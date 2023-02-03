@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@vector-im/compound@git+ssh://git@github.com:vector-im/compound":
+"@vector-im/compound@git+ssh://git@github.com:vector-im/compound#hackathon":
   version "1.0.0"
   resolved "git+ssh://git@github.com:vector-im/compound#ee12828e09b35285920b6a9aae2b351fc37174f0"
   dependencies:
