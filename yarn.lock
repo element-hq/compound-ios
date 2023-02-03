@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@vector-im/compound@git+ssh://git@github.com:vector-im/compound#hackathon":
+"@vector-im/compound@git+ssh://git@github.com:vector-im/compound":
   version "1.0.0"
-  resolved "git+ssh://git@github.com:vector-im/compound#ee12828e09b35285920b6a9aae2b351fc37174f0"
+  resolved "git+ssh://git@github.com:vector-im/compound#d6a8e18453818650687d1d8ebfbb97f1ca35c914"
   dependencies:
     react "^18.2.0"
     react-dom "^18.2.0"
