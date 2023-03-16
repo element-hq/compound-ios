@@ -16,7 +16,6 @@ let package = Package(
                 dependencies: [
                     .product(name: "CompoundDesignTokens", package: "compound-design-tokens"),
                 ]),
-        .target(name: "CompoundTokens"), // Remove this once the inspector is updated.
         .testTarget(name: "CompoundTests", dependencies: ["Compound"])
     ]
 )
