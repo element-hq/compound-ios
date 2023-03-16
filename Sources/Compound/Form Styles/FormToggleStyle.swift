@@ -32,8 +32,8 @@ public struct FormToggleStyle: ToggleStyle {
     }
 }
 
-struct FormToggleStyle_Previews: PreviewProvider {
-    static var previews: some View {
+public struct FormToggleStyle_Previews: PreviewProvider {
+    public static var previews: some View {
         Form {
             Section {
                 states
@@ -44,19 +44,19 @@ struct FormToggleStyle_Previews: PreviewProvider {
     }
     
     @ViewBuilder
-    static var states: some View {
-        Toggle("Basic setting", isOn: .constant(true))
-            .toggleStyle(.compoundForm())
-        Toggle("Basic setting", isOn: .constant(false))
-            .toggleStyle(.compoundForm())
-        
+    public static var states: some View {
         Toggle(isOn: .constant(true)) {
-            Label("Enable something", systemImage: "power")
+            Label("Notifications", systemImage: "bell")
         }
         .toggleStyle(.compoundForm())
         Toggle(isOn: .constant(false)) {
-            Label("Enable something", systemImage: "power")
+            Label("Enable sound", systemImage: "speaker.wave.2")
         }
         .toggleStyle(.compoundForm())
+        
+        Toggle("Enable analytics", isOn: .constant(true))
+            .toggleStyle(.compoundForm())
+        Toggle("Show removed messages", isOn: .constant(false))
+            .toggleStyle(.compoundForm())
     }
 }

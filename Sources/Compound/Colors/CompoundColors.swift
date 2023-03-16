@@ -40,6 +40,7 @@ public struct CompoundColors {
     public let textPrimary = compound.colorTextPrimary
     public let bgActionPrimary = compound.colorBgActionPrimary
     public let bgSecondary = compound.colorBgSecondary
+    public let bgPrimary = compound.colorBgPrimary
     public let bgCanvas = compound.colorBgCanvas
     
     // MARK: - Custom

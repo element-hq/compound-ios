@@ -44,21 +44,29 @@ public struct FormRowLabelStyle: LabelStyle {
     }
 }
 
-struct FormRowLabelStyle_Previews: PreviewProvider {
-    static var previews: some View {
-        VStack(alignment: .leading) {
-            Label("Person", systemImage: "person")
-                .labelStyle(FormRowLabelStyle())
-            
-            Label("Help", systemImage: "questionmark.circle")
-                .labelStyle(FormRowLabelStyle())
-            
-            Label("Camera", systemImage: "camera")
-                .labelStyle(FormRowLabelStyle())
-            
-            Label("Help", systemImage: "questionmark")
-                .labelStyle(FormRowLabelStyle())
+public struct FormRowLabelStyle_Previews: PreviewProvider {
+    public static var previews: some View {
+        Form {
+            Section {
+                states
+            }
+            .compoundFormSection()
         }
-        .padding()
+        .compoundForm()
+    }
+    
+    @ViewBuilder
+    public static var states: some View {
+        Label("Person", systemImage: "person")
+            .labelStyle(FormRowLabelStyle())
+        
+        Label("Help", systemImage: "questionmark.circle")
+            .labelStyle(FormRowLabelStyle())
+        
+        Label("Camera", systemImage: "camera")
+            .labelStyle(FormRowLabelStyle())
+        
+        Label("Help", systemImage: "questionmark")
+            .labelStyle(FormRowLabelStyle())
     }
 }

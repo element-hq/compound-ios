@@ -68,37 +68,43 @@ public struct FormButtonStyle: PrimitiveButtonStyle {
             }
             .contentShape(Rectangle())
             .padding(FormRow.insets) // Re-apply the normal insets using padding.
-            .background(configuration.isPressed ? Color.compound.iconQuaternary : .clear) // FIXME: Actual colour.
+            .background(configuration.isPressed ? Color.compound.bgPrimary : .compound.formRowBackground)
         }
     }
 }
 
-struct FormButtonStyle_Previews: PreviewProvider {
-    static var previews: some View {
+public struct FormButtonStyle_Previews: PreviewProvider {
+    public static var previews: some View {
         Form {
             Section {
-                Button { } label: {
-                    Label("Hello world", systemImage: "globe")
-                }
-                .buttonStyle(FormButtonStyle())
-                
-                Button { } label: {
-                    Label("Show something", systemImage: "rectangle.portrait")
-                }
-                .buttonStyle(FormButtonStyle(accessory: .navigationLink))
-                
-                ShareLink(item: "test")
-                    .buttonStyle(FormButtonStyle())
+                states
             }
             .compoundFormSection()
             
             Section {
-                Button { } label: {
-                    Text("Hello world")
-                }
-                .buttonStyle(FormButtonStyle())
+                ShareLink(item: "test")
+                    .buttonStyle(FormButtonStyle())
             }
             .compoundFormSection()
         }
+        .compoundForm()
+    }
+    
+    @ViewBuilder
+    public static var states: some View {
+        Button { } label: {
+            Label("Open in browser", systemImage: "globe")
+        }
+        .buttonStyle(FormButtonStyle())
+        
+        Button { } label: {
+            Label("Navigate to screen", systemImage: "rectangle.portrait")
+        }
+        .buttonStyle(FormButtonStyle(accessory: .navigationLink))
+        
+        Button { } label: {
+            Text("Mark as read")
+        }
+        .buttonStyle(FormButtonStyle())
     }
 }
