@@ -22,7 +22,13 @@ public extension Color {
     static let compound = CompoundColors()
 }
 
+/// The colours used by Element as defined in Compound Design Tokens.
+/// This struct contains only the colour tokens in a more usable form.
 public struct CompoundColors {
+    /// The raw compound tokens.
+    ///
+    /// Note: Whilst this references `CompoundLightDesignTokens`, all generated tokens are aware
+    /// of dark and high contract variants the generated collections each contain the same token set.
     private static let compound = CompoundLightDesignTokens.self
     
     public let iconAccentTertiary = compound.colorIconAccentTertiary

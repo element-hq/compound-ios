@@ -17,11 +17,15 @@
 import SwiftUI
 
 public extension ToggleStyle where Self == FormToggleStyle {
-    static func compoundForm() -> FormToggleStyle {
+    /// A toggle style that applies Compound design tokens to display a Switch row within a `Form`.
+    static var compoundForm: FormToggleStyle {
         FormToggleStyle()
     }
 }
 
+/// Default toggle styling for form rows.
+///
+/// The toggle is given the form row label style and is tinted correctly.
 public struct FormToggleStyle: ToggleStyle {
     public func makeBody(configuration: Configuration) -> some View {
         Toggle(isOn: configuration.$isOn) {
@@ -48,15 +52,15 @@ public struct FormToggleStyle_Previews: PreviewProvider {
         Toggle(isOn: .constant(true)) {
             Label("Notifications", systemImage: "bell")
         }
-        .toggleStyle(.compoundForm())
+        .toggleStyle(.compoundForm)
         Toggle(isOn: .constant(false)) {
             Label("Enable sound", systemImage: "speaker.wave.2")
         }
-        .toggleStyle(.compoundForm())
+        .toggleStyle(.compoundForm)
         
         Toggle("Enable analytics", isOn: .constant(true))
-            .toggleStyle(.compoundForm())
+            .toggleStyle(.compoundForm)
         Toggle("Show removed messages", isOn: .constant(false))
-            .toggleStyle(.compoundForm())
+            .toggleStyle(.compoundForm)
     }
 }

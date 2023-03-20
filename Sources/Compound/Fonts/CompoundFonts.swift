@@ -21,6 +21,8 @@ public extension Font {
     static let compound = CompoundFonts()
 }
 
+/// A manual mapping of the Compound font styles to iOS styles. This will be
+/// generated directly from the style dictionary in the future.
 public struct CompoundFonts {
     public let bodyXS = Font.caption
     public let bodyXSSemibold = Font.caption.weight(.semibold)

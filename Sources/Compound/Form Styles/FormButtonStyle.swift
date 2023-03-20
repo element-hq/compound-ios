@@ -17,7 +17,8 @@
 import SwiftUI
 
 public extension PrimitiveButtonStyle where Self == FormButtonStyle {
-    /// Some docs to go here!
+    /// A button style that applies Compound design tokens for a tappable row within a `Form`.
+    /// - Parameter accessory: An optional accessory to be added on the trailing side of the row.
     static func compoundForm(accessory: FormRowAccessory? = nil) -> FormButtonStyle {
         FormButtonStyle(accessory: accessory)
     }
@@ -25,6 +26,7 @@ public extension PrimitiveButtonStyle where Self == FormButtonStyle {
 
 /// A view to be added on the trailing edge of a form row.
 public enum FormRowAccessory: View {
+    /// A chevron to indicate that the button pushes another screen.
     case navigationLink
     
     public var body: some View {
@@ -68,7 +70,7 @@ public struct FormButtonStyle: PrimitiveButtonStyle {
             }
             .contentShape(Rectangle())
             .padding(FormRow.insets) // Re-apply the normal insets using padding.
-            .background(configuration.isPressed ? Color.compound.bgPrimary : .compound.formRowBackground)
+            .background(configuration.isPressed ? Color.compound.bgPrimary : .compound.bgCanvas)
         }
     }
 }

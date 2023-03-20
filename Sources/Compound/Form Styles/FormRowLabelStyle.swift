@@ -24,6 +24,10 @@ public extension LabelStyle where Self == FormRowLabelStyle {
     }
 }
 
+/// Default label styling for form rows.
+///
+/// The icon will be inset inside a square with rounded corners and the text will be
+/// given the correct font and colour.
 public struct FormRowLabelStyle: LabelStyle {
     @ScaledMetric private var menuIconSize = 30.0
     
