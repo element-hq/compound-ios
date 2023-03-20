@@ -18,7 +18,8 @@ import SwiftUI
 
 
 public extension LabelStyle where Self == FormRowLabelStyle {
-    /// Some docs to go here!
+    /// A label style that applies Compound design tokens for a row within a `Form`.
+    /// - Parameter alignment: The vertical alignment between the label's icon and title.
     static func compoundFormRow(alignment: VerticalAlignment = .firstTextBaseline) -> FormRowLabelStyle {
         FormRowLabelStyle(alignment: alignment)
     }
@@ -26,8 +27,8 @@ public extension LabelStyle where Self == FormRowLabelStyle {
 
 /// Default label styling for form rows.
 ///
-/// The icon will be inset inside a square with rounded corners and the text will be
-/// given the correct font and colour.
+/// The icon will be inset inside a square with rounded corners and the title
+/// will be given the correct font and colour.
 public struct FormRowLabelStyle: LabelStyle {
     @ScaledMetric private var menuIconSize = 30.0
     
