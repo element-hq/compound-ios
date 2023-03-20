@@ -31,7 +31,7 @@ struct ScreenContent<Content: View>: View {
 
 struct ComponentsContainer_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ScreenContent(navigationTitle: "Buttons") {
                 Button("Confirm") { }
             }

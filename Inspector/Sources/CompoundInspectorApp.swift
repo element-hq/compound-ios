@@ -17,9 +17,11 @@ struct CompoundInspectorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
+            NavigationSplitView {
                 SidebarList()
                     .navigationTitle("Components")
+            } detail: {
+                EmptyView()
             }
             .accentColor(.compound.textActionPrimary)
             .preferredColorScheme(colorScheme)

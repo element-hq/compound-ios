@@ -56,16 +56,16 @@ struct FormScreen: View {
                   text: .constant(""),
                   prompt: Text("Let us know"),
                   axis: .vertical)
+        .textFieldStyle(.compoundForm)
         .lineLimit(4, reservesSpace: true)
-        .tint(.compound.iconAccentTertiary)
-        .labelStyle(.compoundFormRow())
     }
 }
 
 struct FormScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             FormScreen()
         }
+        .previewLayout(.fixed(width: 375, height: 700))
     }
 }

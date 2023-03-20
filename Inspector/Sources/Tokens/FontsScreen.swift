@@ -33,10 +33,9 @@ struct FontItem: View {
 
 struct FontsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             FontsScreen()
         }
         .previewLayout(.fixed(width: 375, height: 700))
-        .navigationViewStyle(.stack)
     }
 }
