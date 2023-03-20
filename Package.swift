@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "Compound", targets: ["Compound"])
     ],
     dependencies: [
-        .package(url: "https://github.com/vector-im/compound-design-tokens.git", branch: "develop"),
+        .package(url: "https://github.com/vector-im/compound-design-tokens.git", revision: "342145ff8044b58b967186b0efe34477e1f7c3ca"),
     ],
     targets: [
         .target(name: "Compound",
