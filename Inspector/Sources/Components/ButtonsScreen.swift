@@ -19,8 +19,9 @@ struct ButtonsScreen: View {
 
 struct ButtonsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ButtonsScreen()
         }
+        .previewLayout(.fixed(width: 375, height: 700))
     }
 }

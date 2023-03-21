@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		70AC7B23011C802F750E470E /* Pods_Compound_Inspector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E28F45EEA9A8DE6AFB10E9 /* Pods_Compound_Inspector.framework */; };
-		9139E78128257DBD00091740 /* FLEX in Frameworks */ = {isa = PBXBuildFile; productRef = 9139E78028257DBD00091740 /* FLEX */; };
+		917C22F429C3760A00B35660 /* FormScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C22F329C375AA00B35660 /* FormScreen.swift */; };
+		917C22F629C37A9D00B35660 /* AllCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C22F529C37A9D00B35660 /* AllCases.swift */; };
+		917C22F829C380A200B35660 /* FontsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C22F729C380A200B35660 /* FontsScreen.swift */; };
 		917F561C28256DB800D19543 /* CompoundInspectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917F561B28256DB800D19543 /* CompoundInspectorApp.swift */; };
 		917F562028256DB900D19543 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 917F561F28256DB900D19543 /* Assets.xcassets */; };
 		917F562F28256DD800D19543 /* SidebarList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917F562E28256DD800D19543 /* SidebarList.swift */; };
@@ -32,6 +34,9 @@
 
 /* Begin PBXFileReference section */
 		9139E78228257ECF00091740 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
+		917C22F329C375AA00B35660 /* FormScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen.swift; sourceTree = "<group>"; };
+		917C22F529C37A9D00B35660 /* AllCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCases.swift; sourceTree = "<group>"; };
+		917C22F729C380A200B35660 /* FontsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsScreen.swift; sourceTree = "<group>"; };
 		917F561828256DB800D19543 /* Compound Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Compound Inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		917F561B28256DB800D19543 /* CompoundInspectorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompoundInspectorApp.swift; sourceTree = "<group>"; };
 		917F561F28256DB900D19543 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -52,7 +57,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				91B2EA9928CA05B900A90A83 /* Compound in Frameworks */,
-				9139E78128257DBD00091740 /* FLEX in Frameworks */,
 				70AC7B23011C802F750E470E /* Pods_Compound_Inspector.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -81,7 +85,9 @@
 		9145A25128CCAD08001B3451 /* Tokens */ = {
 			isa = PBXGroup;
 			children = (
+				917C22F529C37A9D00B35660 /* AllCases.swift */,
 				91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */,
+				917C22F729C380A200B35660 /* FontsScreen.swift */,
 			);
 			path = Tokens;
 			sourceTree = "<group>";
@@ -130,6 +136,7 @@
 			isa = PBXGroup;
 			children = (
 				917F562A28256DCD00D19543 /* ButtonsScreen.swift */,
+				917C22F329C375AA00B35660 /* FormScreen.swift */,
 				917F563028256DDC00D19543 /* TextFieldsScreen.swift */,
 			);
 			path = Components;
@@ -155,7 +162,6 @@
 			);
 			name = "Compound Inspector";
 			packageProductDependencies = (
-				9139E78028257DBD00091740 /* FLEX */,
 				91B2EA9828CA05B900A90A83 /* Compound */,
 			);
 			productName = "Component Library";
@@ -187,7 +193,6 @@
 			);
 			mainGroup = 917F560F28256DB800D19543;
 			packageReferences = (
-				9139E77F28257DBD00091740 /* XCRemoteSwiftPackageReference "FLEX" */,
 			);
 			productRefGroup = 917F561928256DB800D19543 /* Products */;
 			projectDirPath = "";
@@ -257,8 +262,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				917F562F28256DD800D19543 /* SidebarList.swift in Sources */,
+				917C22F629C37A9D00B35660 /* AllCases.swift in Sources */,
 				917F561C28256DB800D19543 /* CompoundInspectorApp.swift in Sources */,
+				917C22F829C380A200B35660 /* FontsScreen.swift in Sources */,
 				9184AC022825741600227C3A /* ScreenContent.swift in Sources */,
+				917C22F429C3760A00B35660 /* FormScreen.swift in Sources */,
 				91B2EA9C28CA064800A90A83 /* ColorsScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -316,7 +324,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -370,7 +378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -465,23 +473,7 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		9139E77F28257DBD00091740 /* XCRemoteSwiftPackageReference "FLEX" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/FLEXTool/FLEX";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
-		9139E78028257DBD00091740 /* FLEX */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 9139E77F28257DBD00091740 /* XCRemoteSwiftPackageReference "FLEX" */;
-			productName = FLEX;
-		};
 		91B2EA9828CA05B900A90A83 /* Compound */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Compound;

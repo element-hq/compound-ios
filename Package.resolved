@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "compound-design-tokens",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/vector-im/compound-design-tokens.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "342145ff8044b58b967186b0efe34477e1f7c3ca"
+      }
+    }
+  ],
+  "version" : 2
+}

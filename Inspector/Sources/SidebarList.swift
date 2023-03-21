@@ -15,19 +15,19 @@ struct SidebarList: View {
         }
         .navigationTitle("Components")
         .listStyle(.sidebar)
+        .tint(.compound.iconAccentTertiary)
     }
     
     var tokensSection: some View {
         Section("Tokens") {
-            NavigationLink(destination: ColorsScreen.init()) {
+            NavigationLink(destination: ColorsScreen.init) {
                 Label("Colours", systemImage: "paintpalette")
             }
-            NavigationLink(destination: ColorsScreen.init()) {
-                Label("Sizes", systemImage: "ruler")
-            }
-            .disabled(true)
-            NavigationLink(destination: ColorsScreen.init()) {
+            NavigationLink(destination: FontsScreen.init) {
                 Label("Typography", systemImage: "character")
+            }
+            NavigationLink(destination: ColorsScreen.init) {
+                Label("Sizes", systemImage: "ruler")
             }
             .disabled(true)
         }
@@ -35,20 +35,24 @@ struct SidebarList: View {
     
     var componentsSection: some View {
         Section("Components") {
-            NavigationLink(destination: ColorsScreen.init()) {
+            NavigationLink(destination: FormScreen.init) {
+                Label("Form", systemImage: "list.bullet.clipboard")
+            }
+            NavigationLink(destination: ColorsScreen.init) {
                 Label("Labels", systemImage: "character.textbox")
             }
-            NavigationLink(destination: ColorsScreen.init()) {
+            .disabled(true)
+            NavigationLink(destination: ColorsScreen.init) {
                 Label("Text Fields", systemImage: "character.cursor.ibeam")
             }
+            .disabled(true)
         }
-        .disabled(true)
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             SidebarList()
         }
     }

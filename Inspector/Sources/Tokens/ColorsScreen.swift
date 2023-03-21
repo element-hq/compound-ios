@@ -6,12 +6,12 @@
 //
 
 import SwiftUI
-import CompoundTokens
+import Compound
 
 struct ColorsScreen: View {
     var body: some View {
         ScreenContent(navigationTitle: "Colors") {
-            let allColors = CompoundColors.allColors
+            let allColors = Color.compound.allColors
             ForEach(Array(allColors.keys.sorted()), id: \.self) { key in
                 ColorItem(color: allColors[key]!, name: key)
             }
@@ -29,9 +29,9 @@ struct ColorItem: View {
             
             VStack(alignment: .leading) {
                 Text(name)
-                Text(color.description)
-                    .font(.footnote)
-                    .foregroundColor(CompoundColors.coreSecondaryContent)
+                Text(color.hexValue())
+                    .font(.footnote.monospaced())
+                    .foregroundColor(.compound.textSecondary)
             }
         }
     }
@@ -43,7 +43,7 @@ struct ColorItem: View {
             .aspectRatio(1, contentMode: .fit)
             .overlay {
                 swatchShape
-                    .strokeBorder(CompoundColors.corePrimaryContent, lineWidth: 1.5)
+                    .strokeBorder(Color.compound.textPrimary, lineWidth: 1.5)
                     .opacity(0.2)
             }
     }
@@ -53,12 +53,32 @@ struct ColorItem: View {
     }
 }
 
+private extension Color {
+    func hexValue() -> String {
+        let uiColor = UIColor(self)
+        
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        
+        uiColor.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+        
+        return "#\(red.asHex)\(green.asHex)\(blue.asHex)"
+    }
+}
+
+private extension CGFloat {
+    var asHex: String {
+        String(format:"%02X", Int((self * 255).rounded()))
+    }
+}
+
 struct ColorsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             ColorsScreen()
         }
         .previewLayout(.fixed(width: 375, height: 700))
-        .navigationViewStyle(.stack)
     }
 }

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CompoundTokens
+import Compound
 import HyperionCore
 
 @main
@@ -17,11 +17,13 @@ struct CompoundInspectorApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
+            NavigationSplitView {
                 SidebarList()
                     .navigationTitle("Components")
+            } detail: {
+                EmptyView()
             }
-            .accentColor(CompoundColors.coreAccent)
+            .accentColor(.compound.textActionPrimary)
             .preferredColorScheme(colorScheme)
         }
         .commands {

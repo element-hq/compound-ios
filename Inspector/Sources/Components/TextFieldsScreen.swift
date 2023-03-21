@@ -18,8 +18,9 @@ struct TextFieldsScreen: View {
 
 struct TextFieldsScreen_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
+        NavigationStack {
             TextFieldsScreen()
         }
+        .previewLayout(.fixed(width: 375, height: 700))
     }
 }
