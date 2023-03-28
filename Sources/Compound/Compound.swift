@@ -17,8 +17,8 @@
 import SwiftUI
 
 public struct Compound {
-    /// Themes some default components to match Compound as needed.
-    public static func theme() {
+    /// Configures system components as needed to use Compound design tokens.
+    public static func configureSystemComponents() {
         UITextField.appearance(whenContainedInInstancesOf: [UIAlertController.self]).tintColor = UIColor(.compound.iconAccentTertiary)
     }
 }

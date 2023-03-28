@@ -49,7 +49,7 @@ public extension View {
             searchTextField.backgroundColor = textFieldBackgroundColor
             searchTextField.tintColor = textFieldTintColor
             
-            // Hide the effect views so we can the rounded rect style without any materials.
+            // Hide the effect views so we can use the rounded rect style without any materials.
             let effectBackgroundTop = searchTextField.value(forKey: "_effectBackgroundTop") as? UIView
             effectBackgroundTop?.isHidden = true
             let effectBackgroundBottom = searchTextField.value(forKey: "_effectBackgroundBottom") as? UIView
