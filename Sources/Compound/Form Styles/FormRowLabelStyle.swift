@@ -14,14 +14,23 @@
 // limitations under the License.
 //
 
+import CompoundDesignTokens
 import SwiftUI
-
 
 public extension LabelStyle where Self == FormRowLabelStyle {
     /// A label style that applies Compound design tokens for a row within a `Form`.
+    /// - Parameter secondaryText: If the row's title has supporting text, it should be passed in here.
+    /// - Parameter role: An optional semantic role describing the row's purpose.
     /// - Parameter alignment: The vertical alignment between the label's icon and title.
-    static func compoundFormRow(alignment: VerticalAlignment = .firstTextBaseline) -> FormRowLabelStyle {
-        FormRowLabelStyle(alignment: alignment)
+    /// - Parameter hideIconBackground: Pass `true` if the default icon background should be hidden.
+    static func compoundFormRow(secondaryText: String? = nil,
+                                role: FormRowLabelStyle.Role? = nil,
+                                alignment: VerticalAlignment = .center,
+                                hideIconBackground: Bool = false) -> FormRowLabelStyle {
+        FormRowLabelStyle(secondaryText: secondaryText,
+                          role: role,
+                          alignment: alignment,
+                          hideIconBackground: hideIconBackground)
     }
 }
 
@@ -30,21 +39,58 @@ public extension LabelStyle where Self == FormRowLabelStyle {
 /// The icon will be inset inside a square with rounded corners and the title
 /// will be given the correct font and colour.
 public struct FormRowLabelStyle: LabelStyle {
+    @Environment(\.isEnabled) private var isEnabled
     @ScaledMetric private var menuIconSize = 30.0
     
-    var alignment: VerticalAlignment = .firstTextBaseline
+    /// A value that describes the purpose of a row.
+    public enum Role { case destructive }
+    
+    /// Supporting text that will be shown beneath the title.
+    let secondaryText: String?
+    /// An optional semantic role describing the row's purpose.
+    let role: Role?
+    /// The vertical alignment between the label's icon and title.
+    let alignment: VerticalAlignment
+    /// Whether or not the default icon background should be hidden.
+    let hideIconBackground: Bool
+    
+    var titleColor: Color {
+        // FIXME: Disabled & Destructive??
+        guard isEnabled else { return .compound.textDisabled }
+        return role == .destructive ? .compound.textCriticalPrimary : .compound.textPrimary
+    }
+    
+    var iconForegroundColor: Color {
+        // FIXME: Disabled & Destructive??
+        guard isEnabled else { return .compound.iconTertiaryAlpha }
+        if role == .destructive { return .compound.textCriticalPrimary }
+        return hideIconBackground ? .compound.iconPrimary : .compound.iconTertiaryAlpha
+    }
+    
+    var iconBackgroundColor: Color {
+        if hideIconBackground { return .clear }
+        return role == .destructive ? .compound._bgCriticalSubtleAlpha : .compound._bgSubtleSecondaryAlpha
+    }
 
     public func makeBody(configuration: Configuration) -> some View {
         HStack(alignment: alignment, spacing: 16) {
             configuration.icon
-                .foregroundColor(.compound.iconTertiaryAlpha)
-                .padding(4)
+                .foregroundColor(iconForegroundColor)
                 .frame(width: menuIconSize, height: menuIconSize)
-                .background(Color.compound._bgSubtleSecondaryAlpha)
+                .background(iconBackgroundColor)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
-            configuration.title
-                .font(.compound.bodyLG)
-                .foregroundColor(.compound.textPrimary)
+            
+            VStack(alignment: .leading, spacing: 2) {
+                configuration.title
+                    .font(.compound.bodyLG)
+                    .foregroundColor(titleColor)
+                
+                if let secondaryText {
+                    Text(secondaryText)
+                        .font(.compound.bodySM)
+                        .foregroundColor(.secondary)
+                }
+            }
         }
     }
 }
@@ -63,15 +109,18 @@ public struct FormRowLabelStyle_Previews: PreviewProvider {
     @ViewBuilder
     public static var states: some View {
         Label("Person", systemImage: "person")
-            .labelStyle(FormRowLabelStyle())
+            .labelStyle(.compoundFormRow())
         
         Label("Help", systemImage: "questionmark.circle")
-            .labelStyle(FormRowLabelStyle())
+            .labelStyle(.compoundFormRow(secondaryText: "Supporting text"))
+        
+        Label("Trash", systemImage: "trash")
+            .labelStyle(.compoundFormRow(role: .destructive))
         
         Label("Camera", systemImage: "camera")
-            .labelStyle(FormRowLabelStyle())
+            .labelStyle(.compoundFormRow(hideIconBackground: true))
         
-        Label("Help", systemImage: "questionmark")
-            .labelStyle(FormRowLabelStyle())
+        Label("Remove", systemImage: "person.badge.minus")
+            .labelStyle(.compoundFormRow(role: .destructive, hideIconBackground: true))
     }
 }
