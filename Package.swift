@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "Compound", targets: ["Compound"])
     ],
     dependencies: [
-        .package(url: "https://github.com/vector-im/compound-design-tokens.git", revision: "342145ff8044b58b967186b0efe34477e1f7c3ca"),
+        .package(url: "https://github.com/vector-im/compound-design-tokens.git", revision: "d9d1a792d8a124708c7e15becd359893ee9e9ea6"),
         .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "0.2.3")
     ],
     targets: [

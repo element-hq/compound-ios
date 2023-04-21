@@ -25,13 +25,13 @@ public extension View {
     /// Styles a form using the Compound design tokens.
     func compoundForm() -> some View {
         scrollContentBackground(.hidden)
-            .background(Color.compound.bgSecondary.ignoresSafeArea()) // FIXME: Dynamic form colour?
+            .background(Color.compound.bgSubtleSecondary.ignoresSafeArea()) // FIXME: Use elevation tokens.
     }
     
     /// Styles a form section using the Compound design tokens.
     func compoundFormSection() -> some View {
         listRowInsets(FormRow.insets)
-            .listRowBackground(Color.compound.bgCanvas) // FIXME: Dynamic Form colour?
+            .listRowBackground(Color.compound.bgCanvas) // FIXME: Use elevation tokens.
     }
     
     /// Styles a form section footer using the Compound design tokens.

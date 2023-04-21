@@ -70,7 +70,7 @@ public struct FormButtonStyle: PrimitiveButtonStyle {
             }
             .contentShape(Rectangle())
             .padding(FormRow.insets) // Re-apply the normal insets using padding.
-            .background(configuration.isPressed ? Color.compound.bgPrimary : .compound.bgCanvas)
+            .background(configuration.isPressed ? Color.compound.bgSubtlePrimary : .compound.bgCanvas)
         }
     }
 }

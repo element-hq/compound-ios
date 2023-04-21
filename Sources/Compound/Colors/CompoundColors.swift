@@ -37,31 +37,31 @@ public struct CompoundColors {
     public let iconSecondary = compound.colorIconSecondary
     public let iconPrimary = compound.colorIconPrimary
     public let textLinkExternal = compound.colorTextLinkExternal
-    public let textActionCritical = compound.colorTextActionCritical
+    public let textCriticalPrimary = compound.colorTextCriticalPrimary
     public let textActionAccent = compound.colorTextActionAccent
     public let textActionPrimary = compound.colorTextActionPrimary
     public let textDisabled = compound.colorTextDisabled
     public let textPlaceholder = compound.colorTextPlaceholder
     public let textSecondary = compound.colorTextSecondary
     public let textPrimary = compound.colorTextPrimary
-    public let bgActionPrimary = compound.colorBgActionPrimary
-    public let bgSecondary = compound.colorBgSecondary
-    public let bgPrimary = compound.colorBgPrimary
-    public let bgCanvas = compound.colorBgCanvas
+    public let bgActionPrimaryRest = compound.colorBgActionPrimaryRest
+    public let bgSubtleSecondary = compound.colorBgSubtleSecondary
+    public let bgSubtlePrimary = compound.colorBgSubtlePrimary
+    public let bgCanvas = compound.colorBgCanvasDefault
     
-    // MARK: - Custom
+    // MARK: - Core Colors
     
-    /// The colour to use on the background of a Form or grouped List.
+    /// The core colours used to assemble all of the semantic tokens.
     ///
-    /// This colour is a special case as it uses `colorBgSecondary` in light mode and `???` in dark mode.
-    public let formBackground = Color(UIColor { collection in
-        collection.userInterfaceStyle == .light ? UIColor(compound.colorBgSecondary) : UIColor(compound.colorBgCanvas)
-    })
+    /// Direct use of these core colours should only be occasional, the majority of components
+    /// and styles within the app should be based on the semantic tokens instead.
+    let core = CoreColors()
     
-    /// The background colour of a row in a Form or grouped List.
-    ///
-    /// This colour is a special case as it uses `colorBgCanvas` in light mode and `???` in dark mode.
-    public var formRowBackground = Color(UIColor { collection in
-        collection.userInterfaceStyle == .light ? UIColor(compound.colorBgCanvas) : UIColor(compound.colorBgSecondary)
-    })
+    struct CoreColors {
+        /// The raw compound tokens.
+        private static let compound = CompoundLightDesignTokens.self
+        
+        /// Will be available as `color.bg.subtle-secondary-alpha`.
+        let alphaGray300 = compound.colorAlphaGray300
+    }
 }

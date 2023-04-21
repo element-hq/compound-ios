@@ -40,7 +40,7 @@ public struct FormRowLabelStyle: LabelStyle {
                 .foregroundColor(.compound.iconSecondary)
                 .padding(4)
                 .frame(width: menuIconSize, height: menuIconSize)
-                .background(Color.compound.bgSecondary)
+                .background(Color.compound.bgSubtleSecondary) // FIXME: Might use elevation tokens?
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             configuration.title
                 .font(.compound.bodyLG)
