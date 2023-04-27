@@ -32,7 +32,7 @@ public struct FormToggleStyle: ToggleStyle {
             configuration.label
                 .labelStyle(.compoundFormRow())
         }
-        .tint(.compound.bgActionPrimary)
+        .tint(.compound.bgActionPrimaryRest)
     }
 }
 
