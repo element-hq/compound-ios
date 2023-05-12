@@ -11,9 +11,8 @@ import Compound
 struct ColorsScreen: View {
     var body: some View {
         ScreenContent(navigationTitle: "Colors") {
-            let allColors = Color.compound.allColors
-            ForEach(Array(allColors.keys.sorted()), id: \.self) { key in
-                ColorItem(color: allColors[key]!, name: key)
+            ForEach(Color.compound.allColors, id: \.name) { color in
+                ColorItem(color: color.value, name: color.name)
             }
         }
     }
