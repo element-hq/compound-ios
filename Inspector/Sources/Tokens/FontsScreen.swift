@@ -11,9 +11,8 @@ import Compound
 struct FontsScreen: View {
     var body: some View {
         ScreenContent(navigationTitle: "Fonts") {
-            let allFonts = Font.compound.allFonts
-            ForEach(Array(allFonts.keys.sorted()), id: \.self) { key in
-                FontItem(font: allFonts[key]!, name: key)
+            ForEach(Font.compound.allFonts, id: \.name) { font in
+                FontItem(font: font.value, name: font.name)
             }
         }
     }
@@ -36,6 +35,6 @@ struct FontsScreen_Previews: PreviewProvider {
         NavigationStack {
             FontsScreen()
         }
-        .previewLayout(.fixed(width: 375, height: 700))
+        .previewLayout(.fixed(width: 375, height: 750))
     }
 }
