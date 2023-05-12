@@ -11,4 +11,12 @@ node_modules
 
 # Cocoapods in Inspector app
 Inspector/Pods
-Inspector/Inspector.xcworkspace
+
+# Ridiculous workaround to unignore the Package.resolved file to keep Xcode Cloud happy.
+# https://stackoverflow.com/a/16318111/730924
+Inspector/Inspector.xcworkspace/*
+!Inspector/Inspector.xcworkspace/xcshareddata
+Inspector/Inspector.xcworkspace/xcshareddata/*
+!Inspector/Inspector.xcworkspace/xcshareddata/swiftpm
+Inspector/Inspector.xcworkspace/xcshareddata/swiftpm/*
+!Inspector/Inspector.xcworkspace/xcshareddata/swiftpm/Package.resolved

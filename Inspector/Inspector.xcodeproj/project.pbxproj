@@ -44,6 +44,7 @@
 		917F562E28256DD800D19543 /* SidebarList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarList.swift; sourceTree = "<group>"; };
 		917F563028256DDC00D19543 /* TextFieldsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsScreen.swift; sourceTree = "<group>"; };
 		9184AC012825741600227C3A /* ScreenContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenContent.swift; sourceTree = "<group>"; };
+		91AB476A2A0E774E00D961AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91B2EA9728CA048200A90A83 /* compound-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "compound-ios"; path = ..; sourceTree = "<group>"; };
 		91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreen.swift; sourceTree = "<group>"; };
 		9F9AF07976782861ECA2764C /* Pods-Compound Inspector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Compound Inspector.release.xcconfig"; path = "Target Support Files/Pods-Compound Inspector/Pods-Compound Inspector.release.xcconfig"; sourceTree = "<group>"; };
@@ -76,6 +77,7 @@
 		9145A25028CCACF7001B3451 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				91AB476A2A0E774E00D961AE /* Info.plist */,
 				917F561F28256DB900D19543 /* Assets.xcassets */,
 				9139E78228257ECF00091740 /* Entitlements.entitlements */,
 			);
@@ -399,6 +401,9 @@
 				DEVELOPMENT_TEAM = 7J4U792NQT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Compound;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -430,6 +435,9 @@
 				DEVELOPMENT_TEAM = 7J4U792NQT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Resources/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Compound;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
