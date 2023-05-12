@@ -12,6 +12,7 @@ import HyperionCore
 @main
 struct CompoundInspectorApp: App {
     @State private var colorScheme: ColorScheme = .light
+    @State private var dynamicTypeSize: DynamicTypeSize = .large
     
     private var isDark: Bool { colorScheme == .dark }
     
@@ -20,11 +21,17 @@ struct CompoundInspectorApp: App {
             NavigationSplitView {
                 SidebarList()
                     .navigationTitle("Components")
+                    #if targetEnvironment(macCatalyst)
+                    .dynamicTypeSize(.large)
+                    #endif
             } detail: {
                 EmptyView()
             }
             .accentColor(.compound.textActionPrimary)
             .preferredColorScheme(colorScheme)
+            #if targetEnvironment(macCatalyst)
+            .dynamicTypeSize(dynamicTypeSize)
+            #endif
         }
         .commands {
             CommandMenu("Options") {
@@ -35,6 +42,14 @@ struct CompoundInspectorApp: App {
                 
                 Button("Toggle Appearance", action: toggleDarkMode)
                     .keyboardShortcut("a", modifiers: [.command, .shift])
+                
+                #if targetEnvironment(macCatalyst)
+                Picker("Text Size", selection: $dynamicTypeSize) {
+                    ForEach(DynamicTypeSize.allCases, id: \.self) { size in
+                        Text(String(describing: size)).tag(size)
+                    }
+                }
+                #endif
             }
         }
     }

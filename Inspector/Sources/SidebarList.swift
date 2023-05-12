@@ -26,6 +26,9 @@ struct SidebarList: View {
             NavigationLink(destination: FontsScreen.init) {
                 Label("Typography", systemImage: "character")
             }
+            NavigationLink(destination: IconsScreen.init) {
+                Label("Icons", systemImage: "pencil.and.outline")
+            }
             NavigationLink(destination: ColorsScreen.init) {
                 Label("Sizes", systemImage: "ruler")
             }
@@ -40,6 +43,10 @@ struct SidebarList: View {
             }
             NavigationLink(destination: ColorsScreen.init) {
                 Label("Labels", systemImage: "character.textbox")
+            }
+            .disabled(true)
+            NavigationLink(destination: ColorsScreen.init) {
+                Label("Buttons", systemImage: "rectangle.and.hand.point.up.left")
             }
             .disabled(true)
             NavigationLink(destination: ColorsScreen.init) {

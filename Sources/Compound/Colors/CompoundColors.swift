@@ -31,23 +31,60 @@ public struct CompoundColors {
     /// of dark and high contract variants the generated collections each contain the same token set.
     private static let compound = CompoundLightDesignTokens.self
     
+    public let iconOnSolidPrimary = compound.colorIconOnSolidPrimary
+    public let iconInfoPrimary = compound.colorIconInfoPrimary
+    public let iconSuccessPrimary = compound.colorIconSuccessPrimary
+    public let iconCriticalPrimary = compound.colorIconCriticalPrimary
     public let iconAccentTertiary = compound.colorIconAccentTertiary
+    public let iconQuaternaryAlpha = compound.colorIconQuaternaryAlpha
+    public let iconTertiaryAlpha = compound.colorIconTertiaryAlpha
+    public let iconSecondaryAlpha = compound.colorIconSecondaryAlpha
+    public let iconPrimaryAlpha = compound.colorIconPrimaryAlpha
+    public let iconDisabled = compound.colorIconDisabled
     public let iconQuaternary = compound.colorIconQuaternary
     public let iconTertiary = compound.colorIconTertiary
     public let iconSecondary = compound.colorIconSecondary
     public let iconPrimary = compound.colorIconPrimary
-    public let textLinkExternal = compound.colorTextLinkExternal
+    public let borderInfoSubtle = compound.colorBorderInfoSubtle
+    public let borderSuccessSubtle = compound.colorBorderSuccessSubtle
+    public let borderCriticalSubtle = compound.colorBorderCriticalSubtle
+    public let borderCriticalHovered = compound.colorBorderCriticalHovered
+    public let borderCriticalPrimary = compound.colorBorderCriticalPrimary
+    public let borderInteractiveHovered = compound.colorBorderInteractiveHovered
+    public let borderInteractiveSecondary = compound.colorBorderInteractiveSecondary
+    public let borderInteractivePrimary = compound.colorBorderInteractivePrimary
+    public let borderFocused = compound.colorBorderFocused
+    public let borderDisabled = compound.colorBorderDisabled
+    public let bgSubtleSecondaryLevel0 = compound.colorBgSubtleSecondaryLevel0
+    public let bgInfoSubtle = compound.colorBgInfoSubtle
+    public let bgSuccessSubtle = compound.colorBgSuccessSubtle
+    public let bgCriticalSubtleHovered = compound.colorBgCriticalSubtleHovered
+    public let bgCriticalSubtle = compound.colorBgCriticalSubtle
+    public let bgCriticalHovered = compound.colorBgCriticalHovered
+    public let bgCriticalPrimary = compound.colorBgCriticalPrimary
+    public let bgActionSecondaryPressed = compound.colorBgActionSecondaryPressed
+    public let bgActionSecondaryHovered = compound.colorBgActionSecondaryHovered
+    public let bgActionSecondaryRest = compound.colorBgActionSecondaryRest
+    public let bgActionPrimaryDisabled = compound.colorBgActionPrimaryDisabled
+    public let bgActionPrimaryPressed = compound.colorBgActionPrimaryPressed
+    public let bgActionPrimaryHovered = compound.colorBgActionPrimaryHovered
+    public let bgActionPrimaryRest = compound.colorBgActionPrimaryRest
+    public let bgCanvasDefaultLevel1 = compound.colorBgCanvasDefaultLevel1
+    public let bgCanvasDisabled = compound.colorBgCanvasDisabled
+    public let bgCanvasDefault = compound.colorBgCanvasDefault
+    public let bgSubtleSecondary = compound.colorBgSubtleSecondary
+    public let bgSubtlePrimary = compound.colorBgSubtlePrimary
+    public let textOnSolidPrimary = compound.colorTextOnSolidPrimary
+    public let textInfoPrimary = compound.colorTextInfoPrimary
+    public let textSuccessPrimary = compound.colorTextSuccessPrimary
     public let textCriticalPrimary = compound.colorTextCriticalPrimary
+    public let textLinkExternal = compound.colorTextLinkExternal
     public let textActionAccent = compound.colorTextActionAccent
     public let textActionPrimary = compound.colorTextActionPrimary
     public let textDisabled = compound.colorTextDisabled
     public let textPlaceholder = compound.colorTextPlaceholder
     public let textSecondary = compound.colorTextSecondary
     public let textPrimary = compound.colorTextPrimary
-    public let bgActionPrimaryRest = compound.colorBgActionPrimaryRest
-    public let bgSubtleSecondary = compound.colorBgSubtleSecondary
-    public let bgSubtlePrimary = compound.colorBgSubtlePrimary
-    public let bgCanvas = compound.colorBgCanvasDefault
     
     // MARK: - Core Colors
     
