@@ -13,27 +13,29 @@ enum FontSize {
         case .style(let style):
             switch style {
             case .largeTitle:
-                return 34
+                return UIFont.preferredFont(forTextStyle: .largeTitle).pointSize
             case .title:
-                return 28
+                return UIFont.preferredFont(forTextStyle: .title1).pointSize
             case .title2:
-                return 22
+                return UIFont.preferredFont(forTextStyle: .title2).pointSize
             case .title3:
-                return 20
-            case .subheadline:
-                return 15
-            case .body, .headline:
-                return 17
+                return UIFont.preferredFont(forTextStyle: .title3).pointSize
+            case .body:
+                return UIFont.preferredFont(forTextStyle: .body).pointSize
+            case .headline:
+                return UIFont.preferredFont(forTextStyle: .headline).pointSize
             case .callout:
-                return 16
+                return UIFont.preferredFont(forTextStyle: .callout).pointSize
+            case .subheadline:
+                return UIFont.preferredFont(forTextStyle: .subheadline).pointSize
             case .footnote:
-                return 13
+                return UIFont.preferredFont(forTextStyle: .footnote).pointSize
             case .caption:
-                return 12
+                return UIFont.preferredFont(forTextStyle: .caption1).pointSize
             case .caption2:
-                return 11
+                return UIFont.preferredFont(forTextStyle: .caption2).pointSize
             @unknown default:
-                return 17
+                return UIFont.preferredFont(forTextStyle: .body).pointSize
             }
         }
     }

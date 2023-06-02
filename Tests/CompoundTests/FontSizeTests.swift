@@ -20,14 +20,47 @@ import SwiftUI
 import XCTest
 
 final class FontSizeTests: XCTestCase {
+    /// Test all system text styles to assert mapping between `Font` and `UIFont`.
     func testTextStyle() throws {
-        let bodyFontSize = FontSize.reflecting(.body)
-        XCTAssertEqual(bodyFontSize?.value, 17)
-        XCTAssertEqual(bodyFontSize?.style, .body)
+        let caption2FontSize = FontSize.reflecting(.caption2)
+        XCTAssertEqual(caption2FontSize?.value, 11)
+        XCTAssertEqual(caption2FontSize?.style, .caption2)
+        
+        let captionFontSize = FontSize.reflecting(.caption)
+        XCTAssertEqual(captionFontSize?.value, 12)
+        XCTAssertEqual(captionFontSize?.style, .caption)
         
         let footnoteFontSize = FontSize.reflecting(.footnote)
         XCTAssertEqual(footnoteFontSize?.value, 13)
         XCTAssertEqual(footnoteFontSize?.style, .footnote)
+        
+        let subheadlineFontSize = FontSize.reflecting(.subheadline)
+        XCTAssertEqual(subheadlineFontSize?.value, 15)
+        XCTAssertEqual(subheadlineFontSize?.style, .subheadline)
+        
+        let calloutFontSize = FontSize.reflecting(.callout)
+        XCTAssertEqual(calloutFontSize?.value, 16)
+        XCTAssertEqual(calloutFontSize?.style, .callout)
+        
+        let bodyFontSize = FontSize.reflecting(.body)
+        XCTAssertEqual(bodyFontSize?.value, 17)
+        XCTAssertEqual(bodyFontSize?.style, .body)
+        
+        let headlineFontSize = FontSize.reflecting(.headline)
+        XCTAssertEqual(headlineFontSize?.value, 17)
+        XCTAssertEqual(headlineFontSize?.style, .headline)
+        
+        let title3FontSize = FontSize.reflecting(.title3)
+        XCTAssertEqual(title3FontSize?.value, 20)
+        XCTAssertEqual(title3FontSize?.style, .title3)
+        
+        let title2FontSize = FontSize.reflecting(.title2)
+        XCTAssertEqual(title2FontSize?.value, 22)
+        XCTAssertEqual(title2FontSize?.style, .title2)
+        
+        let titleFontSize = FontSize.reflecting(.title)
+        XCTAssertEqual(titleFontSize?.value, 28)
+        XCTAssertEqual(titleFontSize?.style, .title)
         
         let largeTitleFontSize = FontSize.reflecting(.largeTitle)
         XCTAssertEqual(largeTitleFontSize?.value, 34)
