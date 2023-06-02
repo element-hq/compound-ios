@@ -1,12 +1,14 @@
 import SwiftUI
 
+/// The size of a SwiftUI font.
 enum FontSize {
-    case custom(CGFloat)
+    case custom(CGFloat, Font.TextStyle?)
     case style(Font.TextStyle)
     
+    /// The raw value in points.
     var value: CGFloat {
         switch self {
-        case .custom(let size):
+        case .custom(let size, _):
             return size
         case .style(let style):
             switch style {
@@ -36,10 +38,11 @@ enum FontSize {
         }
     }
     
+    /// The text style of the font.
     var style: Font.TextStyle {
         switch self {
-        case .custom:
-            return .body // this is a wrong assumption
+        case .custom(_, let textStyle):
+            return textStyle ?? .body
         case .style(let textStyle):
             return textStyle
         }
@@ -55,7 +58,7 @@ enum FontSize {
         let mirror = Mirror(reflecting: provider)
         
         if let size = mirror.descendant("size") as? CGFloat {
-            return .custom(size)
+            return .custom(size, mirror.descendant("textStyle") as? Font.TextStyle)
         } else if let textStyle = mirror.descendant("style") as? Font.TextStyle {
             return .style(textStyle)
         }
