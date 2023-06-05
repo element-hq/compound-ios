@@ -31,7 +31,7 @@ public extension View {
     /// Styles a form section using the Compound design tokens.
     func compoundFormSection() -> some View {
         listRowInsets(FormRow.insets)
-            .listRowBackground(Color.compound.bgCanvas) // FIXME: Use elevation tokens.
+            .listRowBackground(Color.compound.bgCanvasDefault) // FIXME: Use elevation tokens.
     }
     
     /// Styles a form section footer using the Compound design tokens.

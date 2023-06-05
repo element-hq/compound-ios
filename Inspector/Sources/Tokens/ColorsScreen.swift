@@ -28,8 +28,10 @@ struct ColorItem: View {
             
             VStack(alignment: .leading) {
                 Text(name)
+                    .font(.compound.bodyLG)
+                    .foregroundColor(.compound.textPrimary)
                 Text(color.hexValue())
-                    .font(.footnote.monospaced())
+                    .font(.compound.bodySM.monospaced())
                     .foregroundColor(.compound.textSecondary)
             }
         }
@@ -42,7 +44,7 @@ struct ColorItem: View {
             .aspectRatio(1, contentMode: .fit)
             .overlay {
                 swatchShape
-                    .strokeBorder(Color.compound.textPrimary, lineWidth: 1.5)
+                    .strokeBorder(Color.compound.iconPrimary, lineWidth: 1.5)
                     .opacity(0.2)
             }
     }
