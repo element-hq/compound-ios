@@ -21,17 +21,19 @@ struct CompoundInspectorApp: App {
             NavigationSplitView {
                 SidebarList()
                     .navigationTitle("Components")
-                    #if targetEnvironment(macCatalyst)
-                    .dynamicTypeSize(.large)
-                    #endif
+                    .navigationDestination(for: Screen.self) { screen in
+                        screen
+                            #if targetEnvironment(macCatalyst)
+                            .dynamicTypeSize(dynamicTypeSize)
+                            #endif
+                            .navigationBarTitleDisplayMode(.inline)
+                            .toolbar { screenToolbar }
+                    }
             } detail: {
                 EmptyView()
             }
             .accentColor(.compound.textActionPrimary)
             .preferredColorScheme(colorScheme)
-            #if targetEnvironment(macCatalyst)
-            .dynamicTypeSize(dynamicTypeSize)
-            #endif
         }
         .commands {
             CommandMenu("Options") {
@@ -44,13 +46,33 @@ struct CompoundInspectorApp: App {
                     .keyboardShortcut("a", modifiers: [.command, .shift])
                 
                 #if targetEnvironment(macCatalyst)
-                Picker("Text Size", selection: $dynamicTypeSize) {
-                    ForEach(DynamicTypeSize.allCases, id: \.self) { size in
-                        Text(String(describing: size)).tag(size)
-                    }
-                }
+                textSizePicker
                 #endif
             }
+        }
+    }
+    
+    var textSizePicker: some View {
+        Picker("Text Size", selection: $dynamicTypeSize) {
+            ForEach(DynamicTypeSize.allCases, id: \.self) { size in
+                Text(String(describing: size)).tag(size)
+            }
+        }
+    }
+    
+    @ViewBuilder
+    var screenToolbar: some View {
+        #if targetEnvironment(macCatalyst)
+        Menu {
+            textSizePicker
+                .pickerStyle(.inline)
+        } label: {
+            Image(systemName: "textformat.size")
+        }
+        #endif
+
+        Button(action: HyperionManager.sharedInstance().togglePluginDrawer) {
+            Image(systemName: "ruler")
         }
     }
     

@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import HyperionCore
 
+/// A helper to provider a default layout for the content of a screen.
 struct ScreenContent<Content: View>: View {
     let navigationTitle: String
     @ViewBuilder var content: () -> Content
@@ -20,12 +20,6 @@ struct ScreenContent<Content: View>: View {
             .padding()
         }
         .navigationTitle(navigationTitle)
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            Button(action: HyperionManager.sharedInstance().togglePluginDrawer) {
-                Image(systemName: "ruler")
-            }
-        }
     }
 }
 

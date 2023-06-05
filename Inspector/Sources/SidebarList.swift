@@ -20,16 +20,16 @@ struct SidebarList: View {
     
     var tokensSection: some View {
         Section("Tokens") {
-            NavigationLink(destination: ColorsScreen.init) {
+            NavigationLink(value: Screen.colors) {
                 Label("Colours", systemImage: "paintpalette")
             }
-            NavigationLink(destination: FontsScreen.init) {
+            NavigationLink(value: Screen.fonts) {
                 Label("Typography", systemImage: "character")
             }
-            NavigationLink(destination: IconsScreen.init) {
+            NavigationLink(value: Screen.icons) {
                 Label("Icons", systemImage: "pencil.and.outline")
             }
-            NavigationLink(destination: ColorsScreen.init) {
+            NavigationLink(value: Screen.sizes) {
                 Label("Sizes", systemImage: "ruler")
             }
             .disabled(true)
@@ -38,18 +38,18 @@ struct SidebarList: View {
     
     var componentsSection: some View {
         Section("Components") {
-            NavigationLink(destination: FormScreen.init) {
+            NavigationLink(value: Screen.form) {
                 Label("Form", systemImage: "list.bullet.clipboard")
             }
-            NavigationLink(destination: ColorsScreen.init) {
+            NavigationLink(value: Screen.labels) {
                 Label("Labels", systemImage: "character.textbox")
             }
             .disabled(true)
-            NavigationLink(destination: ColorsScreen.init) {
+            NavigationLink(value: Screen.buttons) {
                 Label("Buttons", systemImage: "rectangle.and.hand.point.up.left")
             }
             .disabled(true)
-            NavigationLink(destination: ColorsScreen.init) {
+            NavigationLink(value: Screen.textFields) {
                 Label("Text Fields", systemImage: "character.cursor.ibeam")
             }
             .disabled(true)

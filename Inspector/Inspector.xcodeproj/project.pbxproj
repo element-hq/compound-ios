@@ -15,6 +15,7 @@
 		917F562028256DB900D19543 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 917F561F28256DB900D19543 /* Assets.xcassets */; };
 		917F562F28256DD800D19543 /* SidebarList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917F562E28256DD800D19543 /* SidebarList.swift */; };
 		9184AC022825741600227C3A /* ScreenContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9184AC012825741600227C3A /* ScreenContent.swift */; };
+		9188246A2A2DE882001606AE /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 918824692A2DE882001606AE /* Screen.swift */; };
 		91B2EA9928CA05B900A90A83 /* Compound in Frameworks */ = {isa = PBXBuildFile; productRef = 91B2EA9828CA05B900A90A83 /* Compound */; };
 		91B2EA9C28CA064800A90A83 /* ColorsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */; };
 		91B946812A29062300F187EF /* IconsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B946802A29062300F187EF /* IconsScreen.swift */; };
@@ -45,6 +46,7 @@
 		917F562E28256DD800D19543 /* SidebarList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SidebarList.swift; sourceTree = "<group>"; };
 		917F563028256DDC00D19543 /* TextFieldsScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldsScreen.swift; sourceTree = "<group>"; };
 		9184AC012825741600227C3A /* ScreenContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenContent.swift; sourceTree = "<group>"; };
+		918824692A2DE882001606AE /* Screen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Screen.swift; sourceTree = "<group>"; };
 		91AB476A2A0E774E00D961AE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91B2EA9728CA048200A90A83 /* compound-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "compound-ios"; path = ..; sourceTree = "<group>"; };
 		91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreen.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			children = (
 				917F561B28256DB800D19543 /* CompoundInspectorApp.swift */,
 				917F562E28256DD800D19543 /* SidebarList.swift */,
+				918824692A2DE882001606AE /* Screen.swift */,
 				9184AC012825741600227C3A /* ScreenContent.swift */,
 				9145A25128CCAD08001B3451 /* Tokens */,
 				91B2EA9A28CA05F300A90A83 /* Components */,
@@ -271,6 +274,7 @@
 				917C22F629C37A9D00B35660 /* AllCases.swift in Sources */,
 				917F561C28256DB800D19543 /* CompoundInspectorApp.swift in Sources */,
 				917C22F829C380A200B35660 /* FontsScreen.swift in Sources */,
+				9188246A2A2DE882001606AE /* Screen.swift in Sources */,
 				9184AC022825741600227C3A /* ScreenContent.swift in Sources */,
 				917C22F429C3760A00B35660 /* FormScreen.swift in Sources */,
 				91B2EA9C28CA064800A90A83 /* ColorsScreen.swift in Sources */,

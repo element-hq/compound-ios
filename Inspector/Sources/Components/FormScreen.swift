@@ -34,12 +34,6 @@ struct FormScreen: View {
         }
         .compoundForm()
         .navigationTitle("Forms")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            Button(action: HyperionManager.sharedInstance().togglePluginDrawer) {
-                Image(systemName: "ruler")
-            }
-        }
     }
     
     @ViewBuilder
