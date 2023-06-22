@@ -37,10 +37,10 @@ public struct FormRowLabelStyle: LabelStyle {
     public func makeBody(configuration: Configuration) -> some View {
         HStack(alignment: alignment, spacing: 16) {
             configuration.icon
-                .foregroundColor(.compound.iconSecondary)
+                .foregroundColor(.compound.iconTertiaryAlpha)
                 .padding(4)
                 .frame(width: menuIconSize, height: menuIconSize)
-                .background(Color.compound.bgSubtleSecondary) // FIXME: Might use elevation tokens?
+                .background(Color.compound._bgSubtleSecondaryAlpha)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             configuration.title
                 .font(.compound.bodyLG)

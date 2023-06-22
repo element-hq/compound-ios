@@ -34,7 +34,7 @@ public enum FormRowAccessory: View {
         case .navigationLink:
             return Image(systemName: "chevron.forward")
                 .font(.compound.bodySMSemibold)
-                .foregroundColor(.compound.iconQuaternary)
+                .foregroundColor(.compound.iconTertiaryAlpha)
         }
     }
 }
@@ -70,7 +70,7 @@ public struct FormButtonStyle: PrimitiveButtonStyle {
             }
             .contentShape(Rectangle())
             .padding(FormRow.insets) // Re-apply the normal insets using padding.
-            .background(configuration.isPressed ? Color.compound.bgSubtlePrimary : .compound.bgCanvasDefault) // FIXME: Use elevation tokens.
+            .background(configuration.isPressed ? Color.compound.bgSubtlePrimary : .compound.bgCanvasDefaultLevel1)
         }
     }
 }
