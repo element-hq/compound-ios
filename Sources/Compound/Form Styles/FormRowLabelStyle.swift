@@ -40,7 +40,7 @@ public struct FormRowLabelStyle: LabelStyle {
                 .foregroundColor(.compound.iconTertiaryAlpha)
                 .padding(4)
                 .frame(width: menuIconSize, height: menuIconSize)
-                .background(Color.compound.base.alphaGray300)
+                .background(Color.compound._bgSubtleSecondaryAlpha)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
             configuration.title
                 .font(.compound.bodyLG)

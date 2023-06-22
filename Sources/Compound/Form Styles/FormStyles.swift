@@ -32,11 +32,18 @@ public extension View {
     func compoundFormSection() -> some View {
         listRowInsets(FormRow.insets)
             .listRowBackground(Color.compound.bgCanvasDefaultLevel1)
+            .listRowSeparatorTint(.compound._borderInteractiveSecondaryAlpha)
+    }
+    
+    /// Styles a form section header using the Compound design tokens.
+    func compoundFormSectionHeader() -> some View {
+        font(.compound.bodySM)
+            .foregroundColor(.compound.textSecondary)
     }
     
     /// Styles a form section footer using the Compound design tokens.
     func compoundFormSectionFooter() -> some View {
         font(.compound.bodySM)
-            .foregroundColor(Color.compound.textSecondary)
+            .foregroundColor(.compound.textSecondary)
     }
 }
