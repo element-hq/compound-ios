@@ -55,7 +55,7 @@ public struct CompoundColors {
     public let borderInteractivePrimary = compound.colorBorderInteractivePrimary
     public let borderFocused = compound.colorBorderFocused
     public let borderDisabled = compound.colorBorderDisabled
-    public let bgSubtleSecondaryLevel0 = compound.colorBgSubtleSecondaryLevel0
+    // public let bgSubtleSecondaryLevel0 = compound.colorBgSubtleSecondaryLevel0
     public let bgInfoSubtle = compound.colorBgInfoSubtle
     public let bgSuccessSubtle = compound.colorBgSuccessSubtle
     public let bgCriticalSubtleHovered = compound.colorBgCriticalSubtleHovered
@@ -69,7 +69,7 @@ public struct CompoundColors {
     public let bgActionPrimaryPressed = compound.colorBgActionPrimaryPressed
     public let bgActionPrimaryHovered = compound.colorBgActionPrimaryHovered
     public let bgActionPrimaryRest = compound.colorBgActionPrimaryRest
-    public let bgCanvasDefaultLevel1 = compound.colorBgCanvasDefaultLevel1
+    // public let bgCanvasDefaultLevel1 = compound.colorBgCanvasDefaultLevel1
     public let bgCanvasDisabled = compound.colorBgCanvasDisabled
     public let bgCanvasDefault = compound.colorBgCanvasDefault
     public let bgSubtleSecondary = compound.colorBgSubtleSecondary
@@ -85,6 +85,12 @@ public struct CompoundColors {
     public let textPlaceholder = compound.colorTextPlaceholder
     public let textSecondary = compound.colorTextSecondary
     public let textPrimary = compound.colorTextPrimary
+    
+    // MARK: - Elevation Tokens
+    // This is a workaround until they are generated correctly
+    
+    public let bgSubtleSecondaryLevel0 = Color(UIColor { $0.isLight ? UIColor(compound.colorGray300) : UIColor(compound.colorThemeBg) })
+    public let bgCanvasDefaultLevel1 = Color(UIColor { $0.isLight ? UIColor(compound.colorThemeBg) : UIColor(compound.colorGray300) })
     
     // MARK: - Awaiting Semantic Tokens
     
@@ -106,12 +112,12 @@ public struct CompoundColors {
     
     // MARK: - Core Colors
     
-    /// The core colours used to assemble all of the semantic tokens.
+    /// The base colours used to assemble all of the semantic tokens.
     ///
-    /// Direct use of these core colours should only be occasional, the majority of components
+    /// Direct use of these base colours should only be occasional, the majority of components
     /// and styles within the app should be based on the semantic tokens instead. Please only
     /// use these within the package, instead adding temporary semantic tokens for external use.
-    let core = CoreColors()
+    let base = CoreColors()
     
     struct CoreColors {
         /// The raw compound tokens.

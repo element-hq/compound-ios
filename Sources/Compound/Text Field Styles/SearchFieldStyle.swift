@@ -28,7 +28,7 @@ public extension View {
             let placeholderColor = UIColor(.compound.textPlaceholder)
             let textFieldTintColor = UIColor(.compound.iconAccentTertiary)
             // FIXME: Use the semantic token when generated.
-            let textFieldBackgroundColor = UIColor(.compound.core.alphaGray300)
+            let textFieldBackgroundColor = UIColor(.compound.base.alphaGray300)
             
             let searchTextField = searchController.searchBar.searchTextField
             
