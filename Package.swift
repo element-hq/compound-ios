@@ -10,13 +10,13 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/vector-im/compound-design-tokens.git", revision: "cc950d575f8536ff5bebbd02e28c0b8ab541aa29"),
-        .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "0.2.3")
+        .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "0.9.0")
     ],
     targets: [
         .target(name: "Compound",
                 dependencies: [
                     .product(name: "CompoundDesignTokens", package: "compound-design-tokens"),
-                    .product(name: "Introspect", package: "SwiftUI-Introspect")
+                    .product(name: "SwiftUIIntrospect", package: "SwiftUI-Introspect")
                 ]),
         .testTarget(name: "CompoundTests", dependencies: ["Compound"])
     ]

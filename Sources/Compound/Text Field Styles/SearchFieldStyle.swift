@@ -14,16 +14,19 @@
 // limitations under the License.
 //
 
-import Introspect
 import SwiftUI
+import SwiftUIIntrospect
 
 public extension View {
     /// Styles a search bar text field using the Compound design tokens.
     /// This modifier is to be used in combination with `.searchable`.
     func compoundSearchField() -> some View {
-        // Ported from Riot iOS as this is the only reliable way to get the exact look we want.
-        // However this is fragile and tied to gutwrenching the current UISearchBar internals.
-        introspectSearchController { searchController in
+        introspect(.navigationStack, on: .iOS(.v16), scope: .ancestor) { navigationController in
+            // Uses the navigation stack as .searchField is unreliable when pushing the second search bar, during the create rooms flow.
+            guard let searchController = navigationController.navigationBar.topItem?.searchController else { return }
+            
+            // Ported from Riot iOS as this is the only reliable way to get the exact look we want.
+            // However this is fragile and tied to gutwrenching the current UISearchBar internals.
             let textColor = UIColor(.compound.textPrimary)
             let placeholderColor = UIColor(.compound.textPlaceholder)
             let textFieldTintColor = UIColor(.compound.iconAccentTertiary)
