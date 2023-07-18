@@ -30,8 +30,6 @@ public extension PrimitiveButtonStyle where Self == FormButtonStyle {
 public enum FormRowAccessory: View {
     /// A chevron to indicate that the button pushes another screen.
     case navigationLink
-    /// An indicator to represent that an activity is in progress.
-    case progressView
     
     public var body: some View {
         switch self {
@@ -39,8 +37,6 @@ public enum FormRowAccessory: View {
             Image(systemName: "chevron.forward")
                 .font(.compound.bodySMSemibold)
                 .foregroundColor(.compound.iconTertiaryAlpha)
-        case .progressView:
-            ProgressView()
         }
     }
 }
@@ -74,6 +70,7 @@ public struct FormButtonStyle: PrimitiveButtonStyle {
                 configuration.label
                     .labelStyle(.compoundFormRow(role: configuration.role == .destructive ? .destructive : nil,
                                                  hideIconBackground: hideIconBackground))
+                    .labeledContentStyle(.compoundForm())
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 accessory
@@ -113,12 +110,6 @@ public struct FormButtonStyle_Previews: PreviewProvider {
             Label("Navigate to screen", systemImage: "rectangle.portrait")
         }
         .buttonStyle(.compoundForm(accessory: .navigationLink))
-        
-        Button { } label: {
-            Label("Block user", systemImage: "slash.circle")
-        }
-        .buttonStyle(.compoundForm(accessory: .progressView))
-        .disabled(true)
         
         Button(role: .destructive) { } label: {
             Label("Delete", systemImage: "trash")
