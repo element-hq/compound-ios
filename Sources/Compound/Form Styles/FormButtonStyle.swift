@@ -18,9 +18,11 @@ import SwiftUI
 
 public extension PrimitiveButtonStyle where Self == FormButtonStyle {
     /// A button style that applies Compound design tokens for a tappable row within a `Form`.
+    /// - Parameter hideIconBackground: Pass `true` if the default icon background should be hidden.
     /// - Parameter accessory: An optional accessory to be added on the trailing side of the row.
-    static func compoundForm(accessory: FormRowAccessory? = nil) -> FormButtonStyle {
-        FormButtonStyle(accessory: accessory)
+    static func compoundForm(accessory: FormRowAccessory? = nil,
+                             hideIconBackground: Bool = false) -> FormButtonStyle {
+        FormButtonStyle(accessory: accessory, hideIconBackground: hideIconBackground)
     }
 }
 
@@ -32,7 +34,7 @@ public enum FormRowAccessory: View {
     public var body: some View {
         switch self {
         case .navigationLink:
-            return Image(systemName: "chevron.forward")
+            Image(systemName: "chevron.forward")
                 .font(.compound.bodySMSemibold)
                 .foregroundColor(.compound.iconTertiaryAlpha)
         }
@@ -45,25 +47,30 @@ public enum FormRowAccessory: View {
 /// to change the background colour depending on whether the button is currently pressed or not.
 public struct FormButtonStyle: PrimitiveButtonStyle {
     /// An accessory to be added on the trailing side of the row.
-    var accessory: FormRowAccessory?
+    let accessory: FormRowAccessory?
+    /// Whether or not the default icon background should be hidden.
+    let hideIconBackground: Bool
     
     public func makeBody(configuration: Configuration) -> some View {
-        Button(action: configuration.trigger) {
+        Button(role: configuration.role, action: configuration.trigger) {
             configuration.label
                 .frame(maxHeight: .infinity) // Make sure the label fills the cell vertically.
         }
-        .buttonStyle(Style(accessory: accessory))
+        .buttonStyle(Style(accessory: accessory, hideIconBackground: hideIconBackground))
         .listRowInsets(EdgeInsets()) // Remove insets so the background fills the cell.
     }
     
     /// Inner style used to set the pressed background colour.
     struct Style: ButtonStyle {
         var accessory: FormRowAccessory?
+        var hideIconBackground: Bool
         
         func makeBody(configuration: Configuration) -> some View {
             HStack {
                 configuration.label
-                    .labelStyle(.compoundFormRow())
+                    .labelStyle(.compoundFormRow(role: configuration.role == .destructive ? .destructive : nil,
+                                                 hideIconBackground: hideIconBackground))
+                    .labeledContentStyle(.compoundForm())
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
                 accessory
@@ -85,7 +92,7 @@ public struct FormButtonStyle_Previews: PreviewProvider {
             
             Section {
                 ShareLink(item: "test")
-                    .buttonStyle(FormButtonStyle())
+                    .buttonStyle(.compoundForm())
             }
             .compoundFormSection()
         }
@@ -97,16 +104,37 @@ public struct FormButtonStyle_Previews: PreviewProvider {
         Button { } label: {
             Label("Open in browser", systemImage: "globe")
         }
-        .buttonStyle(FormButtonStyle())
+        .buttonStyle(.compoundForm())
         
         Button { } label: {
             Label("Navigate to screen", systemImage: "rectangle.portrait")
         }
-        .buttonStyle(FormButtonStyle(accessory: .navigationLink))
+        .buttonStyle(.compoundForm(accessory: .navigationLink))
+        
+        Button(role: .destructive) { } label: {
+            Label("Delete", systemImage: "trash")
+        }
+        .buttonStyle(.compoundForm())
+        
+        Button { } label: {
+            Label("Title", systemImage: "globe")
+        }
+        .buttonStyle(.compoundForm(hideIconBackground: true))
+        
+        Button(role: .destructive) { } label: {
+            Label("Title", systemImage: "globe")
+        }
+        .buttonStyle(.compoundForm(hideIconBackground: true))
+        
+        Button { } label: {
+            Label("Title", systemImage: "globe")
+        }
+        .buttonStyle(.compoundForm(hideIconBackground: true))
+        .disabled(true)
         
         Button { } label: {
             Text("Mark as read")
         }
-        .buttonStyle(FormButtonStyle())
+        .buttonStyle(.compoundForm())
     }
 }
