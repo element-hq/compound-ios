@@ -45,7 +45,7 @@ public struct FormLabeledContentStyle: LabeledContentStyle {
     }
 }
 
-struct Previews_FormLabeledContentStyle_Previews: PreviewProvider {
+public struct FormLabeledContentStyle_Previews: PreviewProvider {
     public static var previews: some View {
         Form {
             Section {
@@ -65,12 +65,14 @@ struct Previews_FormLabeledContentStyle_Previews: PreviewProvider {
         }
         .labeledContentStyle(.compoundForm())
         
-        LabeledContent {
-            Text("Custom")
-        } label: {
-            Label("Notifications", systemImage: "bell")
+        Button { } label : {
+            LabeledContent {
+                Text("Custom")
+            } label: {
+                Label("Notifications", systemImage: "bell")
+            }
         }
-        .labeledContentStyle(.compoundForm())
+        .buttonStyle(.compoundForm(accessory: .navigationLink))
         
         LabeledContent {
             ProgressView()

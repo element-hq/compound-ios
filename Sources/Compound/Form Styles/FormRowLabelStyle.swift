@@ -55,13 +55,15 @@ public struct FormRowLabelStyle: LabelStyle {
     let hideIconBackground: Bool
     
     var titleColor: Color {
-        // FIXME: Disabled & Destructive??
         guard isEnabled else { return .compound.textDisabled }
         return role == .destructive ? .compound.textCriticalPrimary : .compound.textPrimary
     }
     
+    var secondaryTextColor: Color {
+        isEnabled ? .compound.textSecondary : .compound.textDisabled
+    }
+    
     var iconForegroundColor: Color {
-        // FIXME: Disabled & Destructive??
         guard isEnabled else { return .compound.iconTertiaryAlpha }
         if role == .destructive { return .compound.textCriticalPrimary }
         return hideIconBackground ? .compound.iconPrimary : .compound.iconTertiaryAlpha
@@ -69,6 +71,7 @@ public struct FormRowLabelStyle: LabelStyle {
     
     var iconBackgroundColor: Color {
         if hideIconBackground { return .clear }
+        guard isEnabled else { return .compound._bgSubtleSecondaryAlpha }
         return role == .destructive ? .compound._bgCriticalSubtleAlpha : .compound._bgSubtleSecondaryAlpha
     }
 
@@ -88,7 +91,7 @@ public struct FormRowLabelStyle: LabelStyle {
                 if let secondaryText {
                     Text(secondaryText)
                         .font(.compound.bodySM)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(secondaryTextColor)
                 }
             }
         }

@@ -18,11 +18,26 @@ import SwiftUI
 
 public extension PrimitiveButtonStyle where Self == FormButtonStyle {
     /// A button style that applies Compound design tokens for a tappable row within a `Form`.
+    /// - Parameter secondaryText: If the row's title has supporting text, it should be passed in here.
     /// - Parameter hideIconBackground: Pass `true` if the default icon background should be hidden.
     /// - Parameter accessory: An optional accessory to be added on the trailing side of the row.
-    static func compoundForm(accessory: FormRowAccessory? = nil,
+    static func compoundForm(secondaryText: String? = nil,
+                             accessory: FormRowAccessory? = nil,
                              hideIconBackground: Bool = false) -> FormButtonStyle {
-        FormButtonStyle(accessory: accessory, hideIconBackground: hideIconBackground)
+        FormButtonStyle(options: Options(secondaryText: secondaryText,
+                                         accessory: accessory,
+                                         hideIconBackground: hideIconBackground,
+                                         hasCenterAlignment: false))
+    }
+    
+    /// A button style that applies Compound design tokens for a tappable `Form` row that has a centred label.
+    ///
+    /// This style should only ever be used as the sole row in a section.
+    static func compoundFormCentred() -> FormButtonStyle {
+        FormButtonStyle(options: Options(secondaryText: nil,
+                                         accessory: nil,
+                                         hideIconBackground: true,
+                                         hasCenterAlignment: true))
     }
 }
 
@@ -41,52 +56,98 @@ public enum FormRowAccessory: View {
     }
 }
 
+/// Supported configuration options for the style.
+private struct Options {
+    /// Supporting text that will be shown beneath the title.
+    let secondaryText: String?
+    /// An accessory to be added on the trailing side of the row.
+    let accessory: FormRowAccessory?
+    /// Whether or not the default icon background should be hidden.
+    let hideIconBackground: Bool
+    /// Whether the button's label is center aligned or not.
+    let hasCenterAlignment: Bool
+}
+
 /// Default button styling for form rows.
 ///
 /// The primitive style is needed to set the list row insets to `0`. The inner style is then needed
 /// to change the background colour depending on whether the button is currently pressed or not.
 public struct FormButtonStyle: PrimitiveButtonStyle {
-    /// An accessory to be added on the trailing side of the row.
-    let accessory: FormRowAccessory?
-    /// Whether or not the default icon background should be hidden.
-    let hideIconBackground: Bool
+    fileprivate let options: Options
     
     public func makeBody(configuration: Configuration) -> some View {
         Button(role: configuration.role, action: configuration.trigger) {
             configuration.label
                 .frame(maxHeight: .infinity) // Make sure the label fills the cell vertically.
         }
-        .buttonStyle(Style(accessory: accessory, hideIconBackground: hideIconBackground))
+        .buttonStyle(Style(options: options))
         .listRowInsets(EdgeInsets()) // Remove insets so the background fills the cell.
     }
     
     /// Inner style used to set the pressed background colour.
     struct Style: ButtonStyle {
-        var accessory: FormRowAccessory?
-        var hideIconBackground: Bool
+        fileprivate let options: Options
+        
+        var alignment: Alignment { options.hasCenterAlignment ? .center : .leading }
         
         func makeBody(configuration: Configuration) -> some View {
-            HStack {
-                configuration.label
-                    .labelStyle(.compoundFormRow(role: configuration.role == .destructive ? .destructive : nil,
-                                                 hideIconBackground: hideIconBackground))
-                    .labeledContentStyle(.compoundForm())
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                
-                accessory
+            Group {
+                if options.hasCenterAlignment {
+                    centeredBody(configuration: configuration)
+                } else {
+                    defaultBody(configuration: configuration)
+                }
             }
             .contentShape(Rectangle())
             .padding(FormRow.insets) // Re-apply the normal insets using padding.
             .background(configuration.isPressed ? Color.compound.bgSubtlePrimary : .compound.bgCanvasDefaultLevel1)
         }
+        
+        func defaultBody(configuration: Configuration) -> some View {
+            HStack {
+                configuration.label
+                    .labelStyle(.compoundFormRow(secondaryText: options.secondaryText,
+                                                 role: configuration.role == .destructive ? .destructive : nil,
+                                                 hideIconBackground: options.hideIconBackground))
+                    .labeledContentStyle(.compoundForm())
+                    .frame(maxWidth: .infinity, alignment: alignment)
+                
+                options.accessory
+            }
+        }
+        
+        func centeredBody(configuration: Configuration) -> some View {
+            configuration.label
+                .labelStyle(FormRowCenteredLabelStyle(role: configuration.role == .destructive ? .destructive : nil,
+                                                      alignment: .center))
+                .frame(maxWidth: .infinity, alignment: .center)
+                .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
+        }
     }
 }
+
+// MARK: - Previews
 
 public struct FormButtonStyle_Previews: PreviewProvider {
     public static var previews: some View {
         Form {
             Section {
                 states
+            }
+            .compoundFormSection()
+            
+            Section {
+                centeredButton
+            }
+            .compoundFormSection()
+            
+            Section {
+                destructiveCenteredButton
+            }
+            .compoundFormSection()
+            
+            Section {
+                disabledCenteredButton
             }
             .compoundFormSection()
             
@@ -99,42 +160,71 @@ public struct FormButtonStyle_Previews: PreviewProvider {
         .compoundForm()
     }
     
+    // MARK: - States
+    
     @ViewBuilder
     public static var states: some View {
         Button { } label: {
-            Label("Open in browser", systemImage: "globe")
+            Label("Action", systemImage: "globe")
+        }
+        .buttonStyle(.compoundForm(secondaryText: "Action description"))
+        
+        Button { } label: {
+            Label("Action", systemImage: "globe")
         }
         .buttonStyle(.compoundForm())
         
         Button { } label: {
-            Label("Navigate to screen", systemImage: "rectangle.portrait")
+            Label("Navigation", systemImage: "rectangle.portrait")
         }
         .buttonStyle(.compoundForm(accessory: .navigationLink))
         
         Button(role: .destructive) { } label: {
-            Label("Delete", systemImage: "trash")
+            Label("Destructive", systemImage: "trash")
         }
         .buttonStyle(.compoundForm())
         
         Button { } label: {
-            Label("Title", systemImage: "globe")
+            Label("Action", systemImage: "globe")
         }
         .buttonStyle(.compoundForm(hideIconBackground: true))
         
         Button(role: .destructive) { } label: {
-            Label("Title", systemImage: "globe")
+            Label("Destructive", systemImage: "globe")
         }
         .buttonStyle(.compoundForm(hideIconBackground: true))
         
         Button { } label: {
-            Label("Title", systemImage: "globe")
+            Label("Disabled", systemImage: "globe")
         }
         .buttonStyle(.compoundForm(hideIconBackground: true))
         .disabled(true)
         
         Button { } label: {
-            Text("Mark as read")
+            Text("Action without icon")
         }
         .buttonStyle(.compoundForm())
+    }
+    
+    public static var centeredButton: some View {
+        Button { } label: {
+            Label("Action", systemImage: "app.dashed")
+        }
+        .buttonStyle(.compoundFormCentred())
+    }
+    
+    public static var destructiveCenteredButton: some View {
+        Button(role: .destructive) { } label: {
+            Label("Destructive", systemImage: "app.dashed")
+        }
+        .buttonStyle(.compoundFormCentred())
+    }
+    
+    public static var disabledCenteredButton: some View {
+        Button { } label: {
+            Label("Disabled", systemImage: "app.dashed")
+        }
+        .buttonStyle(.compoundFormCentred())
+        .disabled(true)
     }
 }
