@@ -62,5 +62,11 @@ public struct FormToggleStyle_Previews: PreviewProvider {
             .toggleStyle(.compoundForm)
         Toggle("Show removed messages", isOn: .constant(false))
             .toggleStyle(.compoundForm)
+        
+        Toggle(isOn: .constant(false)) {
+            Label("Something complicated", systemImage: "flowchart")
+                .labelStyle(.compoundFormRow(secondaryText: "An explanation about it."))
+        }
+        .toggleStyle(.compoundForm)
     }
 }

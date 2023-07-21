@@ -12,23 +12,53 @@ import HyperionCore
 struct FormScreen: View {
     var body: some View {
         Form {
-            Section("Buttons") {
+            Section {
                 FormButtonStyle_Previews.states
+            } header: {
+                Text("Buttons")
+                    .compoundFormSectionHeader()
+            } footer: {
+                Text("Supporting text explaining the section. [Learn more](https://element.io)")
+                    .compoundFormSectionFooter()
             }
             .compoundFormSection()
             
-            Section("Toggles") {
+            Section {
+                FormButtonStyle_Previews.centeredButton
+            }
+            .compoundFormSection()
+            
+            Section {
+                FormButtonStyle_Previews.destructiveCenteredButton
+            }
+            .compoundFormSection()
+            
+            Section {
+                FormButtonStyle_Previews.disabledCenteredButton
+            }
+            .compoundFormSection()
+            
+            Section {
+                FormLabeledContentStyle_Previews.states
+            } header: {
+                Text("Labeled Content")
+                    .compoundFormSectionHeader()
+            }
+            .compoundFormSection()
+            
+            Section {
                 FormToggleStyle_Previews.states
+            } header: {
+                Text("Toggles")
+                    .compoundFormSectionHeader()
             }
             .compoundFormSection()
             
-            Section("Labels") {
-                FormRowLabelStyle_Previews.states
-            }
-            .compoundFormSection()
-            
-            Section("Other") {
+            Section {
                 otherComponents
+            } header: {
+                Text("Other")
+                    .compoundFormSectionHeader()
             }
             .compoundFormSection()
         }
