@@ -35,6 +35,12 @@ public extension View {
             .listRowSeparatorTint(.compound._borderInteractiveSecondaryAlpha)
     }
     
+    /// Styles a `Text` to be used in a description-only row of a form.
+    func compoundFormSecondaryTextRow() -> some View {
+        font(.compound.bodyMD)
+            .foregroundColor(.compound.textSecondary)
+    }
+    
     /// Styles a form section header using the Compound design tokens.
     func compoundFormSectionHeader() -> some View {
         font(.compound.bodySM)
