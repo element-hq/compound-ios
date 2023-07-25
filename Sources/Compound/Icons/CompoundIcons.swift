@@ -27,7 +27,7 @@ public extension Image {
 /// drop the static keyword in the generated tokens.
 public struct CompoundIcons {
     /// The raw compound tokens.
-    private static let compound = CompoundLightDesignTokens.self
+    private static let compound = CompoundIconTokens.self
     
     public let webBrowser = compound.iconWebBrowser
     public let visibilityVisible = compound.iconVisibilityVisible
