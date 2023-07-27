@@ -15,6 +15,7 @@ struct CompoundInspectorApp: App {
     @State private var dynamicTypeSize: DynamicTypeSize = .large
     
     private var isDark: Bool { colorScheme == .dark }
+    private var preferredColorScheme: ColorScheme? { ProcessInfo.processInfo.isMacCatalystApp ? colorScheme : nil }
     
     var body: some Scene {
         WindowGroup {
@@ -33,7 +34,11 @@ struct CompoundInspectorApp: App {
                 EmptyView()
             }
             .accentColor(.compound.textActionPrimary)
-            .preferredColorScheme(colorScheme)
+            .preferredColorScheme(preferredColorScheme)
+            .introspect(.window, on: .iOS(.v16)) { window in
+                // Apply the tint colour to alerts and confirmation dialogs
+                window.tintColor = .compound.textActionPrimary
+            }
         }
         .commands {
             CommandMenu("Options") {

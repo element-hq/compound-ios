@@ -27,16 +27,34 @@ enum Screen: Hashable, View {
     /// Text field styles.
     case textFields
     
+    /// The system's confirmation dialog component
+    case actionSheet
+    /// The system's alert component
+    case alert
+    /// The system's context menu component
+    case contextMenu
+    /// The system's navigation bar component
+    case navigationBar
+    /// The system's share sheet component
+    case shareSheet
+    
     var body: some View {
         switch self {
         case .colors: ColorsScreen()
         case .fonts: FontsScreen()
         case .icons: IconsScreen()
+        
         case .form: FormScreen()
         case .sizes: EmptyView()
         case .labels: EmptyView()
         case .buttons: EmptyView()
         case .textFields: EmptyView()
+        
+        case .actionSheet: ActionSheetScreen()
+        case .alert: AlertScreen()
+        case .contextMenu: ContextMenuScreen()
+        case .navigationBar: NavigationBarScreen()
+        case .shareSheet: ShareSheetScreen()
         }
     }
 }
