@@ -12,6 +12,7 @@ struct SidebarList: View {
         List {
             tokensSection
             componentsSection
+            systemComponentsSection
         }
         .navigationTitle("Components")
         .listStyle(.sidebar)
@@ -53,6 +54,30 @@ struct SidebarList: View {
                 Label("Text Fields", systemImage: "character.cursor.ibeam")
             }
             .disabled(true)
+        }
+    }
+    
+    var systemComponentsSection: some View {
+        Section("System Components") {
+            NavigationLink(value: Screen.actionSheet) {
+                Label("Action Sheets", systemImage: "window.shade.closed")
+            }
+            
+            NavigationLink(value: Screen.alert) {
+                Label("Alerts", systemImage: "exclamationmark.triangle")
+            }
+            
+            NavigationLink(value: Screen.contextMenu) {
+                Label("Context Menus", systemImage: "contextualmenu.and.cursorarrow")
+            }
+            
+            NavigationLink(value: Screen.navigationBar) {
+                Label("Navigation Bar", systemImage: "window.shade.open")
+            }
+            
+            NavigationLink(value: Screen.shareSheet) {
+                Label("Share Sheet", systemImage: "square.and.arrow.up")
+            }
         }
     }
 }

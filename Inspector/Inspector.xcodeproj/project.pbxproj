@@ -8,6 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		70AC7B23011C802F750E470E /* Pods_Compound_Inspector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E28F45EEA9A8DE6AFB10E9 /* Pods_Compound_Inspector.framework */; };
+		9132C62D2A72708400EAEF3D /* ActionSheetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132C62C2A72708400EAEF3D /* ActionSheetScreen.swift */; };
+		9132C62F2A72785500EAEF3D /* AlertScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132C62E2A72785400EAEF3D /* AlertScreen.swift */; };
+		9132C6312A7280A500EAEF3D /* ContextMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132C6302A7280A500EAEF3D /* ContextMenuScreen.swift */; };
+		9132C6332A72850200EAEF3D /* ShareSheetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132C6322A72850200EAEF3D /* ShareSheetScreen.swift */; };
+		9132C6352A72868B00EAEF3D /* NavigationBarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132C6342A72868B00EAEF3D /* NavigationBarScreen.swift */; };
 		917C22F429C3760A00B35660 /* FormScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C22F329C375AA00B35660 /* FormScreen.swift */; };
 		917C22F629C37A9D00B35660 /* AllCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C22F529C37A9D00B35660 /* AllCases.swift */; };
 		917C22F829C380A200B35660 /* FontsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C22F729C380A200B35660 /* FontsScreen.swift */; };
@@ -35,6 +40,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9132C62C2A72708400EAEF3D /* ActionSheetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionSheetScreen.swift; sourceTree = "<group>"; };
+		9132C62E2A72785400EAEF3D /* AlertScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertScreen.swift; sourceTree = "<group>"; };
+		9132C6302A7280A500EAEF3D /* ContextMenuScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContextMenuScreen.swift; sourceTree = "<group>"; };
+		9132C6322A72850200EAEF3D /* ShareSheetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetScreen.swift; sourceTree = "<group>"; };
+		9132C6342A72868B00EAEF3D /* NavigationBarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarScreen.swift; sourceTree = "<group>"; };
 		9139E78228257ECF00091740 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
 		917C22F329C375AA00B35660 /* FormScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen.swift; sourceTree = "<group>"; };
 		917C22F529C37A9D00B35660 /* AllCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCases.swift; sourceTree = "<group>"; };
@@ -76,6 +86,18 @@
 				9F9AF07976782861ECA2764C /* Pods-Compound Inspector.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		9132C62B2A72707500EAEF3D /* System Components */ = {
+			isa = PBXGroup;
+			children = (
+				9132C62C2A72708400EAEF3D /* ActionSheetScreen.swift */,
+				9132C62E2A72785400EAEF3D /* AlertScreen.swift */,
+				9132C6302A7280A500EAEF3D /* ContextMenuScreen.swift */,
+				9132C6342A72868B00EAEF3D /* NavigationBarScreen.swift */,
+				9132C6322A72850200EAEF3D /* ShareSheetScreen.swift */,
+			);
+			path = "System Components";
 			sourceTree = "<group>";
 		};
 		9145A25028CCACF7001B3451 /* Resources */ = {
@@ -128,6 +150,7 @@
 				9184AC012825741600227C3A /* ScreenContent.swift */,
 				9145A25128CCAD08001B3451 /* Tokens */,
 				91B2EA9A28CA05F300A90A83 /* Components */,
+				9132C62B2A72707500EAEF3D /* System Components */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -270,12 +293,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				91B946812A29062300F187EF /* IconsScreen.swift in Sources */,
+				9132C6352A72868B00EAEF3D /* NavigationBarScreen.swift in Sources */,
 				917F562F28256DD800D19543 /* SidebarList.swift in Sources */,
 				917C22F629C37A9D00B35660 /* AllCases.swift in Sources */,
+				9132C62D2A72708400EAEF3D /* ActionSheetScreen.swift in Sources */,
 				917F561C28256DB800D19543 /* CompoundInspectorApp.swift in Sources */,
+				9132C6332A72850200EAEF3D /* ShareSheetScreen.swift in Sources */,
 				917C22F829C380A200B35660 /* FontsScreen.swift in Sources */,
 				9188246A2A2DE882001606AE /* Screen.swift in Sources */,
 				9184AC022825741600227C3A /* ScreenContent.swift in Sources */,
+				9132C6312A7280A500EAEF3D /* ContextMenuScreen.swift in Sources */,
+				9132C62F2A72785500EAEF3D /* AlertScreen.swift in Sources */,
 				917C22F429C3760A00B35660 /* FormScreen.swift in Sources */,
 				91B2EA9C28CA064800A90A83 /* ColorsScreen.swift in Sources */,
 			);
@@ -403,6 +431,7 @@
 			baseConfigurationReference = B62609A3377EA1D9C59FCD20 /* Pods-Compound Inspector.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "accent-color";
 				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
@@ -437,6 +466,7 @@
 			baseConfigurationReference = 9F9AF07976782861ECA2764C /* Pods-Compound Inspector.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = "accent-color";
 				CODE_SIGN_ENTITLEMENTS = Resources/Entitlements.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
