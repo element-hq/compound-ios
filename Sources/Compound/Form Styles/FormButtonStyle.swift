@@ -106,10 +106,8 @@ public struct FormButtonStyle: PrimitiveButtonStyle {
         func defaultBody(configuration: Configuration) -> some View {
             HStack {
                 configuration.label
-                    .labelStyle(.compoundFormRow(secondaryText: options.secondaryText,
-                                                 role: configuration.role == .destructive ? .destructive : nil,
-                                                 hideIconBackground: options.hideIconBackground))
-                    .labeledContentStyle(.compoundForm())
+                    .labelStyle(labelStyle(for: configuration, and: options))
+                    .labeledContentStyle(.compoundForm(labelStyle: labelStyle(for: configuration, and: options)))
                     .frame(maxWidth: .infinity, alignment: alignment)
                 
                 options.accessory
@@ -122,6 +120,13 @@ public struct FormButtonStyle: PrimitiveButtonStyle {
                                                       alignment: .center))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
+        }
+        
+        private func labelStyle(for configuration: Configuration, and options: Options) -> FormRowLabelStyle {
+            return .compoundFormRow(secondaryText: options.secondaryText,
+                                    role: configuration.role == .destructive ? .destructive : nil,
+                                    alignment: .center,
+                                    hideIconBackground: options.hideIconBackground)
         }
     }
 }
