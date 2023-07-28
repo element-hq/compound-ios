@@ -85,7 +85,7 @@ struct FormScreen: View {
         }
         .labelStyle(.compoundFormRow())
         
-        Text("This is a row in the form, with a multiline description but it doesn't have either an icon or a title, just the this text here.")
+        Text("This is a row in the form, with a multiline description but it doesn't have either an icon or a title, just this text here.")
             .compoundFormSecondaryTextRow()
         
         TextField("Let us know",

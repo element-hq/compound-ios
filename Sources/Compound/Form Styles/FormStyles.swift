@@ -18,13 +18,20 @@ import SwiftUI
 
 enum FormRow {
     /// Element specific insets that are used for all our Form rows.
-    static let insets = EdgeInsets(top: 7, leading: 16, bottom: 7, trailing: 16)
+    ///
+    /// The vertical insets are set to `0` to fix a bug with our desired padding when using a toggle with a
+    /// multiline label. This means that the `verticalPadding` property needs to be applied separately.
+    static let insets = EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16)
+    
+    /// The amount of padding between the top/bottom of the row and the row's label.
+    static let verticalPadding: CGFloat = 13
 }
 
 public extension View {
     /// Styles a form using the Compound design tokens.
     func compoundForm() -> some View {
-        scrollContentBackground(.hidden)
+        environment(\.defaultMinListRowHeight, 48)
+            .scrollContentBackground(.hidden)
             .background(Color.compound.bgSubtleSecondaryLevel0.ignoresSafeArea())
     }
     
@@ -39,6 +46,7 @@ public extension View {
     func compoundFormSecondaryTextRow() -> some View {
         font(.compound.bodyMD)
             .foregroundColor(.compound.textSecondary)
+            .padding(.vertical, FormRow.verticalPadding)
     }
     
     /// Styles a form section header using the Compound design tokens.
