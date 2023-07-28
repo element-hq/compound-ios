@@ -39,17 +39,17 @@ struct FormScreen: View {
             .compoundFormSection()
             
             Section {
-                FormLabeledContentStyle_Previews.states
+                FormToggleStyle_Previews.states
             } header: {
-                Text("Labeled Content")
+                Text("Toggles")
                     .compoundFormSectionHeader()
             }
             .compoundFormSection()
             
             Section {
-                FormToggleStyle_Previews.states
+                FormLabeledContentStyle_Previews.states
             } header: {
-                Text("Toggles")
+                Text("Labeled Content")
                     .compoundFormSectionHeader()
             }
             .compoundFormSection()
@@ -68,6 +68,15 @@ struct FormScreen: View {
     
     @ViewBuilder
     var otherComponents: some View {
+        Picker(selection: .constant(0)) {
+            Text("Item 1").tag(0)
+            Text("Item 2").tag(1)
+            Text("Item 3").tag(2)
+        } label: {
+            Label("Picker", systemImage: "square.dashed")
+        }
+        .labelStyle(.compoundFormRow(secondaryText: "Picker description"))
+        
         Picker(selection: .constant(0)) {
             Text("Bubbles").tag(0)
             Text("Modern").tag(1)

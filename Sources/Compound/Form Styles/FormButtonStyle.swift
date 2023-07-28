@@ -170,17 +170,27 @@ public struct FormButtonStyle_Previews: PreviewProvider {
     @ViewBuilder
     public static var states: some View {
         Button { } label: {
-            Label("Action", systemImage: "globe")
+            Label("Action", systemImage: "square.dashed")
         }
         .buttonStyle(.compoundForm(secondaryText: "Action description"))
         
         Button { } label: {
-            Label("Action", systemImage: "globe")
+            LabeledContent {
+                Label("Content", systemImage: "square.dashed")
+            } label: {
+                Label("Navigation", systemImage: "square.dashed")
+            }
+        }
+        .buttonStyle(.compoundForm(secondaryText: "Navigation description",
+                                   accessory: .navigationLink))
+        
+        Button { } label: {
+            Label("Action", systemImage: "square.dashed")
         }
         .buttonStyle(.compoundForm())
         
         Button { } label: {
-            Label("Navigation", systemImage: "rectangle.portrait")
+            Label("Navigation", systemImage: "square.dashed")
         }
         .buttonStyle(.compoundForm(accessory: .navigationLink))
         
