@@ -45,6 +45,9 @@ public extension PrimitiveButtonStyle where Self == FormButtonStyle {
 public enum FormRowAccessory: View {
     /// A chevron to indicate that the button pushes another screen.
     case navigationLink
+    /// A checkmark (when `true`) to indicate that the row is selected.
+    @available(iOS, deprecated: 17.0, message: "Add the .isToggle accessibility trait to the body.")
+    case selected(Bool)
     
     public var body: some View {
         switch self {
@@ -52,6 +55,13 @@ public enum FormRowAccessory: View {
             Image(systemName: "chevron.forward")
                 .font(.compound.bodySMSemibold)
                 .foregroundColor(.compound.iconTertiaryAlpha)
+        case .selected(let isSelected):
+            if isSelected {
+                CompoundIcon(\.check)
+                    .font(.system(size: 24))
+                    .foregroundColor(.compound.iconPrimary)
+                    .accessibilityAddTraits(.isSelected)
+            }
         }
     }
 }
@@ -199,6 +209,26 @@ public struct FormButtonStyle_Previews: PreviewProvider {
         }
         .buttonStyle(.compoundForm())
         
+        Button { } label: {
+            LabeledContent {
+                Text("Content")
+            } label: {
+                Label("Selected", systemImage: "square.dashed")
+            }
+        }
+        .buttonStyle(.compoundForm(secondaryText: "Selected description",
+                                   accessory: .selected(true)))
+        
+        Button { } label: {
+            Label("Selected", systemImage: "square.dashed")
+        }
+        .buttonStyle(.compoundForm(accessory: .selected(true)))
+        
+        actionButtons
+    }
+    
+    @ViewBuilder
+    static var actionButtons: some View {
         Button { } label: {
             Label("Action", systemImage: "globe")
         }
