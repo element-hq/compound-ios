@@ -49,6 +49,12 @@ public struct FormToggleStyle_Previews: PreviewProvider {
     
     @ViewBuilder
     public static var states: some View {
+        Toggle(isOn: .constant(false)) {
+            Label("Something complicated", systemImage: "flowchart")
+                .labelStyle(.compoundFormRow(secondaryText: "An explanation about it."))
+        }
+        .toggleStyle(.compoundForm)
+        
         Toggle(isOn: .constant(true)) {
             Label("Notifications", systemImage: "bell")
         }
@@ -62,11 +68,5 @@ public struct FormToggleStyle_Previews: PreviewProvider {
             .toggleStyle(.compoundForm)
         Toggle("Show removed messages", isOn: .constant(false))
             .toggleStyle(.compoundForm)
-        
-        Toggle(isOn: .constant(false)) {
-            Label("Something complicated", systemImage: "flowchart")
-                .labelStyle(.compoundFormRow(secondaryText: "An explanation about it."))
-        }
-        .toggleStyle(.compoundForm)
     }
 }

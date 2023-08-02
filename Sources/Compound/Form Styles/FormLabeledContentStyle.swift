@@ -39,9 +39,22 @@ public struct FormLabeledContentStyle: LabeledContentStyle {
                 .labelStyle(labelStyle ?? .compoundFormRow())
             
             configuration.content
-                .font(.compound.bodyLG)
                 .foregroundColor(.compound.textSecondary)
+                .labelStyle(FormRowContentLabelStyle())
         }
+    }
+}
+
+/// The style of the content of a labelled content row in a Form.
+private struct FormRowContentLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        HStack(spacing: 8) {
+            configuration.title
+                .foregroundColor(.compound.textSecondary)
+            configuration.icon
+                .foregroundColor(.compound.iconPrimary)
+        }
+        .font(.compound.bodyLG)
     }
 }
 
@@ -73,6 +86,15 @@ public struct FormLabeledContentStyle_Previews: PreviewProvider {
             }
         }
         .buttonStyle(.compoundForm(accessory: .navigationLink))
+        
+        Button { } label : {
+            LabeledContent {
+                Label("Content", systemImage: "square.dashed")
+            } label: {
+                Label("Title", systemImage: "square.dashed")
+            }
+        }
+        .buttonStyle(.compoundForm(secondaryText: "Some description", accessory: .navigationLink))
         
         LabeledContent {
             ProgressView()

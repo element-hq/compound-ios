@@ -45,6 +45,9 @@ public extension PrimitiveButtonStyle where Self == FormButtonStyle {
 public enum FormRowAccessory: View {
     /// A chevron to indicate that the button pushes another screen.
     case navigationLink
+    /// A checkmark (when `true`) to indicate that the row is selected.
+    @available(iOS, deprecated: 17.0, message: "Add the .isToggle accessibility trait to the body.")
+    case selected(Bool)
     
     public var body: some View {
         switch self {
@@ -52,6 +55,13 @@ public enum FormRowAccessory: View {
             Image(systemName: "chevron.forward")
                 .font(.compound.bodySMSemibold)
                 .foregroundColor(.compound.iconTertiaryAlpha)
+        case .selected(let isSelected):
+            if isSelected {
+                CompoundIcon(\.check)
+                    .font(.system(size: 24))
+                    .foregroundColor(.compound.iconPrimary)
+                    .accessibilityAddTraits(.isSelected)
+            }
         }
     }
 }
@@ -106,10 +116,8 @@ public struct FormButtonStyle: PrimitiveButtonStyle {
         func defaultBody(configuration: Configuration) -> some View {
             HStack {
                 configuration.label
-                    .labelStyle(.compoundFormRow(secondaryText: options.secondaryText,
-                                                 role: configuration.role == .destructive ? .destructive : nil,
-                                                 hideIconBackground: options.hideIconBackground))
-                    .labeledContentStyle(.compoundForm())
+                    .labelStyle(labelStyle(for: configuration, and: options))
+                    .labeledContentStyle(.compoundForm(labelStyle: labelStyle(for: configuration, and: options)))
                     .frame(maxWidth: .infinity, alignment: alignment)
                 
                 options.accessory
@@ -122,6 +130,13 @@ public struct FormButtonStyle: PrimitiveButtonStyle {
                                                       alignment: .center))
                 .frame(maxWidth: .infinity, alignment: .center)
                 .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
+        }
+        
+        private func labelStyle(for configuration: Configuration, and options: Options) -> FormRowLabelStyle {
+            return .compoundFormRow(secondaryText: options.secondaryText,
+                                    role: configuration.role == .destructive ? .destructive : nil,
+                                    alignment: .center,
+                                    hideIconBackground: options.hideIconBackground)
         }
     }
 }
@@ -165,17 +180,27 @@ public struct FormButtonStyle_Previews: PreviewProvider {
     @ViewBuilder
     public static var states: some View {
         Button { } label: {
-            Label("Action", systemImage: "globe")
+            Label("Action", systemImage: "square.dashed")
         }
         .buttonStyle(.compoundForm(secondaryText: "Action description"))
         
         Button { } label: {
-            Label("Action", systemImage: "globe")
+            LabeledContent {
+                Label("Content", systemImage: "square.dashed")
+            } label: {
+                Label("Navigation", systemImage: "square.dashed")
+            }
+        }
+        .buttonStyle(.compoundForm(secondaryText: "Navigation description",
+                                   accessory: .navigationLink))
+        
+        Button { } label: {
+            Label("Action", systemImage: "square.dashed")
         }
         .buttonStyle(.compoundForm())
         
         Button { } label: {
-            Label("Navigation", systemImage: "rectangle.portrait")
+            Label("Navigation", systemImage: "square.dashed")
         }
         .buttonStyle(.compoundForm(accessory: .navigationLink))
         
@@ -184,6 +209,26 @@ public struct FormButtonStyle_Previews: PreviewProvider {
         }
         .buttonStyle(.compoundForm())
         
+        Button { } label: {
+            LabeledContent {
+                Text("Content")
+            } label: {
+                Label("Selected", systemImage: "square.dashed")
+            }
+        }
+        .buttonStyle(.compoundForm(secondaryText: "Selected description",
+                                   accessory: .selected(true)))
+        
+        Button { } label: {
+            Label("Selected", systemImage: "square.dashed")
+        }
+        .buttonStyle(.compoundForm(accessory: .selected(true)))
+        
+        actionButtons
+    }
+    
+    @ViewBuilder
+    static var actionButtons: some View {
         Button { } label: {
             Label("Action", systemImage: "globe")
         }
