@@ -94,6 +94,7 @@ public struct FormRowLabelStyle: LabelStyle {
                         .foregroundColor(secondaryTextColor)
                 }
             }
+            .padding(.vertical, FormRow.verticalPadding)
         }
     }
 }
