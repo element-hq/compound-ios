@@ -16,21 +16,21 @@
 
 import SwiftUI
 
-public extension ToggleStyle where Self == FormToggleStyle {
+public extension ToggleStyle where Self == CompoundToggleStyle {
     /// A toggle style that applies Compound design tokens to display a Switch row within a `Form`.
-    static var compoundForm: FormToggleStyle {
-        FormToggleStyle()
+    static var compound: CompoundToggleStyle {
+        CompoundToggleStyle()
     }
 }
 
 /// Default toggle styling for form rows.
 ///
 /// The toggle is given the form row label style and is tinted correctly.
-public struct FormToggleStyle: ToggleStyle {
+public struct CompoundToggleStyle: ToggleStyle {
     public func makeBody(configuration: Configuration) -> some View {
         Toggle(isOn: configuration.$isOn) {
             configuration.label
-                .labelStyle(.compoundFormRow())
+                .foregroundColor(.compound.textPrimary)
         }
         .tint(.compound.iconAccentTertiary)
     }
@@ -38,35 +38,39 @@ public struct FormToggleStyle: ToggleStyle {
 
 public struct FormToggleStyle_Previews: PreviewProvider {
     public static var previews: some View {
-        Form {
-            Section {
-                states
-            }
-            .compoundFormSection()
+        VStack(spacing: 16) {
+            states
         }
-        .compoundForm()
+        .padding(32)
     }
     
     @ViewBuilder
     public static var states: some View {
-        Toggle(isOn: .constant(false)) {
-            Label("Something complicated", systemImage: "flowchart")
-                .labelStyle(.compoundFormRow(secondaryText: "An explanation about it."))
+        VStack(spacing: 16) {
+            Toggle("Title", isOn: .constant(false))
+                .toggleStyle(.compound)
+                .labelsHidden()
+            
+            Toggle("Title", isOn: .constant(true))
+                .toggleStyle(.compound)
+                .labelsHidden()
         }
-        .toggleStyle(.compoundForm)
+        .padding(.bottom, 32)
         
-        Toggle(isOn: .constant(true)) {
-            Label("Notifications", systemImage: "bell")
+        VStack(spacing: 16) {
+            Toggle("Title", isOn: .constant(true))
+                .toggleStyle(.compound)
+            Toggle("Title", isOn: .constant(false))
+                .toggleStyle(.compound)
+            
+            Toggle(isOn: .constant(true)) {
+                Label("Title", systemImage: "square.dashed")
+            }
+            .toggleStyle(.compound)
+            Toggle(isOn: .constant(false)) {
+                Label("Title", systemImage: "square.dashed")
+            }
+            .toggleStyle(.compound)
         }
-        .toggleStyle(.compoundForm)
-        Toggle(isOn: .constant(false)) {
-            Label("Enable sound", systemImage: "speaker.wave.2")
-        }
-        .toggleStyle(.compoundForm)
-        
-        Toggle("Enable analytics", isOn: .constant(true))
-            .toggleStyle(.compoundForm)
-        Toggle("Show removed messages", isOn: .constant(false))
-            .toggleStyle(.compoundForm)
     }
 }

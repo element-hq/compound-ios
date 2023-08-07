@@ -85,7 +85,7 @@ struct SearchStyle_Previews: PreviewProvider {
 
                 Section("More Settings") {
                     Toggle("Some setting", isOn: .constant(true))
-                        .toggleStyle(.compoundForm)
+                        .toggleStyle(.compound)
                 }
                 .compoundFormSection()
             }
