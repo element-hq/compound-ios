@@ -31,6 +31,7 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
         case navigationLink(action: () -> Void)
         case picker(selection: Binding<SelectionValue>, items: [(title: String, tag: SelectionValue)])
         case toggle(Binding<Bool>)
+        case inlinePicker(selection: Binding<SelectionValue>, items: [(title: String, tag: SelectionValue)])
         case selection(isSelected: Bool, action: () -> Void)
         case textField(text: Binding<String>, axis: Axis)
         
@@ -100,6 +101,10 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                 label
             }
             .padding(.trailing, ListRowPadding.horizontal)
+        case .inlinePicker(let selection, let items):
+            ListInlinePicker(title: label.title ?? "",
+                             selection: selection,
+                             items: items)
         case .selection(let isSelected, let action):
             Button(action: action) {
                 LabeledContent {
@@ -263,6 +268,12 @@ struct ListRow_Previews: PreviewProvider {
                             kind: .selection(isSelected: true) {
                         print("I was tapped!")
                     })
+                    
+                    ListRow(label: .plain(title: "Title"),
+                            kind: .inlinePicker(selection: .constant("Item 1"),
+                                                items: [(title: "Item 1", tag: "Item 1"),
+                                                        (title: "Item 2", tag: "Item 2"),
+                                                        (title: "Item 3", tag: "Item 3")]))
                 }
                 
                 Group {
