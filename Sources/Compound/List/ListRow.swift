@@ -27,17 +27,14 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
     
     public enum Kind<CustomContent: View, SelectionValue: Hashable> {
         case label
-        case button(accessory: ListRowAccessory?, action: () -> Void)
+        case button(action: () -> Void)
+        case navigationLink(action: () -> Void)
         case picker(selection: Binding<SelectionValue>, items: [(title: String, tag: SelectionValue)])
         case toggle(Binding<Bool>)
         case selection(isSelected: Bool, action: () -> Void)
         case textField(text: Binding<String>, axis: Axis)
         
         case custom(() -> CustomContent)
-        
-        public static func button(action: @escaping () -> Void) -> Self {
-            .button(accessory: nil, action: action)
-        }
         
         public static func textField(text: Binding<String>) -> Self {
             .textField(text: text, axis: .vertical)
@@ -58,17 +55,20 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
     var rowContent: some View {
         switch kind {
         case .label:
-            LabeledContent {
-                details
-            } label: {
-                label
+            LabeledContent { details } label: { label }
+                .padding(.trailing, ListRowPadding.horizontal)
+        case .button(let action):
+            Button(action: action) {
+                LabeledContent { details } label: { label }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                    .padding(.trailing, ListRowPadding.horizontal)
             }
-        case .button(let accessory, let action):
+        case .navigationLink(let action):
             Button(action: action) {
                 LabeledContent {
                     HStack(spacing: 8) {
                         details
-                        accessory
+                        FormRowAccessory.navigationLink
                     }
                 } label: {
                     label
@@ -210,27 +210,19 @@ struct ListRow_Previews: PreviewProvider {
                     ListRow(label: .default(title: "Title",
                                             description: "Description…",
                                             systemIcon: .squareDashed),
-                            kind: .button(accessory: nil) {
-                        print("I was tapped!")
-                    })
+                            kind: .button { print("I was tapped!") })
                     ListRow(label: .default(title: "Title",
                                             systemIcon: .squareDashed),
-                            kind: .button(accessory: nil) {
-                        print("I was tapped!")
-                    })
+                            kind: .button { print("I was tapped!") })
                     ListRow(label: .default(title: "Title",
                                             description: "Description…",
                                             systemIcon: .squareDashed),
                             details: .label(title: "Details", systemIcon: .squareDashed),
-                            kind: .button(accessory: .navigationLink) {
-                        print("I was tapped!")
-                    })
+                            kind: .navigationLink { print("Perform navigation!") })
                     ListRow(label: .default(title: "Title",
                                             systemIcon: .squareDashed),
                             details: .label(title: "Details", systemIcon: .squareDashed),
-                            kind: .button(accessory: .navigationLink) {
-                        print("I was tapped!")
-                    })
+                            kind: .navigationLink { print("Perform navigation!") })
                 }
                 
                 Group {
@@ -276,54 +268,40 @@ struct ListRow_Previews: PreviewProvider {
                 Group {
                     ListRow(label: .action(title: "Title",
                                            systemIcon: .squareDashed),
-                            kind: .button(accessory: nil) {
-                        print("I was tapped!")
-                    })
+                            kind: .button { print("I was tapped!") })
                     ListRow(label: .action(title: "Title",
                                            systemIcon: .squareDashed,
                                            role: .destructive),
-                            kind: .button(accessory: nil) {
-                        print("I was tapped!")
-                    })
+                            kind: .button { print("I was tapped!") })
                     ListRow(label: .action(title: "Title",
                                            systemIcon: .squareDashed),
-                            kind: .button(accessory: nil) {
-                        print("I was tapped!")
-                    })
+                            kind: .button { print("I was tapped!") })
                     .disabled(true)
                 }
                 
                 Group {
                     ListRow(label: .plain(title: "Title"),
-                            kind: .button(accessory: nil) {
-                        print("I was tapped!")
-                    })
+                            kind: .button { print("I was tapped!") })
                 }
             }
             
             Section {
                 ListRow(label: .centeredAction(title: "Title",
                                                systemIcon: .squareDashed),
-                        kind: .button(accessory: nil) {
-                    print("I was tapped!")
-                })
+                        kind: .button { print("I was tapped!") })
             }
             
             Section {
                 ListRow(label: .centeredAction(title: "Title",
                                                systemIcon: .squareDashed,
                                                role: .destructive),
-                        kind: .button(accessory: nil) {
-                    print("I was tapped!")
-                })
+                        kind: .button { print("I was tapped!") })
             }
             
             Section {
                 ListRow(label: .centeredAction(title: "Title",
                                                systemIcon: .squareDashed),
-                        kind: .button(accessory: nil) {
-                    print("I was tapped!")
-                })
+                        kind: .button { print("I was tapped!") })
                 .disabled(true)
             }
             
