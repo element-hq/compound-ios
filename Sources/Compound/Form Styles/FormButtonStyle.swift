@@ -52,9 +52,10 @@ public enum FormRowAccessory: View {
     public var body: some View {
         switch self {
         case .navigationLink:
-            Image(systemName: "chevron.forward")
-                .font(.compound.bodySMSemibold)
+            CompoundIcon(\.chevronRight)
+                .font(.system(size: 24))
                 .foregroundColor(.compound.iconTertiaryAlpha)
+                .flipsForRightToLeftLayoutDirection(true)
         case .selected(let isSelected):
             if isSelected {
                 CompoundIcon(\.check)
