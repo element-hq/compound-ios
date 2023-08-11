@@ -94,12 +94,12 @@ struct CompoundIcon_Previews: PreviewProvider {
         Form {
             Section {
                 Label { Text("Plain Icon") } icon: {
-                    CompoundIcon(\.user)
+                    CompoundIcon(\.userProfile)
                         .foregroundColor(.compound.iconSecondary)
                 }
                 
                 Label { Text("Styled Icon") } icon: {
-                    CompoundIcon(\.user)
+                    CompoundIcon(\.userProfile)
                 }
                 .labelStyle(.compoundFormRow(alignment: .center))
                 
@@ -112,7 +112,7 @@ struct CompoundIcon_Previews: PreviewProvider {
         .safeAreaInset(edge: .bottom) {
             Button { } label: {
                 Label { Text("Button") } icon: {
-                    CompoundIcon(\.user)
+                    CompoundIcon(\.userProfile)
                 }
                 .frame(maxWidth: .infinity)
             }
@@ -125,7 +125,7 @@ struct CompoundIcon_Previews: PreviewProvider {
         VStack {
             Button { } label: {
                 Label { Text("Heading Large") } icon: {
-                    CompoundIcon(\.user)
+                    CompoundIcon(\.userProfile)
                 }
             }
             .font(.compound.headingLG)
@@ -133,14 +133,14 @@ struct CompoundIcon_Previews: PreviewProvider {
             
             Button { } label: {
                 Label { Text("Body Large") } icon: {
-                    CompoundIcon(\.user)
+                    CompoundIcon(\.userProfile)
                 }
             }
             .buttonStyle(.borderedProminent)
             
             Button { } label: {
                 Label { Text("Body Small") } icon: {
-                    CompoundIcon(\.user)
+                    CompoundIcon(\.userProfile)
                 }
             }
             .font(.compound.bodySM)
