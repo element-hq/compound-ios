@@ -18,8 +18,10 @@ enum Screen: Hashable, View {
     /// Size tokens
     case sizes
     
-    /// Form styles and components
+    /// Form styles and components (deprecated)
     case form
+    /// List styles and components
+    case list
     /// Label styles
     case labels
     /// Button styles
@@ -45,6 +47,7 @@ enum Screen: Hashable, View {
         case .icons: IconsScreen()
         
         case .form: FormScreen()
+        case .list: ListScreen()
         case .sizes: EmptyView()
         case .labels: EmptyView()
         case .buttons: EmptyView()

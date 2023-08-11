@@ -200,141 +200,162 @@ public extension ListRow where Icon == EmptyView, DetailsIcon == EmptyView {
 
 // MARK: - Previews
 
-struct ListRow_Previews: PreviewProvider {
-    static var previews: some View {
+public struct ListRow_Previews: PreviewProvider {
+    public static var previews: some View {
         Form {
             Section {
-                Group {
-                    ListRow(label: .default(title: "Label",
-                                            description: "Non-interactive item",
-                                            systemIcon: .squareDashed),
-                            details: .label(title: "Content",
-                                            systemIcon: .squareDashed,
-                                            isWaiting: true),
-                            kind: .label)
-                }
-                
-                Group {
-                    ListRow(label: .default(title: "Title",
-                                            description: "Description…",
-                                            systemIcon: .squareDashed),
-                            kind: .button { print("I was tapped!") })
-                    ListRow(label: .default(title: "Title",
-                                            systemIcon: .squareDashed),
-                            kind: .button { print("I was tapped!") })
-                    ListRow(label: .default(title: "Title",
-                                            description: "Description…",
-                                            systemIcon: .squareDashed),
-                            details: .label(title: "Details", systemIcon: .squareDashed),
-                            kind: .navigationLink { print("Perform navigation!") })
-                    ListRow(label: .default(title: "Title",
-                                            systemIcon: .squareDashed),
-                            details: .label(title: "Details", systemIcon: .squareDashed),
-                            kind: .navigationLink { print("Perform navigation!") })
-                }
-                
-                Group {
-                    ListRow(label: .default(title: "Title",
-                                            description: "Description…",
-                                            systemIcon: .squareDashed),
-                            kind: .picker(selection: .constant(0),
-                                          items: [(title: "Item 1", tag: 0),
-                                                  (title: "Item 2", tag: 1),
-                                                  (title: "Item 3", tag: 2)]))
-                    ListRow(label: .default(title: "Title", systemIcon: .squareDashed),
-                            kind: .picker(selection: .constant("Item 1"),
-                                          items: [(title: "Item 1", tag: "Item 1"),
-                                                  (title: "Item 2", tag: "Item 2"),
-                                                  (title: "Item 3", tag: "Item 3")]))
-                }
-                
-                Group {
-                    ListRow(label: .default(title: "Title",
-                                            description: "Description…",
-                                            systemIcon: .squareDashed),
-                            kind: .toggle(.constant(true)))
-                    ListRow(label: .default(title: "Title", systemIcon: .squareDashed),
-                            kind: .toggle(.constant(true)))
-                }
-                
-                Group {
-                    ListRow(label: .default(title: "Title",
-                                            description: "Description…",
-                                            systemIcon: .squareDashed),
-                            details: .title("Content"),
-                            kind: .selection(isSelected: true) {
-                        print("I was tapped!")
-                    })
-                    ListRow(label: .default(title: "Title",
-                                            systemIcon: .squareDashed),
-                            details: .title("Content"),
-                            kind: .selection(isSelected: true) {
-                        print("I was tapped!")
-                    })
-                    
-                    ListRow(label: .plain(title: "Title"),
-                            kind: .inlinePicker(selection: .constant("Item 1"),
-                                                items: [(title: "Item 1", tag: "Item 1"),
-                                                        (title: "Item 2", tag: "Item 2"),
-                                                        (title: "Item 3", tag: "Item 3")]))
-                }
-                
-                Group {
-                    ListRow(label: .action(title: "Title",
+                labels
+                buttons
+                pickers
+                toggles
+                selection
+                actionButtons
+                plainButton
+            }
+            
+            centeredActionButtonSections
+            descriptionLabelSection
+            othersSection
+        }
+        .compoundList()
+    }
+    
+    static var labels: some View {
+        ListRow(label: .default(title: "Label",
+                                description: "Non-interactive item",
+                                systemIcon: .squareDashed),
+                details: .label(title: "Content",
+                                systemIcon: .squareDashed,
+                                isWaiting: true),
+                kind: .label)
+    }
+    
+    @ViewBuilder static var buttons: some View {
+        ListRow(label: .default(title: "Title",
+                                description: "Description…",
+                                systemIcon: .squareDashed),
+                kind: .button { print("I was tapped!") })
+        ListRow(label: .default(title: "Title",
+                                systemIcon: .squareDashed),
+                kind: .button { print("I was tapped!") })
+        ListRow(label: .default(title: "Destructive",
+                                systemIcon: .squareDashed,
+                                role: .destructive),
+                kind: .button { print("I will delete things!") })
+        ListRow(label: .default(title: "Title",
+                                description: "Description…",
+                                systemIcon: .squareDashed),
+                details: .label(title: "Details", systemIcon: .squareDashed),
+                kind: .navigationLink { print("Perform navigation!") })
+        ListRow(label: .default(title: "Title",
+                                systemIcon: .squareDashed),
+                kind: .navigationLink { print("Perform navigation!") })
+    }
+    
+    @ViewBuilder static var pickers: some View {
+        ListRow(label: .default(title: "Title",
+                                description: "Description…",
+                                systemIcon: .squareDashed),
+                kind: .picker(selection: .constant(0),
+                              items: [(title: "Item 1", tag: 0),
+                                      (title: "Item 2", tag: 1),
+                                      (title: "Item 3", tag: 2)]))
+        ListRow(label: .default(title: "Title", systemIcon: .squareDashed),
+                kind: .picker(selection: .constant("Item 1"),
+                              items: [(title: "Item 1", tag: "Item 1"),
+                                      (title: "Item 2", tag: "Item 2"),
+                                      (title: "Item 3", tag: "Item 3")]))
+    }
+    
+    @ViewBuilder static var toggles: some View {
+        ListRow(label: .default(title: "Title",
+                                description: "Description…",
+                                systemIcon: .squareDashed),
+                kind: .toggle(.constant(true)))
+        ListRow(label: .default(title: "Title", systemIcon: .squareDashed),
+                kind: .toggle(.constant(true)))
+    }
+    
+    @ViewBuilder static var selection: some View {
+        ListRow(label: .default(title: "Title",
+                                description: "Description…",
+                                systemIcon: .squareDashed),
+                details: .title("Content"),
+                kind: .selection(isSelected: true) {
+            print("I was tapped!")
+        })
+        ListRow(label: .default(title: "Title",
+                                systemIcon: .squareDashed),
+                details: .title("Content"),
+                kind: .selection(isSelected: true) {
+            print("I was tapped!")
+        })
+        
+        ListRow(label: .plain(title: "Title"),
+                kind: .inlinePicker(selection: .constant("Item 1"),
+                                    items: [(title: "Item 1", tag: "Item 1"),
+                                            (title: "Item 2", tag: "Item 2"),
+                                            (title: "Item 3", tag: "Item 3")]))
+    }
+    
+    @ViewBuilder static var actionButtons: some View {
+        ListRow(label: .action(title: "Title",
+                               systemIcon: .squareDashed),
+                kind: .button { print("I was tapped!") })
+        ListRow(label: .action(title: "Title",
+                               systemIcon: .squareDashed,
+                               role: .destructive),
+                kind: .button { print("I was tapped!") })
+        ListRow(label: .action(title: "Title",
+                               systemIcon: .squareDashed),
+                kind: .button { print("I was tapped!") })
+        .disabled(true)
+    }
+    
+    static var plainButton: some View {
+        ListRow(label: .plain(title: "Title"),
+                kind: .button { print("I was tapped!") })
+    }
+    
+    @ViewBuilder static var centeredActionButtonSections: some View {
+        Section {
+            ListRow(label: .centeredAction(title: "Title",
                                            systemIcon: .squareDashed),
-                            kind: .button { print("I was tapped!") })
-                    ListRow(label: .action(title: "Title",
+                    kind: .button { print("I was tapped!") })
+        }
+        
+        Section {
+            ListRow(label: .centeredAction(title: "Title",
                                            systemIcon: .squareDashed,
                                            role: .destructive),
-                            kind: .button { print("I was tapped!") })
-                    ListRow(label: .action(title: "Title",
-                                           systemIcon: .squareDashed),
-                            kind: .button { print("I was tapped!") })
-                    .disabled(true)
-                }
-                
-                Group {
-                    ListRow(label: .plain(title: "Title"),
-                            kind: .button { print("I was tapped!") })
-                }
-            }
-            
-            Section {
-                ListRow(label: .centeredAction(title: "Title",
-                                               systemIcon: .squareDashed),
-                        kind: .button { print("I was tapped!") })
-            }
-            
-            Section {
-                ListRow(label: .centeredAction(title: "Title",
-                                               systemIcon: .squareDashed,
-                                               role: .destructive),
-                        kind: .button { print("I was tapped!") })
-            }
-            
-            Section {
-                ListRow(label: .centeredAction(title: "Title",
-                                               systemIcon: .squareDashed),
-                        kind: .button { print("I was tapped!") })
-                .disabled(true)
-            }
-            
-            Section {
-                ListRow(label: .description("This is a row in the list, with a multiline description but it doesn't have either an icon or a title, just this text here."),
-                        kind: .label)
-            }
-            
-            Section {
-                ListRow(kind: .custom {
-                    Text("This is a custom row")
-                        .padding(.horizontal, 16)
-                        .padding(.vertical, 20)
-                })
-                ListRow(label: .plain(title: "Placeholder"),
-                        kind: .textField(text: .constant("")))
-                .lineLimit(4...)
-            }
+                    kind: .button { print("I was tapped!") })
         }
-        .environment(\.defaultMinListRowHeight, 48)
+        
+        Section {
+            ListRow(label: .centeredAction(title: "Title",
+                                           systemIcon: .squareDashed),
+                    kind: .button { print("I was tapped!") })
+            .disabled(true)
+        }
+    }
+    
+    static var descriptionLabelSection: some View {
+        Section {
+            ListRow(label: .description("This is a row in the list, with a multiline description but it doesn't have either an icon or a title, just this text here."),
+                    kind: .label)
+        }
+    }
+    
+    @ViewBuilder static var othersSection: some View {
+        Section {
+            ListRow(kind: .custom {
+                Text("This is a custom row")
+                    .padding(.horizontal, 16)
+                    .padding(.vertical, 20)
+            })
+            ListRow(label: .plain(title: "Placeholder"),
+                    kind: .textField(text: .constant("")))
+            .lineLimit(4...)
+        }
     }
 }
