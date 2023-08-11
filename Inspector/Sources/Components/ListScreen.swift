@@ -12,7 +12,7 @@ import HyperionCore
 struct ListScreen: View {
     var body: some View {
         ListRow_Previews.previews
-            .navigationTitle("Forms")
+            .navigationTitle("Lists")
     }
 }
 
