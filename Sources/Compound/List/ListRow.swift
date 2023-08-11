@@ -67,7 +67,7 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
         case .navigationLink(let action):
             Button(action: action) {
                 LabeledContent {
-                    HStack(spacing: 8) {
+                    HStack(spacing: ListDetails.spacing) {
                         details
                         FormRowAccessory.navigationLink
                     }
@@ -108,7 +108,7 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
         case .selection(let isSelected, let action):
             Button(action: action) {
                 LabeledContent {
-                    HStack(spacing: 8) {
+                    HStack(spacing: ListDetails.spacing) {
                         details
                         
                         if isSelected {
@@ -132,7 +132,10 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                     .foregroundColor(.compound.textPlaceholder)
             }
             .tint(.compound.iconAccentTertiary)
-            .listRowInsets(EdgeInsets(top: 11, leading: 16, bottom: 11, trailing: 16))
+            .listRowInsets(EdgeInsets(top: 11,
+                                      leading: ListRowPadding.horizontal,
+                                      bottom: 11,
+                                      trailing: ListRowPadding.horizontal))
         
         case .custom(let content):
             content()

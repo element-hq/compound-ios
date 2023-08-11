@@ -17,10 +17,14 @@
 import SFSafeSymbols
 import SwiftUI
 
+enum ListDetails {
+    static let spacing = 8.0
+}
+
 /// The style applied to the details label in a list row.
 private struct ListDetailsLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
-        HStack(spacing: 8) {
+        HStack(spacing: ListDetails.spacing) {
             configuration.title
                 .foregroundColor(.compound.textSecondary)
             configuration.icon
@@ -37,7 +41,7 @@ public struct ListDetailsLabel<Icon: View>: View {
     var isWaiting = false
     
     public var body: some View {
-        HStack(spacing: 8) {
+        HStack(spacing: ListDetails.spacing) {
             if isWaiting {
                 ProgressView()
             }

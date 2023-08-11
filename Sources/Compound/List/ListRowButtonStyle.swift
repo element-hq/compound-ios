@@ -16,7 +16,10 @@
 
 import SwiftUI
 
-/// Default button styling for form rows.
+// TODO: Check if the primitive style is actually needed now the insets are part of ListRow.
+// It might still be useful for ListRow(kind: .custom) usage?
+
+/// Default button styling for list rows.
 ///
 /// The primitive style is needed to set the list row insets to `0`. The inner style is then needed
 /// to change the background colour depending on whether the button is currently pressed or not.
@@ -40,16 +43,18 @@ public struct ListRowButtonStyle: PrimitiveButtonStyle {
 
 // MARK: - Previews
 
+// TODO: Fix the previews, either the style should expand the label to fill or
+// the previews need to do this manually for demonstration purposes.
+
 public struct ListRowButtonStyle_Previews: PreviewProvider {
     public static var previews: some View {
         Form {
             Section {
                 Button("Title") { }
-                    .buttonStyle(ListRowButtonStyle())
+                    .buttonStyle(ListRowButtonStyle.Style())
             }
             .listRowInsets(EdgeInsets())
             
-            // FIXME: Separator alignment guide???
             Section {
                 Button("Title") { }
                 Button("Title") { }
@@ -64,6 +69,6 @@ public struct ListRowButtonStyle_Previews: PreviewProvider {
             }
             .listRowInsets(EdgeInsets())
         }
-        .compoundForm()
+        .compoundList()
     }
 }

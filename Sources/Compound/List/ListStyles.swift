@@ -17,6 +17,13 @@
 import SwiftUI
 
 public extension View {
+    /// Styles a list using the Compound design tokens.
+    func compoundList() -> some View {
+        environment(\.defaultMinListRowHeight, 48)
+            .scrollContentBackground(.hidden)
+            .background(Color.compound.bgSubtleSecondaryLevel0.ignoresSafeArea())
+    }
+    
     /// Styles a list section header using the Compound design tokens.
     func compoundListSectionHeader() -> some View {
         font(.compound.bodySM)
@@ -70,5 +77,22 @@ struct ListTextStyles_Previews: PreviewProvider {
                     .compoundListSectionFooter()
             }
         }
+        .compoundList()
+        .previewDisplayName("Form")
+        
+        List {
+            Section {
+                ListRow(label: .plain(title: "Hello"), kind: .label)
+                ListRow(label: .plain(title: "World!"), kind: .label)
+            } header: {
+                Text("Section Title")
+                    .compoundListSectionHeader()
+            } footer: {
+                Text("Section footer")
+                    .compoundListSectionFooter()
+            }
+        }
+        .compoundList()
+        .previewDisplayName("List")
     }
 }

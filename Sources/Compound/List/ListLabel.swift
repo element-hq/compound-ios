@@ -238,6 +238,6 @@ struct ListLabel_Previews: PreviewProvider {
                         kind: .label)
             }
         }
-        .compoundForm()
+        .compoundList()
     }
 }
