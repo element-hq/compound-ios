@@ -63,7 +63,7 @@ struct FormScreen: View {
             .compoundFormSection()
         }
         .compoundForm()
-        .navigationTitle("Forms")
+        .navigationTitle("Forms (deprecated")
     }
     
     @ViewBuilder
