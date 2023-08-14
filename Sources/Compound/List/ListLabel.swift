@@ -101,6 +101,7 @@ public struct ListLabel<Icon: View>: View {
                         .foregroundColor(descriptionColor)
                 }
             }
+            .accessibilityElement(children: .combine)
         } icon: {
             icon
                 .foregroundColor(iconForegroundColor)
