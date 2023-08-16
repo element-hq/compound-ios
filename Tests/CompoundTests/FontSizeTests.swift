@@ -14,7 +14,6 @@
 // limitations under the License.
 //
 
-
 @testable import Compound
 import SwiftUI
 import XCTest

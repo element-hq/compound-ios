@@ -55,6 +55,7 @@ public struct ListDetailsLabel<Icon: View>: View {
                 .labelStyle(ListDetailsLabelStyle())
             }
         }
+        .accessibilityElement(children: .combine)
     }
     
     // MARK: - Initialisers

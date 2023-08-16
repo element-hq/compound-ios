@@ -56,30 +56,19 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
     var rowContent: some View {
         switch kind {
         case .label:
-            LabeledContent { details } label: { label }
-                .padding(.trailing, ListRowPadding.horizontal)
+            RowContent { details } label: { label }
         case .button(let action):
             Button(action: action) {
-                LabeledContent { details } label: { label }
-                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                    .padding(.trailing, ListRowPadding.horizontal)
+                RowContent { details } label: { label }
             }
         case .navigationLink(let action):
             Button(action: action) {
-                LabeledContent {
-                    HStack(spacing: ListDetails.spacing) {
-                        details
-                        FormRowAccessory.navigationLink
-                    }
-                } label: {
-                    label
-                }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-                .padding(.trailing, ListRowPadding.horizontal)
+                RowContent(accessory: .navigationLink) { details } label: { label }
             }
         case .picker(let selection, let items):
             LabeledContent {
-                Picker(label.title ?? "", selection: selection) {
+                // Note: VoiceOver label already provided.
+                Picker("", selection: selection) {
                     ForEach(items, id: \.tag) { item in
                         Text(item.title)
                             .tag(item.tag)
@@ -93,7 +82,8 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
             }
         case .toggle(let binding):
             LabeledContent {
-                Toggle(label.title ?? "", isOn: binding)
+                // Note: VoiceOver label already provided.
+                Toggle("", isOn: binding)
                     .toggleStyle(.compound)
                     .labelsHidden()
                     .padding(.vertical, -10)
@@ -107,24 +97,10 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                              items: items)
         case .selection(let isSelected, let action):
             Button(action: action) {
-                LabeledContent {
-                    HStack(spacing: ListDetails.spacing) {
-                        details
-                        
-                        if isSelected {
-                            CompoundIcon(\.check)
-                                .font(.system(size: 24))
-                                .foregroundColor(.compound.iconPrimary)
-                                .accessibilityAddTraits(.isSelected)
-                                .padding(.vertical, -4)
-                        }
-                    }
-                } label: {
-                    label
-                }
-                .padding(.trailing, ListRowPadding.horizontal)
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+                RowContent(accessory: isSelected ? .selected : nil) { details } label: { label }
             }
+            // Add the following trait on iOS 17
+            // .accessibilityAddTraits(.isToggle)
         case .textField(let text, let axis):
             TextField(text: text, axis: axis) {
                 Text(label.title ?? "")
@@ -195,6 +171,30 @@ public extension ListRow where Icon == EmptyView, DetailsIcon == EmptyView {
         self.label = ListLabel()
         self.details = nil
         self.kind = kind
+    }
+}
+
+/// The standard content for labels, and button based rows.
+///
+/// This doesn't use `LabeledContent` as that will happily build using an `EmptyView`
+/// in the content. This creates an issue where the label ends up hidden to VoiceOver,
+/// presumably because SwiftUI thinks that the row doesn't contain any content.
+private struct RowContent<Label: View, Details: View>: View {
+    var accessory: ListRowAccessory?
+    let details: () -> Details?
+    let label: () -> Label
+    
+    var body: some View {
+        HStack(spacing: ListDetails.spacing) {
+            label()
+                .frame(maxWidth: .infinity)
+            
+            details()
+            accessory
+        }
+        .frame(maxHeight: .infinity)
+        .padding(.trailing, ListRowPadding.horizontal)
+        .accessibilityElement(children: .combine)
     }
 }
 

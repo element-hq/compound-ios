@@ -21,23 +21,21 @@ public enum ListRowAccessory: View {
     /// A chevron to indicate that the button pushes another screen.
     case navigationLink
     /// A checkmark (when `true`) to indicate that the row is selected.
-    @available(iOS, deprecated: 17.0, message: "Add the .isToggle accessibility trait to the body.")
-    case selected(Bool)
+    case selected
     
     public var body: some View {
         switch self {
         case .navigationLink:
-            Image(systemName: "chevron.forward")
-                .font(.compound.bodySMSemibold)
+            CompoundIcon(\.chevronRight)
+                .font(.system(size: 24))
                 .foregroundColor(.compound.iconTertiaryAlpha)
-        case .selected(let isSelected):
-            if isSelected {
-                CompoundIcon(\.check)
-                    .font(.system(size: 24))
-                    .foregroundColor(.compound.iconPrimary)
-                    .accessibilityAddTraits(.isSelected)
-                    .padding(.vertical, -4)
-            }
+                .flipsForRightToLeftLayoutDirection(true)
+        case .selected:
+            CompoundIcon(\.check)
+                .font(.system(size: 24))
+                .foregroundColor(.compound.iconPrimary)
+                .accessibilityAddTraits(.isSelected)
+                .padding(.vertical, -4)
         }
     }
 }
