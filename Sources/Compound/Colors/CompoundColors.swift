@@ -156,8 +156,8 @@ private extension String {
     /// See original function here https://github.com/matrix-org/matrix-react-sdk/blob/321dd49db4fbe360fc2ff109ac117305c955b061/src/utils/FormattingUtils.js#L47
     var hashCode: Int {
         let characterCodeSum = self.reduce(0) { sum, character in
-            sum + Int(char.unicodeScalars.first?.value ?? 0)
+            sum + Int(character.unicodeScalars.first?.value ?? 0)
         }
-        return (charCodeSum % Color.compound.avatarColors.count)
+        return (characterCodeSum % Color.compound.avatarColors.count)
     }
 }
