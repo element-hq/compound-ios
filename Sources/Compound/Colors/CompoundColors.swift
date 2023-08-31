@@ -92,6 +92,25 @@ public struct CompoundColors {
     public let bgSubtleSecondaryLevel0 = Color(UIColor { $0.isLight ? UIColor(compound.colorGray300) : UIColor(compound.colorThemeBg) })
     public let bgCanvasDefaultLevel1 = Color(UIColor { $0.isLight ? UIColor(compound.colorThemeBg) : UIColor(compound.colorGray300) })
     
+    // MARK: - Avatar Colors
+    // Used to determine the background color and the foreground color of an avatar.
+    
+    internal let avatarColors: [AvatarColor] = [
+        .init(background: compound.colorBlue300, foreground: compound.colorBlue1200),
+        .init(background: compound.colorFuchsia300, foreground: compound.colorFuchsia1200),
+        .init(background: compound.colorGreen300, foreground: compound.colorGreen1200),
+        .init(background: compound.colorPink300, foreground: compound.colorPink1200),
+        .init(background: compound.colorOrange300, foreground: compound.colorOrange1200),
+        .init(background: compound.colorCyan300, foreground: compound.colorCyan1200),
+        .init(background: compound.colorPurple300, foreground: compound.colorPurple1200),
+        .init(background: compound.colorLime300, foreground: compound.colorLime1200)
+    ]
+    
+    public func avatarColor(for contentId: String) -> AvatarColor {
+        let colorIndex = Int(contentId.hashCode % Int(avatarColors.count))
+        return avatarColors[colorIndex % avatarColors.count]
+    }
+    
     // MARK: - Awaiting Semantic Tokens
     
     /// This token is a placeholder and hasn't been finalised.
@@ -124,4 +143,25 @@ public struct CompoundColors {
 private extension UITraitCollection {
     /// Whether or not the trait collection contains a `userInterfaceStyle` of `.light`.
     var isLight: Bool { userInterfaceStyle == .light }
+}
+
+public struct AvatarColor: Equatable {
+    let background: Color
+    let foreground: Color
+    
+    fileprivate init(background: Color, foreground: Color) {
+        self.background = background
+        self.foreground = foreground
+    }
+}
+
+private extension String {
+    /// Calculates a numeric hash same as Element Web
+    /// See original function here https://github.com/matrix-org/matrix-react-sdk/blob/321dd49db4fbe360fc2ff109ac117305c955b061/src/utils/FormattingUtils.js#L47
+    var hashCode: Int {
+        let charCodeSum = self.reduce(0) { sum, char in
+            return sum + Int(char.unicodeScalars.first?.value ?? 0)
+        }
+        return (charCodeSum % Color.compound.avatarColors.count)
+    }
 }
