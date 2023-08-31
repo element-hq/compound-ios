@@ -108,9 +108,8 @@ public struct CompoundColors {
         .init(background: compound.colorLime300, foreground: compound.colorLime1200)
     ]
     
-    public func avatarColor(for contentId: String) -> AvatarColor {
-        let colorIndex = Int(contentId.hashCode % Int(avatarColors.count))
-        return avatarColors[colorIndex % avatarColors.count]
+    public func avatarColor(for contentID: String) -> AvatarColor {
+        avatarColors[contentID.hashCode]
     }
     
     // MARK: - Awaiting Semantic Tokens
@@ -156,8 +155,8 @@ private extension String {
     /// Calculates a numeric hash same as Element Web
     /// See original function here https://github.com/matrix-org/matrix-react-sdk/blob/321dd49db4fbe360fc2ff109ac117305c955b061/src/utils/FormattingUtils.js#L47
     var hashCode: Int {
-        let charCodeSum = self.reduce(0) { sum, char in
-            return sum + Int(char.unicodeScalars.first?.value ?? 0)
+        let characterCodeSum = self.reduce(0) { sum, character in
+            sum + Int(char.unicodeScalars.first?.value ?? 0)
         }
         return (charCodeSum % Color.compound.avatarColors.count)
     }
