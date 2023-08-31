@@ -147,13 +147,8 @@ private extension UITraitCollection {
 }
 
 public struct AvatarColor: Equatable {
-    let background: Color
-    let foreground: Color
-    
-    public init(background: Color, foreground: Color) {
-        self.background = background
-        self.foreground = foreground
-    }
+    public let background: Color
+    public let foreground: Color
 }
 
 private extension String {
