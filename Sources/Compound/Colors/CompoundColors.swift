@@ -95,6 +95,8 @@ public struct CompoundColors {
     // MARK: - Avatar Colors
     // Used to determine the background color and the foreground color of an avatar.
     
+    // Order matches the one from web
+    // https://github.com/vector-im/compound-web/blob/5dda11aa9733462fb8422968181275bc3e9b35e3/src/components/Avatar/Avatar.module.css#L64
     internal let avatarColors: [AvatarColor] = [
         .init(background: compound.colorBlue300, foreground: compound.colorBlue1200),
         .init(background: compound.colorFuchsia300, foreground: compound.colorFuchsia1200),

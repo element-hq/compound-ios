@@ -16,7 +16,7 @@ final class AvatarColorsTests: XCTestCase {
         let input: String
         private let webOutput: Int
         
-        // remember that web starts the index from 1 while we start from 0)
+        // remember that web starts the index from 1 while we start from 0
         var output: Int {
             webOutput - 1
         }
