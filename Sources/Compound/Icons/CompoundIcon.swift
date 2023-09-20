@@ -141,16 +141,16 @@ public extension Label {
     /// - Parameters:
     ///   - title: A string used as the label’s title.
     ///   - icon: The icon to use from Compound.
-    ///   - size: The size of the icon.
-    ///   - font: The font that should be used for scaling with Dynamic Type.
+    ///   - iconSize: The size of the icon.
+    ///   - font: The font that the icon should scale relative to with Dynamic Type.
     init(_ title: some StringProtocol,
          icon: KeyPath<CompoundIcons, Image>,
-         size: CompoundIcon.Size,
+         iconSize: CompoundIcon.Size,
          relativeTo font: Font) where Title == Text, Icon == CompoundIcon {
         self.init {
             Text(title)
         } icon: {
-            CompoundIcon(icon, size: size, relativeTo: font)
+            CompoundIcon(icon, size: iconSize, relativeTo: font)
         }
     }
 }
