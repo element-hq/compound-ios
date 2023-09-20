@@ -41,17 +41,49 @@ public struct CompoundIcon: View {
         }
     }
     
-    private var size: Size
     private var image: Image
+    private var size: Size
+    private var font: Font
+    
+    private var fontSize: FontSize {
+        FontSize.reflecting(font) ?? .style(.body)
+    }
+    
+    /// Creates an icon using a key path from the Compound tokens. The size will be
+    /// 24pt and will scale relative to the `bodyLG` font when Dynamic Type is used.
+    ///
+    /// - Parameters:
+    ///   - icon: The icon to show.
+    public init(_ icon: KeyPath<CompoundIcons, Image>) {
+        image = .compound[keyPath: icon]
+        self.size = .medium
+        self.font = .compound.bodyLG
+    }
     
     /// Creates an icon using a key path from the Compound tokens.
     ///
     /// - Parameters:
     ///   - icon: The icon to show.
-    ///   - size: The size of the icon. Defaults to `.medium` (24pt).
-    public init(_ icon: KeyPath<CompoundIcons, Image>, size: Size = .medium) {
+    ///   - size: The size of the icon.
+    ///   - font: The font that should be used for scaling with Dynamic Type.
+    public init(_ icon: KeyPath<CompoundIcons, Image>, size: Size, relativeTo font: Font) {
         image = .compound[keyPath: icon]
         self.size = size
+        self.font = font
+    }
+    
+    /// Creates an icon using a custom image to allow assets from outside
+    /// of Compound to scale in the same way as icons. The size will be 24pt
+    /// and will scale relative to the `bodyLG` font when Dynamic Type is used.
+    ///
+    /// - Parameters:
+    ///   - customImage: The image that should be displayed
+    ///
+    /// ** Note:** The image should have a square frame or it may end up distorted.
+    public init(customImage: Image) {
+        image = customImage
+        self.size = .medium
+        self.font = .compound.bodyLG
     }
     
     /// Creates an icon using a custom image to allow assets from outside
@@ -59,38 +91,19 @@ public struct CompoundIcon: View {
     ///
     /// - Parameters:
     ///   - customImage: The image that should be displayed
-    ///   - size: The size of the icon. Defaults to `.medium` (24pt).
+    ///   - size: The size of the icon.
+    ///   - font: The font that should be used for scaling with Dynamic Type.
     ///
     /// ** Note:** The image should have a square frame or it may end up distorted.
-    public init(customImage: Image, size: Size = .medium) {
+    public init(customImage: Image, size: Size, relativeTo font: Font) {
         image = customImage
         self.size = size
+        self.font = font
     }
     
     public var body: some View {
         image
             .resizable()
-            .modifier(CompoundIconStyle(size: size))
-    }
-}
-
-/// A style that ensures the icon is rendered at the correct size, based upon
-/// its font.
-///
-/// This is a modifier to get access to the font from the environment as it
-/// doesn't appear to be available directly from the view as of iOS 16.4.
-private struct CompoundIconStyle: ViewModifier {
-    @Environment(\.font) private var font
-    
-    let size: CompoundIcon.Size
-    
-    private var fontSize: FontSize {
-        FontSize.reflecting(font ?? .body) ?? .style(.body)
-    }
-    
-    func body(content: Content) -> some View {
-        let fontSize = fontSize
-        content
             .modifier(CompoundIconFrame(fontSize: size.value, textStyle: fontSize.style))
     }
 }
@@ -112,15 +125,32 @@ private struct CompoundIconFrame: ViewModifier {
 
 public extension Label {
     /// Creates a label with an icon from Compound and a title generated from a string.
+    /// The icon size will be 24pt, scaling relative to the `bodyLG` with Dynamic Type.
     /// - Parameters:
     ///   - title: A string used as the label’s title.
     ///   - icon: The icon to use from Compound.
-    ///   - size: The size of the icon. Defaults to `.medium` (24pt).
-    init(_ title: some StringProtocol, icon: KeyPath<CompoundIcons, Image>, size: CompoundIcon.Size = .medium) where Title == Text, Icon == CompoundIcon {
+    init(_ title: some StringProtocol, icon: KeyPath<CompoundIcons, Image>) where Title == Text, Icon == CompoundIcon {
         self.init {
             Text(title)
         } icon: {
-            CompoundIcon(icon, size: size)
+            CompoundIcon(icon)
+        }
+    }
+    
+    /// Creates a label with an icon from Compound and a title generated from a string.
+    /// - Parameters:
+    ///   - title: A string used as the label’s title.
+    ///   - icon: The icon to use from Compound.
+    ///   - size: The size of the icon.
+    ///   - font: The font that should be used for scaling with Dynamic Type.
+    init(_ title: some StringProtocol,
+         icon: KeyPath<CompoundIcons, Image>,
+         size: CompoundIcon.Size,
+         relativeTo font: Font) where Title == Text, Icon == CompoundIcon {
+        self.init {
+            Text(title)
+        } icon: {
+            CompoundIcon(icon, size: size, relativeTo: font)
         }
     }
 }
@@ -171,14 +201,15 @@ struct CompoundIcon_Previews: PreviewProvider {
         VStack {
             Button { } label: {
                 Label { Text("Body Large") } icon: {
-                    CompoundIcon(\.userProfile, size: .medium)
+                    CompoundIcon(\.userProfile, size: .medium, relativeTo: .compound.bodyLG)
                 }
             }
+            .font(.compound.bodyLG)
             .buttonStyle(.borderedProminent)
             
             Button { } label: {
                 Label { Text("Body Small") } icon: {
-                    CompoundIcon(\.userProfile, size: .small)
+                    CompoundIcon(\.userProfile, size: .small, relativeTo: .compound.bodySM)
                 }
             }
             .font(.compound.bodySM)
@@ -186,7 +217,7 @@ struct CompoundIcon_Previews: PreviewProvider {
             
             Button { } label: {
                 Label { Text("Body xSmall") } icon: {
-                    CompoundIcon(\.userProfile, size: .xSmall)
+                    CompoundIcon(\.userProfile, size: .xSmall, relativeTo: .compound.bodyXS)
                 }
             }
             .font(.compound.bodyXS)
