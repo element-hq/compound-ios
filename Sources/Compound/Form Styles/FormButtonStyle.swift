@@ -58,7 +58,6 @@ public enum FormRowAccessory: View {
         case .selected(let isSelected):
             if isSelected {
                 CompoundIcon(\.check)
-                    .font(.system(size: 24))
                     .foregroundColor(.compound.iconPrimary)
                     .accessibilityAddTraits(.isSelected)
             }
