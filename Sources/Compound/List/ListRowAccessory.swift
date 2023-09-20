@@ -27,12 +27,10 @@ public enum ListRowAccessory: View {
         switch self {
         case .navigationLink:
             CompoundIcon(\.chevronRight)
-                .font(.system(size: 24))
                 .foregroundColor(.compound.iconTertiaryAlpha)
                 .flipsForRightToLeftLayoutDirection(true)
         case .selected:
             CompoundIcon(\.check)
-                .font(.system(size: 24))
                 .foregroundColor(.compound.iconPrimary)
                 .accessibilityAddTraits(.isSelected)
                 .padding(.vertical, -4)
