@@ -162,7 +162,6 @@ import Prefire
 struct CompoundIcon_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View {
         form
-            .previewLayout(.fixed(width: 375, height: 400))
             .previewDisplayName("Form")
         buttons
             .padding(8)
