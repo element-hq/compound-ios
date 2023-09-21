@@ -1,3 +1,0 @@
-test_configuration:
-  - simulator_device: "iPhone14"
-  - required_os: 16
