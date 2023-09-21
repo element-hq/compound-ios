@@ -36,7 +36,11 @@ struct ListInlinePicker<SelectedValue: Hashable>: View {
     }
 }
 
-struct ListInlinePicker_Previews: PreviewProvider {
+// MARK: - Previews
+
+import Prefire
+
+struct ListInlinePicker_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View { Preview() }
     
     struct Preview: View {

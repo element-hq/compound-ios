@@ -200,7 +200,9 @@ private struct RowContent<Label: View, Details: View>: View {
 
 // MARK: - Previews
 
-public struct ListRow_Previews: PreviewProvider {
+import Prefire
+
+public struct ListRow_Previews: PreviewProvider, PrefireProvider {
     public static var previews: some View {
         Form {
             Section {

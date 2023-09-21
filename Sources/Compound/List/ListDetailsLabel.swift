@@ -93,9 +93,9 @@ public extension ListDetailsLabel where Icon == Image {
 
 // MARK: - Previews
 
-struct ListDetailsLabel_Previews: PreviewProvider {
-    static var someCondition: Bool { Bool.random() }
-    static var otherCondition: Bool { Bool.random() }
+import Prefire
+
+struct ListDetailsLabel_Previews: PreviewProvider, PrefireProvider {
     
     static var previews: some View {
         VStack(spacing: 20) {
@@ -106,8 +106,8 @@ struct ListDetailsLabel_Previews: PreviewProvider {
             ListDetailsLabel.systemIcon(.squareDashed)
             ListDetailsLabel.isWaiting(true)
             
-            // Conditional configurations
-            someCondition ? ListDetailsLabel.isWaiting(true) : otherCondition ? .systemIcon(.checkmark) : .title("Hello")
+            ListDetailsLabel.systemIcon(.checkmark)
+            ListDetailsLabel.title("Hello")
         }
     }
 }

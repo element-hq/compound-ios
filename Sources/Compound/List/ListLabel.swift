@@ -199,7 +199,9 @@ public struct ListLabel<Icon: View>: View {
 
 // MARK: - Previews
 
-struct ListLabel_Previews: PreviewProvider {
+import Prefire
+
+struct ListLabel_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View {
         Form {
             Section {
