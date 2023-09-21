@@ -13,6 +13,7 @@ struct SidebarList: View {
             tokensSection
             componentsSection
             systemComponentsSection
+            playbookSection
         }
         .navigationTitle("Components")
         .listStyle(.sidebar)
@@ -80,6 +81,14 @@ struct SidebarList: View {
             
             NavigationLink(value: Screen.shareSheet) {
                 Label("Share Sheet", systemImage: "square.and.arrow.up")
+            }
+        }
+    }
+    
+    var playbookSection: some View {
+        Section("Playbook") {
+            NavigationLink(value: Screen.playbook) {
+                Label("Previews Playbook", systemImage: "book")
             }
         }
     }

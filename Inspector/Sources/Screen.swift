@@ -40,6 +40,8 @@ enum Screen: Hashable, View {
     /// The system's share sheet component
     case shareSheet
     
+    case playbook
+    
     var body: some View {
         switch self {
         case .colors: ColorsScreen()
@@ -58,6 +60,8 @@ enum Screen: Hashable, View {
         case .contextMenu: ContextMenuScreen()
         case .navigationBar: NavigationBarScreen()
         case .shareSheet: ShareSheetScreen()
+            
+        case .playbook: PlaybookScreen()
         }
     }
 }
