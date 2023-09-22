@@ -96,6 +96,8 @@ public extension ListDetailsLabel where Icon == Image {
 import Prefire
 
 struct ListDetailsLabel_Previews: PreviewProvider, PrefireProvider {
+    static let someCondition = true
+    static let otherCondition = true
     
     static var previews: some View {
         VStack(spacing: 20) {
@@ -108,6 +110,9 @@ struct ListDetailsLabel_Previews: PreviewProvider, PrefireProvider {
             
             ListDetailsLabel.systemIcon(.checkmark)
             ListDetailsLabel.title("Hello")
+            
+            someCondition ? ListDetailsLabel.isWaiting(true) : otherCondition ? .systemIcon(.checkmark) : .title("Hello")
+
         }
     }
 }

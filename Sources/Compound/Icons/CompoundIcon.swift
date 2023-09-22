@@ -173,7 +173,6 @@ struct CompoundIcon_Previews: PreviewProvider, PrefireProvider {
             .previewDisplayName("Accessibility Labels")
     }
     
-    @ViewBuilder
     static var accessibilityIcons: some View {
         VStack {
             ForEach(DynamicTypeSize.allCases, id: \.self) { size in
@@ -187,7 +186,6 @@ struct CompoundIcon_Previews: PreviewProvider, PrefireProvider {
         }
     }
     
-    @ViewBuilder
     static var accessibilityLabels: some View {
         VStack {
             ForEach(DynamicTypeSize.allCases, id: \.self) { size in

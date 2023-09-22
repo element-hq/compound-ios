@@ -64,7 +64,7 @@ public extension View {
 
 import Prefire
 
-struct SearchStyle_Previews: PreviewProvider {
+struct SearchStyle_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View {
         NavigationStack {
             List {
