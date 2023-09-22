@@ -1,0 +1,4 @@
+test_configuration:
+  - template_file_path: PreviewTests.stencil
+  - simulator_device: "iPhone14"
+  - required_os: 16

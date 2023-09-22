@@ -155,15 +155,54 @@ public extension Label {
     }
 }
 
-struct CompoundIcon_Previews: PreviewProvider {
+// MARK: - Previews
+
+import Prefire
+
+struct CompoundIcon_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View {
         form
-            .previewLayout(.fixed(width: 375, height: 400))
             .previewDisplayName("Form")
         buttons
             .padding(8)
             .previewLayout(.sizeThatFits)
             .previewDisplayName("Buttons")
+        accessibilityIcons
+            .previewDisplayName("Accessibility Icons Only")
+        accessibilityLabels
+            .previewDisplayName("Accessibility Labels")
+    }
+    
+    static var accessibilityIcons: some View {
+        VStack {
+            ForEach(DynamicTypeSize.allCases, id: \.self) { size in
+                HStack {
+                    CompoundIcon(\.userProfile, size: .xSmall, relativeTo: .compound.bodyXS)
+                    CompoundIcon(\.userProfile, size: .small, relativeTo: .compound.bodySM)
+                    CompoundIcon(\.userProfile, size: .medium, relativeTo: .compound.bodyLG)
+                }
+                .dynamicTypeSize(size)
+            }
+        }
+    }
+    
+    
+    static var accessibilityLabels: some View {
+        Grid(alignment: .leading) {
+            ForEach(DynamicTypeSize.allCases, id: \.self) {
+                size in
+                GridRow {
+                    Label("Test XS", icon: \.userProfile, iconSize: .xSmall, relativeTo: .compound.bodyXS)
+                        .font(.compound.bodyXS)
+                    Label("Test Small", icon: \.userProfile, iconSize: .small, relativeTo: .compound.bodySM)
+                        .font(.compound.bodySM)
+                    Label("Test Medium", icon: \.userProfile, iconSize: .medium, relativeTo: .compound.bodyLG)
+                        .font(.compound.bodyLG)
+                }
+                .lineLimit(1)
+                .dynamicTypeSize(size)
+            }
+        }
     }
     
     static var form: some View {

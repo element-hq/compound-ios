@@ -43,10 +43,12 @@ public struct ListRowButtonStyle: PrimitiveButtonStyle {
 
 // MARK: - Previews
 
+import Prefire
+
 // TODO: Fix the previews, either the style should expand the label to fill or
 // the previews need to do this manually for demonstration purposes.
 
-public struct ListRowButtonStyle_Previews: PreviewProvider {
+public struct ListRowButtonStyle_Previews: PreviewProvider, PrefireProvider {
     public static var previews: some View {
         Form {
             Section {

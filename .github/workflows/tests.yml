@@ -13,7 +13,9 @@ jobs:
     runs-on: macos-13
 
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: nschloe/action-cached-lfs-checkout@v1
+    
     - name: Run tests
-      run: xcodebuild test -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14'
+      run: xcodebuild test -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4' -skipPackagePluginValidation
  
