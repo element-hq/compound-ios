@@ -186,10 +186,12 @@ struct CompoundIcon_Previews: PreviewProvider, PrefireProvider {
         }
     }
     
+    
     static var accessibilityLabels: some View {
-        VStack {
-            ForEach(DynamicTypeSize.allCases, id: \.self) { size in
-                HStack {
+        Grid(alignment: .leading) {
+            ForEach(DynamicTypeSize.allCases, id: \.self) {
+                size in
+                GridRow {
                     Label("Test XS", icon: \.userProfile, iconSize: .xSmall, relativeTo: .compound.bodyXS)
                         .font(.compound.bodyXS)
                     Label("Test Small", icon: \.userProfile, iconSize: .small, relativeTo: .compound.bodySM)
