@@ -35,7 +35,7 @@ struct CompoundInspectorApp: App {
             }
             .accentColor(.compound.textActionPrimary)
             .preferredColorScheme(preferredColorScheme)
-            .introspect(.window, on: .iOS(.v16)) { window in
+            .introspect(.window, on: .iOS(.v16, .v17)) { window in
                 // Apply the tint colour to alerts and confirmation dialogs
                 window.tintColor = .compound.textActionPrimary
             }
