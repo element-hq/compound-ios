@@ -44,7 +44,7 @@ struct ActionSheetScreen_Previews: PreviewProvider {
         NavigationStack {
             ActionSheetScreen()
         }
-        .introspect(.window, on: .iOS(.v16)) { window in
+        .introspect(.window, on: .iOS(.v16, .v17)) { window in
             // Fix the tint colour like the App strut does.
             window.tintColor = .compound.textActionPrimary
         }
