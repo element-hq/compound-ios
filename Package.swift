@@ -34,6 +34,9 @@ let package = Package(
                 "Compound",
                 .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
             ],
+            exclude: [
+                "__Snapshots__"
+            ],
             plugins: [
                 .plugin(name: "PrefireTestsPlugin", package: "Prefire")
             ]
