@@ -23,9 +23,6 @@ let package = Package(
                 .product(name: "SwiftUIIntrospect", package: "SwiftUI-Introspect"),
                 .product(name: "SFSafeSymbols", package: "SFSafeSymbols"),
                 .product(name: "Prefire", package: "Prefire")
-            ],
-            plugins: [
-                .plugin(name: "PrefirePlaybookPlugin", package: "Prefire")
             ]
         ),
         .testTarget(
