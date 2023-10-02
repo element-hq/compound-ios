@@ -70,7 +70,7 @@ struct AlertScreen_Previews: PreviewProvider {
         NavigationStack {
             AlertScreen()
         }
-        .introspect(.window, on: .iOS(.v16, .v17)) { window in
+        .introspect(.window, on: .supportedVersions) { window in
             // Fix the tint colour like the App strut does.
             window.tintColor = .compound.textActionPrimary
         }
