@@ -25,6 +25,7 @@
 		91B2EA9928CA05B900A90A83 /* Compound in Frameworks */ = {isa = PBXBuildFile; productRef = 91B2EA9828CA05B900A90A83 /* Compound */; };
 		91B2EA9C28CA064800A90A83 /* ColorsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */; };
 		91B946812A29062300F187EF /* IconsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B946802A29062300F187EF /* IconsScreen.swift */; };
+		A75F953C2ACB0B31006C2657 /* PlatformViewVersionPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F953B2ACB0B31006C2657 /* PlatformViewVersionPredicate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +65,7 @@
 		91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreen.swift; sourceTree = "<group>"; };
 		91B946802A29062300F187EF /* IconsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsScreen.swift; sourceTree = "<group>"; };
 		9F9AF07976782861ECA2764C /* Pods-Compound Inspector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Compound Inspector.release.xcconfig"; path = "Target Support Files/Pods-Compound Inspector/Pods-Compound Inspector.release.xcconfig"; sourceTree = "<group>"; };
+		A75F953B2ACB0B31006C2657 /* PlatformViewVersionPredicate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformViewVersionPredicate.swift; sourceTree = "<group>"; };
 		B62609A3377EA1D9C59FCD20 /* Pods-Compound Inspector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Compound Inspector.debug.xcconfig"; path = "Target Support Files/Pods-Compound Inspector/Pods-Compound Inspector.debug.xcconfig"; sourceTree = "<group>"; };
 		D2E28F45EEA9A8DE6AFB10E9 /* Pods_Compound_Inspector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Compound_Inspector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -146,6 +148,7 @@
 		917F561A28256DB800D19543 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				A75F953A2ACB0B22006C2657 /* Extensions */,
 				917F561B28256DB800D19543 /* CompoundInspectorApp.swift */,
 				917F562E28256DD800D19543 /* SidebarList.swift */,
 				918824692A2DE882001606AE /* Screen.swift */,
@@ -174,6 +177,14 @@
 				917F563028256DDC00D19543 /* TextFieldsScreen.swift */,
 			);
 			path = Components;
+			sourceTree = "<group>";
+		};
+		A75F953A2ACB0B22006C2657 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				A75F953B2ACB0B31006C2657 /* PlatformViewVersionPredicate.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +315,7 @@
 				9132C6332A72850200EAEF3D /* ShareSheetScreen.swift in Sources */,
 				917C22F829C380A200B35660 /* FontsScreen.swift in Sources */,
 				9188246A2A2DE882001606AE /* Screen.swift in Sources */,
+				A75F953C2ACB0B31006C2657 /* PlatformViewVersionPredicate.swift in Sources */,
 				9184AC022825741600227C3A /* ScreenContent.swift in Sources */,
 				912974102A864F5E004BEA88 /* ListScreen.swift in Sources */,
 				9132C6312A7280A500EAEF3D /* ContextMenuScreen.swift in Sources */,
