@@ -50,7 +50,7 @@ enum Screen: Hashable, View {
         case .list: ListScreen()
         case .sizes: EmptyView()
         case .labels: EmptyView()
-        case .buttons: EmptyView()
+        case .buttons: ButtonsScreen()
         case .textFields: EmptyView()
         
         case .actionSheet: ActionSheetScreen()

@@ -52,7 +52,6 @@ struct SidebarList: View {
             NavigationLink(value: Screen.buttons) {
                 Label("Buttons", systemImage: "rectangle.and.hand.point.up.left")
             }
-            .disabled(true)
             NavigationLink(value: Screen.textFields) {
                 Label("Text Fields", systemImage: "character.cursor.ibeam")
             }
