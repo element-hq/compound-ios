@@ -119,23 +119,23 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
     
     public static func states(_ size: CompoundButtonStyle.Size) -> some View {
         VStack {
-            Button("Primary") { /* preview */ }
+            Button("Primary") { }
                 .buttonStyle(.compound(.primary, size: size))
             
-            Button("Destructive", role: .destructive) { /* preview */ }
+            Button("Destructive", role: .destructive) { }
                 .buttonStyle(.compound(.primary, size: size))
             
-            Button("Disabled") { /* preview */ }
+            Button("Disabled") { }
                 .buttonStyle(.compound(.primary, size: size))
                 .disabled(true)
             
-            Button("Secondary") { /* preview */ }
+            Button("Secondary") { }
                 .buttonStyle(.compound(.secondary, size: size))
             
-            Button("Destructive", role: .destructive) { /* preview */ }
+            Button("Destructive", role: .destructive) { }
                 .buttonStyle(.compound(.secondary, size: size))
             
-            Button("Disabled") { /* preview */ }
+            Button("Disabled") { }
                 .buttonStyle(.compound(.secondary, size: size))
                 .disabled(true)
         }

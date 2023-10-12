@@ -5,14 +5,13 @@
 //  Created by Doug on 06/05/2022.
 //
 
+import Compound
 import SwiftUI
-import DesignKit
 
 struct ButtonsScreen: View {
     var body: some View {
         ScreenContent(navigationTitle: "Buttons") {
-            PrimaryActionButtonStyle_Previews.states
-            SecondaryActionButtonStyle_Previews.states
+            CompoundButtonStyle_Previews.previews
         }
     }
 }
