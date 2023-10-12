@@ -25,6 +25,7 @@
 		91B2EA9928CA05B900A90A83 /* Compound in Frameworks */ = {isa = PBXBuildFile; productRef = 91B2EA9828CA05B900A90A83 /* Compound */; };
 		91B2EA9C28CA064800A90A83 /* ColorsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */; };
 		91B946812A29062300F187EF /* IconsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B946802A29062300F187EF /* IconsScreen.swift */; };
+		91CA00362AD7D83200121E0F /* ButtonsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917F562A28256DCD00D19543 /* ButtonsScreen.swift */; };
 		A75F953C2ACB0B31006C2657 /* PlatformViewVersionPredicate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A75F953B2ACB0B31006C2657 /* PlatformViewVersionPredicate.swift */; };
 /* End PBXBuildFile section */
 
@@ -321,6 +322,7 @@
 				9132C6312A7280A500EAEF3D /* ContextMenuScreen.swift in Sources */,
 				9132C62F2A72785500EAEF3D /* AlertScreen.swift in Sources */,
 				917C22F429C3760A00B35660 /* FormScreen.swift in Sources */,
+				91CA00362AD7D83200121E0F /* ButtonsScreen.swift in Sources */,
 				91B2EA9C28CA064800A90A83 /* ColorsScreen.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
