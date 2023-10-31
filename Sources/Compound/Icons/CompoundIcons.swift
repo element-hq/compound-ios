@@ -35,8 +35,8 @@ public struct CompoundIcons {
     public let visibilityOff = compound.iconVisibilityOff
     public let videoCall = compound.iconVideoCall
     public let videoCallOff = compound.iconVideoCallOff
-    public let videoCallMissed = compound.iconVideoCallMissed
-    public let videoCallDeclined = compound.iconVideoCallDeclined
+    public let videoCallMissed = compound.iconVideoCallMissedSolid
+    public let videoCallDeclined = compound.iconVideoCallDeclinedSolid
     public let verified = compound.iconVerified
     public let userProfile = compound.iconUserProfile
     public let userAdd = compound.iconUserAdd
@@ -59,6 +59,8 @@ public struct CompoundIcons {
     public let notificationsSolidOff = compound.iconNotificationsSolidOff
     public let notificationsOff = compound.iconNotificationsOff
     public let mobile = compound.iconMobile
+    public let micOnSolid = compound.iconMicOnSolid
+    public let micOnOutline = compound.iconMicOnOutline
     public let mention = compound.iconMention
     public let markerReadReceipts = compound.iconMarkerReadReceipts
     public let lock = compound.iconLock
