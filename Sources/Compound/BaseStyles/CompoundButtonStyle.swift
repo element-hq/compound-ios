@@ -29,10 +29,11 @@ public extension ButtonStyle where Self == CompoundButtonStyle {
 /// Default button style for standalone buttons.
 public struct CompoundButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
-    @Environment(\.colorScheme) private var colorScheme
     
     var kind: Kind
     public enum Kind {
+        /// A plain button with no background.
+        case plain
         /// A filled button usually representing the default action.
         case primary
         /// A stroked button usually representing alternate actions.
@@ -47,32 +48,63 @@ public struct CompoundButtonStyle: ButtonStyle {
         case large
     }
     
-    private var horizontalPadding: CGFloat { size == .large ? 12 : 7 }
-    private var verticalPadding: CGFloat { size == .large ? 14 : 7 }
-    
+    private var horizontalPadding: CGFloat {
+        switch (kind, size) {
+        case (.plain, _):
+            return 0
+        case (_, .medium):
+            return 7
+        case (_, .large):
+            return 12
+        }
+    }
+
+    private var verticalPadding: CGFloat {
+        switch (kind, size) {
+        case (.plain, _):
+            return 0
+        case (_, .medium):
+            return 7
+        case (_, .large):
+            return 14
+        }
+    }
+
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, verticalPadding)
             .frame(maxWidth: .infinity)
             .font(.compound.bodyLGSemibold)
-            .foregroundColor(textColor(role: configuration.role))
+            .foregroundColor(textColor(configuration: configuration))
             .multilineTextAlignment(.center)
             .background {
                 makeBackground(configuration: configuration)
             }
-            .contentShape(Capsule())
+            .contentShape(contentShape)
     }
     
     @ViewBuilder
     private func makeBackground(configuration: Self.Configuration) -> some View {
-        if kind == .primary {
+        switch kind {
+        case .plain:
+            EmptyView()
+        case .primary:
             Capsule().fill(buttonColor(configuration: configuration))
-        } else {
+        case .secondary:
             Capsule().stroke(buttonColor(configuration: configuration))
         }
     }
-    
+
+    private var contentShape: AnyShape {
+        switch kind {
+        case .plain:
+            return AnyShape(Rectangle())
+        case .primary, .secondary:
+            return AnyShape(Capsule())
+        }
+    }
+
     private func buttonColor(configuration: Self.Configuration) -> Color {
         guard isEnabled else { return .compound.bgActionPrimaryDisabled }
         if configuration.role == .destructive {
@@ -82,12 +114,13 @@ public struct CompoundButtonStyle: ButtonStyle {
         }
     }
     
-    private func textColor(role: ButtonRole?) -> Color {
+    private func textColor(configuration: Configuration) -> Color {
         if kind == .primary {
             return .compound.textOnSolidPrimary
         } else {
             guard isEnabled else { return .compound.textDisabled }
-            return role == .destructive ? .compound.textCriticalPrimary : .compound.textActionPrimary
+            let textColor: Color = configuration.role == .destructive ? .compound.textCriticalPrimary : .compound.textActionPrimary
+            return textColor.opacity(kind == .plain && configuration.isPressed ? 0.6 : 1.0)
         }
     }
 }
@@ -137,6 +170,16 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
             
             Button("Disabled") { }
                 .buttonStyle(.compound(.secondary, size: size))
+                .disabled(true)
+
+            Button("Plain") { }
+                .buttonStyle(.compound(.plain, size: size))
+
+            Button("Destructive", role: .destructive) { }
+                .buttonStyle(.compound(.plain, size: size))
+
+            Button("Disabled") { }
+                .buttonStyle(.compound(.plain, size: size))
                 .disabled(true)
         }
     }
