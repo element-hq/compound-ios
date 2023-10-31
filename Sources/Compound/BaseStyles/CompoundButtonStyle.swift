@@ -130,7 +130,6 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
         ScrollView {
             Section {
                 states(.large)
-                    .padding(.bottom, 40)
             } header: {
                 Text("Large")
                     .foregroundStyle(.compound.textSecondary)
@@ -147,7 +146,7 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
                     .padding(.leading)
             }
         }
-        .padding()
+        .padding(.horizontal)
     }
     
     public static func states(_ size: CompoundButtonStyle.Size) -> some View {
