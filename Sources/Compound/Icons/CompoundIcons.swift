@@ -35,8 +35,8 @@ public struct CompoundIcons {
     public let visibilityOff = compound.iconVisibilityOff
     public let videoCall = compound.iconVideoCall
     public let videoCallOff = compound.iconVideoCallOff
-    public let videoCallMissed = compound.iconVideoCallMissedSolid
-    public let videoCallDeclined = compound.iconVideoCallDeclinedSolid
+    public let videoCallMissedSolid = compound.iconVideoCallMissedSolid
+    public let videoCallDeclinedSolid = compound.iconVideoCallDeclinedSolid
     public let verified = compound.iconVerified
     public let userProfile = compound.iconUserProfile
     public let userAdd = compound.iconUserAdd
