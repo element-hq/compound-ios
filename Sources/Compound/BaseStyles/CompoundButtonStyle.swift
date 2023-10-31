@@ -70,11 +70,20 @@ public struct CompoundButtonStyle: ButtonStyle {
         }
     }
 
+    private var maxWidth: CGFloat? {
+        switch kind {
+        case .plain:
+            return nil
+        case .primary, .secondary:
+            return .infinity
+        }
+    }
+
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, verticalPadding)
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: maxWidth)
             .font(.compound.bodyLGSemibold)
             .foregroundColor(textColor(configuration: configuration))
             .multilineTextAlignment(.center)
