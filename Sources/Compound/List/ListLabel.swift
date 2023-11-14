@@ -188,8 +188,9 @@ public struct ListLabel<Icon: View>: View {
     }
     
     public static func plain(title: String,
+                             description: String? = nil,
                       role: ButtonRole? = nil) -> ListLabel where Icon == EmptyView {
-        ListLabel(title: title, role: role, hideIconBackground: true)
+        ListLabel(title: title, description: description, role: role, hideIconBackground: true)
     }
     
     public static func description(_ description: String) -> ListLabel where Icon == EmptyView {
@@ -231,6 +232,7 @@ struct ListLabel_Previews: PreviewProvider, PrefireProvider {
                 ListLabel.plain(title: "Person")
                 ListLabel.plain(title: "Remove",
                                 role: .destructive)
+                ListLabel.plain(title: "Plain", description: "Description")
                 
                 ListLabel.description("This is a row in the list, that only contains a description and doesn't have either an icon or a title.")
             }
