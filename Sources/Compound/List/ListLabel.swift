@@ -188,8 +188,9 @@ public struct ListLabel<Icon: View>: View {
     }
     
     public static func plain(title: String,
-                      role: ButtonRole? = nil) -> ListLabel where Icon == EmptyView {
-        ListLabel(title: title, role: role, hideIconBackground: true)
+                             description: String? = nil,
+                             role: ButtonRole? = nil) -> ListLabel where Icon == EmptyView {
+        ListLabel(title: title, description: description, role: role, hideIconBackground: true)
     }
     
     public static func description(_ description: String) -> ListLabel where Icon == EmptyView {
@@ -205,32 +206,39 @@ struct ListLabel_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View {
         Form {
             Section {
-                ListLabel.default(title: "Person", icon: Image(systemName: "person"))
+                Group {
+                    ListLabel.default(title: "Person", icon: Image(systemName: "person"))
+                    
+                    ListLabel.default(title: "Help",
+                                      description: "Supporting text",
+                                      systemIcon: .questionmarkCircle)
+                    
+                    ListLabel.default(title: "Trash",
+                                      icon: Image(systemName: "trash"),
+                                      role: .destructive)
+                }
                 
-                ListLabel.default(title: "Help",
-                                  description: "Supporting text",
-                                  systemIcon: .questionmarkCircle)
+                Group {
+                    ListLabel.action(title: "Camera",
+                                     icon: Image(systemName: "camera"))
+                    
+                    ListLabel.action(title: "Remove",
+                                     icon: Image(systemName: "person.badge.minus"),
+                                     role: .destructive)
+                    
+                    ListLabel.centeredAction(title: "Person",
+                                             icon: Image(systemName: "person"))
+                    ListLabel.centeredAction(title: "Remove",
+                                             systemIcon: .personBadgeMinus,
+                                             role: .destructive)
+                }
                 
-                ListLabel.default(title: "Trash",
-                                  icon: Image(systemName: "trash"),
-                                  role: .destructive)
-                
-                ListLabel.action(title: "Camera",
-                                 icon: Image(systemName: "camera"))
-                
-                ListLabel.action(title: "Remove",
-                                 icon: Image(systemName: "person.badge.minus"),
-                                 role: .destructive)
-                
-                ListLabel.centeredAction(title: "Person",
-                                         icon: Image(systemName: "person"))
-                ListLabel.centeredAction(title: "Remove",
-                                         systemIcon: .personBadgeMinus,
-                                         role: .destructive)
-                
-                ListLabel.plain(title: "Person")
-                ListLabel.plain(title: "Remove",
-                                role: .destructive)
+                Group {
+                    ListLabel.plain(title: "Person")
+                    ListLabel.plain(title: "Remove",
+                                    role: .destructive)
+                    ListLabel.plain(title: "Plain", description: "Description")
+                }
                 
                 ListLabel.description("This is a row in the list, that only contains a description and doesn't have either an icon or a title.")
             }
