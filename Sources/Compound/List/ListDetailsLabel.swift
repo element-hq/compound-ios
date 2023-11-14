@@ -67,6 +67,12 @@ public struct ListDetailsLabel<Icon: View>: View {
     }
     
     public static func label(title: String,
+                             icon: KeyPath<CompoundIcons, Image>,
+                             isWaiting: Bool = false) -> Self where Icon == CompoundIcon {
+        ListDetailsLabel(title: title, icon: CompoundIcon(icon), isWaiting: isWaiting)
+    }
+    
+    public static func label(title: String,
                              systemIcon: SFSymbol,
                              isWaiting: Bool = false) -> Self where Icon == Image {
         ListDetailsLabel(title: title, icon: Image(systemSymbol: systemIcon), isWaiting: isWaiting)
@@ -74,6 +80,10 @@ public struct ListDetailsLabel<Icon: View>: View {
     
     public static func icon(_ icon: Icon, isWaiting: Bool = false) -> Self {
         ListDetailsLabel(icon: icon, isWaiting: isWaiting)
+    }
+    
+    public static func icon(_ icon: KeyPath<CompoundIcons, Image>, isWaiting: Bool = false) -> Self where Icon == CompoundIcon {
+        ListDetailsLabel(icon:CompoundIcon(icon), isWaiting: isWaiting)
     }
     
     public static func systemIcon(_ systemIcon: SFSymbol, isWaiting: Bool = false) -> Self where Icon == Image {

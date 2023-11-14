@@ -145,10 +145,22 @@ public struct ListLabel<Icon: View>: View {
     }
     
     public static func `default`(title: String,
-                          description: String? = nil,
-                          systemIcon: SFSymbol,
-                          role: ButtonRole? = nil,
-                          iconAlignment: VerticalAlignment = .center) -> ListLabel where Icon == Image {
+                                 description: String? = nil,
+                                 icon: KeyPath<CompoundIcons, Image>,
+                                 role: ButtonRole? = nil,
+                                 iconAlignment: VerticalAlignment = .center) -> ListLabel where Icon == CompoundIcon {
+        .default(title: title,
+                 description: description,
+                 icon: CompoundIcon(icon),
+                 role: role,
+                 iconAlignment: iconAlignment)
+    }
+    
+    public static func `default`(title: String,
+                                 description: String? = nil,
+                                 systemIcon: SFSymbol,
+                                 role: ButtonRole? = nil,
+                                 iconAlignment: VerticalAlignment = .center) -> ListLabel where Icon == Image {
         .default(title: title,
                  description: description,
                  icon: Image(systemSymbol: systemIcon),
@@ -166,14 +178,20 @@ public struct ListLabel<Icon: View>: View {
     }
     
     public static func action(title: String,
-                       systemIcon: SFSymbol,
-                       role: ButtonRole? = nil) -> ListLabel where Icon == Image {
+                              icon: KeyPath<CompoundIcons, Image>,
+                              role: ButtonRole? = nil) -> ListLabel where Icon == CompoundIcon {
+        .action(title: title, icon: CompoundIcon(icon), role: role)
+    }
+    
+    public static func action(title: String,
+                              systemIcon: SFSymbol,
+                              role: ButtonRole? = nil) -> ListLabel where Icon == Image {
         .action(title: title, icon: Image(systemSymbol: systemIcon), role: role)
     }
     
     public static func centeredAction(title: String,
-                              icon: Icon,
-                              role: ButtonRole? = nil) -> ListLabel {
+                                      icon: Icon,
+                                      role: ButtonRole? = nil) -> ListLabel {
         ListLabel(title: title,
                   icon: icon,
                   role: role,
@@ -182,8 +200,14 @@ public struct ListLabel<Icon: View>: View {
     }
     
     public static func centeredAction(title: String,
-                               systemIcon: SFSymbol,
-                               role: ButtonRole? = nil) -> ListLabel where Icon == Image {
+                                      icon: KeyPath<CompoundIcons, Image>,
+                                      role: ButtonRole? = nil) -> ListLabel where Icon == CompoundIcon {
+        .centeredAction(title: title, icon: CompoundIcon(icon), role: role)
+    }
+    
+    public static func centeredAction(title: String,
+                                      systemIcon: SFSymbol,
+                                      role: ButtonRole? = nil) -> ListLabel where Icon == Image {
         .centeredAction(title: title, icon: Image(systemSymbol: systemIcon), role: role)
     }
     
