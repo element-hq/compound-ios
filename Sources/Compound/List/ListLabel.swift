@@ -189,7 +189,7 @@ public struct ListLabel<Icon: View>: View {
     
     public static func plain(title: String,
                              description: String? = nil,
-                      role: ButtonRole? = nil) -> ListLabel where Icon == EmptyView {
+                             role: ButtonRole? = nil) -> ListLabel where Icon == EmptyView {
         ListLabel(title: title, description: description, role: role, hideIconBackground: true)
     }
     
