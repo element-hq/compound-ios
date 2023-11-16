@@ -20,8 +20,10 @@ import SwiftUI
 public enum ListRowAccessory: View {
     /// A chevron to indicate that the button pushes another screen.
     case navigationLink
-    /// A checkmark (when `true`) to indicate that the row is selected.
+    /// A checkmark to indicate that the row is selected.
     case selected
+    /// The same as ``selected`` but invisible to reserve space.
+    case unselected
     
     public var body: some View {
         switch self {
@@ -33,6 +35,10 @@ public enum ListRowAccessory: View {
             CompoundIcon(\.check)
                 .foregroundColor(.compound.iconPrimary)
                 .accessibilityAddTraits(.isSelected)
+                .padding(.vertical, -4)
+        case .unselected:
+            CompoundIcon(\.check)
+                .hidden()
                 .padding(.vertical, -4)
         }
     }
