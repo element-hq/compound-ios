@@ -97,7 +97,7 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                              items: items)
         case .selection(let isSelected, let action):
             Button(action: action) {
-                RowContent(accessory: isSelected ? .selected : nil) { details } label: { label }
+                RowContent(accessory: isSelected ? .selected : .unselected) { details } label: { label }
             }
             // Add the following trait on iOS 17
             // .accessibilityAddTraits(.isToggle)
