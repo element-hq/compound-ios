@@ -22,8 +22,8 @@ public enum ListRowPadding {
 }
 
 public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, SelectionValue: Hashable>: View {
-    let label: ListLabel<Icon>
-    let details: ListDetailsLabel<DetailsIcon>?
+    let label: ListRowLabel<Icon>
+    let details: ListRowDetails<DetailsIcon>?
     
     public enum Kind<CustomContent: View, SelectionValue: Hashable> {
         case label
@@ -56,14 +56,14 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
     var rowContent: some View {
         switch kind {
         case .label:
-            RowContent { details } label: { label }
+            RowContent(details: details) { label }
         case .button(let action):
             Button(action: action) {
-                RowContent { details } label: { label }
+                RowContent(details: details) { label }
             }
         case .navigationLink(let action):
             Button(action: action) {
-                RowContent(accessory: .navigationLink) { details } label: { label }
+                RowContent(details: details, accessory: .navigationLink) { label }
             }
         case .picker(let selection, let items):
             LabeledContent {
@@ -97,7 +97,7 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                              items: items)
         case .selection(let isSelected, let action):
             Button(action: action) {
-                RowContent(accessory: isSelected ? .selected : .unselected) { details } label: { label }
+                RowContent(details: details, accessory: isSelected ? .selected : .unselected) { label }
             }
             // Add the following trait on iOS 17
             // .accessibilityAddTraits(.isToggle)
@@ -123,16 +123,16 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
 
 // Normal row with a details icon
 public extension ListRow where CustomContent == EmptyView {
-    init(label: ListLabel<Icon>,
-         details: ListDetailsLabel<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) {
         self.label = label
         self.details = details
         self.kind = kind
     }
     
-    init(label: ListLabel<Icon>,
-         details: ListDetailsLabel<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) where SelectionValue == String {
         self.label = label
         self.details = details
@@ -142,16 +142,16 @@ public extension ListRow where CustomContent == EmptyView {
 
 // Normal row without a details icon.
 public extension ListRow where DetailsIcon == EmptyView, CustomContent == EmptyView {
-    init(label: ListLabel<Icon>,
-         details: ListDetailsLabel<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) {
         self.label = label
         self.details = details
         self.kind = kind
     }
     
-    init(label: ListLabel<Icon>,
-         details: ListDetailsLabel<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) where SelectionValue == String {
         self.label = label
         self.details = details
@@ -162,13 +162,13 @@ public extension ListRow where DetailsIcon == EmptyView, CustomContent == EmptyV
 // Custom row without a label or details label.
 public extension ListRow where Icon == EmptyView, DetailsIcon == EmptyView {
     init(kind: Kind<CustomContent, SelectionValue>) {
-        self.label = ListLabel()
+        self.label = ListRowLabel()
         self.details = nil
         self.kind = kind
     }
     
     init(kind: Kind<CustomContent, SelectionValue>) where SelectionValue == String {
-        self.label = ListLabel()
+        self.label = ListRowLabel()
         self.details = nil
         self.kind = kind
     }
@@ -179,18 +179,19 @@ public extension ListRow where Icon == EmptyView, DetailsIcon == EmptyView {
 /// This doesn't use `LabeledContent` as that will happily build using an `EmptyView`
 /// in the content. This creates an issue where the label ends up hidden to VoiceOver,
 /// presumably because SwiftUI thinks that the row doesn't contain any content.
-private struct RowContent<Label: View, Details: View>: View {
+private struct RowContent<Label: View, DetailsIcon: View>: View {
+    let details: ListRowDetails<DetailsIcon>?
     var accessory: ListRowAccessory?
-    let details: () -> Details?
     let label: () -> Label
     
     var body: some View {
-        HStack(spacing: ListDetails.spacing) {
+        HStack(spacing: ListRowTrailingSectionSpacing.horizontal) {
             label()
                 .frame(maxWidth: .infinity)
             
-            details()
-            accessory
+            if details != nil || accessory != nil {
+                ListRowTrailingSection(details, accessory: accessory)
+            }
         }
         .frame(maxHeight: .infinity)
         .padding(.trailing, ListRowPadding.horizontal)
@@ -359,5 +360,25 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
                     kind: .textField(text: .constant("")))
             .lineLimit(4...)
         }
+    }
+}
+
+struct ListRowLoadingSelection_Previews: PreviewProvider, PrefireProvider {
+    static var previews: some View {
+        Form {
+            ListRow(label: .plain(title: "Selected",
+                                  description: "This is a long multiline description which shows what happens when wrapping with a details view and selection, specifically, an activity indicator in the details."),
+                    details: .isWaiting(false),
+                    kind: .selection(isSelected: true) { })
+            ListRow(label: .plain(title: "Unselected",
+                                  description: "This is a long multiline description which shows what happens when wrapping with a details view and selection, specifically, an activity indicator in the details."),
+                    details: .isWaiting(false),
+                    kind: .selection(isSelected: false) { })
+            ListRow(label: .plain(title: "Unselected & Loading",
+                                  description: "This is a long multiline description which shows what happens when wrapping with a details view and selection, specifically, an activity indicator in the details."),
+                    details: .isWaiting(true),
+                    kind: .selection(isSelected: false) { })
+        }
+        .compoundList()
     }
 }
