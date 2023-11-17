@@ -17,14 +17,14 @@
 import SwiftUI
 
 /// The spacing used inside of a ListRow
-enum ListRightSectionSpacing {
+enum ListRowTrailingSectionSpacing {
     static let horizontal = 8.0
 }
 
-/// The style applied to the details label in a list row's right section.
-private struct ListDetailsLabelStyle: LabelStyle {
+/// The style applied to the details label in a list row's trailing section.
+private struct ListRowDetailsLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
-        HStack(spacing: ListRightSectionSpacing.horizontal) {
+        HStack(spacing: ListRowTrailingSectionSpacing.horizontal) {
             configuration.title
                 .foregroundColor(.compound.textSecondary)
             configuration.icon
@@ -34,9 +34,9 @@ private struct ListDetailsLabelStyle: LabelStyle {
     }
 }
 
-/// The view shown to the right of the `ListLabel` inside of a `ListRow`.
-/// This consists of both the `ListDetails` and the `ListRowAccessory`.
-public struct ListRightSection<Icon: View>: View {
+/// The view shown to the right of the `ListRowLabel` inside of a `ListRow`.
+/// This consists of both the `ListRowDetails` and the `ListRowAccessory`.
+public struct ListRowTrailingSection<Icon: View>: View {
     var title: String?
     var icon: Icon?
     
@@ -46,7 +46,7 @@ public struct ListRightSection<Icon: View>: View {
     @ScaledMetric private var iconSize = 24
     private var hideAccessory: Bool { isWaiting && accessory == .unselected }
     
-    init(_ details: ListDetails<Icon>?, accessory: ListRowAccessory? = nil) {
+    init(_ details: ListRowDetails<Icon>?, accessory: ListRowAccessory? = nil) {
         title = details?.title
         icon = details?.icon
         isWaiting = details?.isWaiting ?? false
@@ -54,7 +54,7 @@ public struct ListRightSection<Icon: View>: View {
     }
     
     public var body: some View {
-        HStack(spacing: ListRightSectionSpacing.horizontal) {
+        HStack(spacing: ListRowTrailingSectionSpacing.horizontal) {
             if isWaiting {
                 ProgressView()
             }
@@ -65,7 +65,7 @@ public struct ListRightSection<Icon: View>: View {
                 } icon: {
                     icon
                 }
-                .labelStyle(ListDetailsLabelStyle())
+                .labelStyle(ListRowDetailsLabelStyle())
             }
             
             if let accessory, !hideAccessory {
@@ -81,7 +81,7 @@ public struct ListRightSection<Icon: View>: View {
 
 import Prefire
 
-struct ListRightSection_Previews: PreviewProvider, PrefireProvider {
+struct ListRowTrailingSection_Previews: PreviewProvider, PrefireProvider {
     static let someCondition = true
     static let otherCondition = true
     
@@ -94,31 +94,31 @@ struct ListRightSection_Previews: PreviewProvider, PrefireProvider {
     
     static var details: some View {
         VStack(spacing: 20) {
-            ListRightSection(.label(title: "Content", icon: Image(systemName: "square.dashed")))
-            ListRightSection(.label(title: "Content", systemIcon: .squareDashed))
-            ListRightSection(.title("Content"))
-            ListRightSection(.icon(Image(systemName: "square.dashed")))
-            ListRightSection(.systemIcon(.squareDashed))
-            ListRightSection(.isWaiting(true))
+            ListRowTrailingSection(.label(title: "Content", icon: Image(systemName: "square.dashed")))
+            ListRowTrailingSection(.label(title: "Content", systemIcon: .squareDashed))
+            ListRowTrailingSection(.title("Content"))
+            ListRowTrailingSection(.icon(Image(systemName: "square.dashed")))
+            ListRowTrailingSection(.systemIcon(.squareDashed))
+            ListRowTrailingSection(.isWaiting(true))
             
-            ListRightSection(.systemIcon(.checkmark))
-            ListRightSection(.title("Hello"))
+            ListRowTrailingSection(.systemIcon(.checkmark))
+            ListRowTrailingSection(.title("Hello"))
             
-            ListRightSection(someCondition ? .isWaiting(true) : otherCondition ? .systemIcon(.checkmark) : .title("Hello"))
+            ListRowTrailingSection(someCondition ? .isWaiting(true) : otherCondition ? .systemIcon(.checkmark) : .title("Hello"))
         }
     }
     
     static var withAccessory: some View {
         VStack(spacing: 20) {
-            ListRightSection(.isWaiting(true), accessory: .selected)
+            ListRowTrailingSection(.isWaiting(true), accessory: .selected)
                 .border(.purple)
             
             // The checkmark should be hidden.
-            ListRightSection(.isWaiting(true), accessory: .unselected)
+            ListRowTrailingSection(.isWaiting(true), accessory: .unselected)
                 .border(.purple)
             
             // The checkmark's space should be reserved.
-            ListRightSection(.isWaiting(false), accessory: .unselected)
+            ListRowTrailingSection(.isWaiting(false), accessory: .unselected)
                 .border(.purple)
         }
     }

@@ -22,8 +22,8 @@ public enum ListRowPadding {
 }
 
 public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, SelectionValue: Hashable>: View {
-    let label: ListLabel<Icon>
-    let details: ListDetails<DetailsIcon>?
+    let label: ListRowLabel<Icon>
+    let details: ListRowDetails<DetailsIcon>?
     
     public enum Kind<CustomContent: View, SelectionValue: Hashable> {
         case label
@@ -123,16 +123,16 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
 
 // Normal row with a details icon
 public extension ListRow where CustomContent == EmptyView {
-    init(label: ListLabel<Icon>,
-         details: ListDetails<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) {
         self.label = label
         self.details = details
         self.kind = kind
     }
     
-    init(label: ListLabel<Icon>,
-         details: ListDetails<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) where SelectionValue == String {
         self.label = label
         self.details = details
@@ -142,16 +142,16 @@ public extension ListRow where CustomContent == EmptyView {
 
 // Normal row without a details icon.
 public extension ListRow where DetailsIcon == EmptyView, CustomContent == EmptyView {
-    init(label: ListLabel<Icon>,
-         details: ListDetails<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) {
         self.label = label
         self.details = details
         self.kind = kind
     }
     
-    init(label: ListLabel<Icon>,
-         details: ListDetails<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) where SelectionValue == String {
         self.label = label
         self.details = details
@@ -162,13 +162,13 @@ public extension ListRow where DetailsIcon == EmptyView, CustomContent == EmptyV
 // Custom row without a label or details label.
 public extension ListRow where Icon == EmptyView, DetailsIcon == EmptyView {
     init(kind: Kind<CustomContent, SelectionValue>) {
-        self.label = ListLabel()
+        self.label = ListRowLabel()
         self.details = nil
         self.kind = kind
     }
     
     init(kind: Kind<CustomContent, SelectionValue>) where SelectionValue == String {
-        self.label = ListLabel()
+        self.label = ListRowLabel()
         self.details = nil
         self.kind = kind
     }
@@ -180,17 +180,17 @@ public extension ListRow where Icon == EmptyView, DetailsIcon == EmptyView {
 /// in the content. This creates an issue where the label ends up hidden to VoiceOver,
 /// presumably because SwiftUI thinks that the row doesn't contain any content.
 private struct RowContent<Label: View, DetailsIcon: View>: View {
-    let details: ListDetails<DetailsIcon>?
+    let details: ListRowDetails<DetailsIcon>?
     var accessory: ListRowAccessory?
     let label: () -> Label
     
     var body: some View {
-        HStack(spacing: ListRightSectionSpacing.horizontal) {
+        HStack(spacing: ListRowTrailingSectionSpacing.horizontal) {
             label()
                 .frame(maxWidth: .infinity)
             
             if details != nil || accessory != nil {
-                ListRightSection(details, accessory: accessory)
+                ListRowTrailingSection(details, accessory: accessory)
             }
         }
         .frame(maxHeight: .infinity)

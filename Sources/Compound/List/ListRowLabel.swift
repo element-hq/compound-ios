@@ -17,7 +17,7 @@
 import SFSafeSymbols
 import SwiftUI
 
-struct ListLabelStyle: LabelStyle {
+struct ListRowLabelStyle: LabelStyle {
     let iconAlignment: VerticalAlignment
     
     func makeBody(configuration: Configuration) -> some View {
@@ -28,7 +28,7 @@ struct ListLabelStyle: LabelStyle {
     }
 }
 
-struct ListCenteredLabelStyle: LabelStyle {
+struct ListRowCenteredLabelStyle: LabelStyle {
     func makeBody(configuration: Configuration) -> some View {
         HStack(alignment: .center, spacing: 8) {
             configuration.icon
@@ -37,7 +37,7 @@ struct ListCenteredLabelStyle: LabelStyle {
     }
 }
 
-public struct ListLabel<Icon: View>: View {
+public struct ListRowLabel<Icon: View>: View {
     @Environment(\.isEnabled) private var isEnabled
     @ScaledMetric private var iconSize = 30.0
     
@@ -111,7 +111,7 @@ public struct ListLabel<Icon: View>: View {
                 .padding(.vertical, -4) // Don't allow the background to size the row.
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-        .labelStyle(ListLabelStyle(iconAlignment: iconAlignment))
+        .labelStyle(ListRowLabelStyle(iconAlignment: iconAlignment))
     }
     
     var centeredBody: some View {
@@ -126,7 +126,7 @@ public struct ListLabel<Icon: View>: View {
                 .foregroundColor(iconForegroundColor)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .labelStyle(ListCenteredLabelStyle())
+        .labelStyle(ListRowCenteredLabelStyle())
         .alignmentGuide(.listRowSeparatorLeading) { _ in 0 }
     }
     
@@ -136,8 +136,8 @@ public struct ListLabel<Icon: View>: View {
                                  description: String? = nil,
                                  icon: Icon,
                                  role: ButtonRole? = nil,
-                                 iconAlignment: VerticalAlignment = .center) -> ListLabel {
-        ListLabel(title: title,
+                                 iconAlignment: VerticalAlignment = .center) -> ListRowLabel {
+        ListRowLabel(title: title,
                   description: description,
                   icon: icon,
                   role: role,
@@ -148,7 +148,7 @@ public struct ListLabel<Icon: View>: View {
                                  description: String? = nil,
                                  icon: KeyPath<CompoundIcons, Image>,
                                  role: ButtonRole? = nil,
-                                 iconAlignment: VerticalAlignment = .center) -> ListLabel where Icon == CompoundIcon {
+                                 iconAlignment: VerticalAlignment = .center) -> ListRowLabel where Icon == CompoundIcon {
         .default(title: title,
                  description: description,
                  icon: CompoundIcon(icon),
@@ -160,7 +160,7 @@ public struct ListLabel<Icon: View>: View {
                                  description: String? = nil,
                                  systemIcon: SFSymbol,
                                  role: ButtonRole? = nil,
-                                 iconAlignment: VerticalAlignment = .center) -> ListLabel where Icon == Image {
+                                 iconAlignment: VerticalAlignment = .center) -> ListRowLabel where Icon == Image {
         .default(title: title,
                  description: description,
                  icon: Image(systemSymbol: systemIcon),
@@ -170,8 +170,8 @@ public struct ListLabel<Icon: View>: View {
     
     public static func action(title: String,
                               icon: Icon,
-                              role: ButtonRole? = nil) -> ListLabel {
-        ListLabel(title: title,
+                              role: ButtonRole? = nil) -> ListRowLabel {
+        ListRowLabel(title: title,
                   icon: icon,
                   role: role,
                   hideIconBackground: true)
@@ -179,20 +179,20 @@ public struct ListLabel<Icon: View>: View {
     
     public static func action(title: String,
                               icon: KeyPath<CompoundIcons, Image>,
-                              role: ButtonRole? = nil) -> ListLabel where Icon == CompoundIcon {
+                              role: ButtonRole? = nil) -> ListRowLabel where Icon == CompoundIcon {
         .action(title: title, icon: CompoundIcon(icon), role: role)
     }
     
     public static func action(title: String,
                               systemIcon: SFSymbol,
-                              role: ButtonRole? = nil) -> ListLabel where Icon == Image {
+                              role: ButtonRole? = nil) -> ListRowLabel where Icon == Image {
         .action(title: title, icon: Image(systemSymbol: systemIcon), role: role)
     }
     
     public static func centeredAction(title: String,
                                       icon: Icon,
-                                      role: ButtonRole? = nil) -> ListLabel {
-        ListLabel(title: title,
+                                      role: ButtonRole? = nil) -> ListRowLabel {
+        ListRowLabel(title: title,
                   icon: icon,
                   role: role,
                   hideIconBackground: true,
@@ -201,24 +201,24 @@ public struct ListLabel<Icon: View>: View {
     
     public static func centeredAction(title: String,
                                       icon: KeyPath<CompoundIcons, Image>,
-                                      role: ButtonRole? = nil) -> ListLabel where Icon == CompoundIcon {
+                                      role: ButtonRole? = nil) -> ListRowLabel where Icon == CompoundIcon {
         .centeredAction(title: title, icon: CompoundIcon(icon), role: role)
     }
     
     public static func centeredAction(title: String,
                                       systemIcon: SFSymbol,
-                                      role: ButtonRole? = nil) -> ListLabel where Icon == Image {
+                                      role: ButtonRole? = nil) -> ListRowLabel where Icon == Image {
         .centeredAction(title: title, icon: Image(systemSymbol: systemIcon), role: role)
     }
     
     public static func plain(title: String,
                              description: String? = nil,
-                             role: ButtonRole? = nil) -> ListLabel where Icon == EmptyView {
-        ListLabel(title: title, description: description, role: role, hideIconBackground: true)
+                             role: ButtonRole? = nil) -> ListRowLabel where Icon == EmptyView {
+        ListRowLabel(title: title, description: description, role: role, hideIconBackground: true)
     }
     
-    public static func description(_ description: String) -> ListLabel where Icon == EmptyView {
-        ListLabel(description: description)
+    public static func description(_ description: String) -> ListRowLabel where Icon == EmptyView {
+        ListRowLabel(description: description)
     }
 }
 
@@ -226,45 +226,45 @@ public struct ListLabel<Icon: View>: View {
 
 import Prefire
 
-struct ListLabel_Previews: PreviewProvider, PrefireProvider {
+struct ListRowLabel_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View {
         Form {
             Section {
                 Group {
-                    ListLabel.default(title: "Person", icon: Image(systemName: "person"))
+                    ListRowLabel.default(title: "Person", icon: Image(systemName: "person"))
                     
-                    ListLabel.default(title: "Help",
+                    ListRowLabel.default(title: "Help",
                                       description: "Supporting text",
                                       systemIcon: .questionmarkCircle)
                     
-                    ListLabel.default(title: "Trash",
+                    ListRowLabel.default(title: "Trash",
                                       icon: Image(systemName: "trash"),
                                       role: .destructive)
                 }
                 
                 Group {
-                    ListLabel.action(title: "Camera",
+                    ListRowLabel.action(title: "Camera",
                                      icon: Image(systemName: "camera"))
                     
-                    ListLabel.action(title: "Remove",
+                    ListRowLabel.action(title: "Remove",
                                      icon: Image(systemName: "person.badge.minus"),
                                      role: .destructive)
                     
-                    ListLabel.centeredAction(title: "Person",
+                    ListRowLabel.centeredAction(title: "Person",
                                              icon: Image(systemName: "person"))
-                    ListLabel.centeredAction(title: "Remove",
+                    ListRowLabel.centeredAction(title: "Remove",
                                              systemIcon: .personBadgeMinus,
                                              role: .destructive)
                 }
                 
                 Group {
-                    ListLabel.plain(title: "Person")
-                    ListLabel.plain(title: "Remove",
+                    ListRowLabel.plain(title: "Person")
+                    ListRowLabel.plain(title: "Remove",
                                     role: .destructive)
-                    ListLabel.plain(title: "Plain", description: "Description")
+                    ListRowLabel.plain(title: "Plain", description: "Description")
                 }
                 
-                ListLabel.description("This is a row in the list, that only contains a description and doesn't have either an icon or a title.")
+                ListRowLabel.description("This is a row in the list, that only contains a description and doesn't have either an icon or a title.")
             }
             .listRowInsets(EdgeInsets())
             

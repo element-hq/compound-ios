@@ -17,9 +17,9 @@
 import SFSafeSymbols
 import SwiftUI
 
-/// The configuration of the details portion of a list row's right section.
+/// The configuration of the details portion of a list row's trailing section.
 /// This consists of the title, icon and a waiting indicator.
-public struct ListDetails<Icon: View> {
+public struct ListRowDetails<Icon: View> {
     var title: String?
     var icon: Icon?
     
@@ -30,40 +30,40 @@ public struct ListDetails<Icon: View> {
     public static func label(title: String,
                              icon: Icon,
                              isWaiting: Bool = false) -> Self {
-        ListDetails(title: title, icon: icon, isWaiting: isWaiting)
+        ListRowDetails(title: title, icon: icon, isWaiting: isWaiting)
     }
     
     public static func label(title: String,
                              icon: KeyPath<CompoundIcons, Image>,
                              isWaiting: Bool = false) -> Self where Icon == CompoundIcon {
-        ListDetails(title: title, icon: CompoundIcon(icon), isWaiting: isWaiting)
+        ListRowDetails(title: title, icon: CompoundIcon(icon), isWaiting: isWaiting)
     }
     
     public static func label(title: String,
                              systemIcon: SFSymbol,
                              isWaiting: Bool = false) -> Self where Icon == Image {
-        ListDetails(title: title, icon: Image(systemSymbol: systemIcon), isWaiting: isWaiting)
+        ListRowDetails(title: title, icon: Image(systemSymbol: systemIcon), isWaiting: isWaiting)
     }
     
     public static func icon(_ icon: Icon, isWaiting: Bool = false) -> Self {
-        ListDetails(icon: icon, isWaiting: isWaiting)
+        ListRowDetails(icon: icon, isWaiting: isWaiting)
     }
     
     public static func icon(_ icon: KeyPath<CompoundIcons, Image>, isWaiting: Bool = false) -> Self where Icon == CompoundIcon {
-        ListDetails(icon:CompoundIcon(icon), isWaiting: isWaiting)
+        ListRowDetails(icon:CompoundIcon(icon), isWaiting: isWaiting)
     }
     
     public static func systemIcon(_ systemIcon: SFSymbol, isWaiting: Bool = false) -> Self where Icon == Image {
-        ListDetails(icon: Image(systemSymbol: systemIcon), isWaiting: isWaiting)
+        ListRowDetails(icon: Image(systemSymbol: systemIcon), isWaiting: isWaiting)
     }
 }
 
-public extension ListDetails where Icon == Image {
+public extension ListRowDetails where Icon == Image {
     static func title(_ title: String, isWaiting: Bool = false) -> Self {
-        ListDetails(title: title, isWaiting: isWaiting)
+        ListRowDetails(title: title, isWaiting: isWaiting)
     }
     
     static func isWaiting(_ isWaiting: Bool) -> Self {
-        ListDetails(isWaiting: isWaiting)
+        ListRowDetails(isWaiting: isWaiting)
     }
 }
