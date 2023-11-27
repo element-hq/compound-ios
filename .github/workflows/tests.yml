@@ -28,7 +28,7 @@ jobs:
         xcrun simctl create "iPhone 14" "com.apple.CoreSimulator.SimDeviceType.iPhone-14" "com.apple.CoreSimulator.SimRuntime.iOS-16-4"
 
     - name: Run tests
-      run: xcodebuild test -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4' -skipPackagePluginValidation -resultBundlePath Logs/Test.xcresult
+      run: xcodebuild test -verbose -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4' -skipPackagePluginValidation -resultBundlePath Logs/Test.xcresult
 
     - name: Zip artifacts
       if: failure() # We only care about artefacts if the tests fail
