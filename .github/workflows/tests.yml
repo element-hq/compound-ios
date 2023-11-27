@@ -25,21 +25,20 @@ jobs:
         sudo mkdir -p /Library/Developer/CoreSimulator/Profiles/Runtimes
         echo "Creating symlink of the iOS 16.4 runtime..."
         sudo ln -s /Applications/Xcode_14.3.1.app/Contents/Developer/Platforms/iPhoneOS.platform/Library/Developer/CoreSimulator/Profiles/Runtimes/iOS.simruntime /Library/Developer/CoreSimulator/Profiles/Runtimes/iOS\ 16.4.simruntime
-        xcrun simctl create "iPhone 14" "com.apple.CoreSimulator.SimDeviceType.iPhone-14" "com.apple.CoreSimulator.SimRuntime.iOS-16-4"
 
     - name: Run tests
-      run: xcodebuild test -verbose -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4' -skipPackagePluginValidation -resultBundlePath Logs/Test.xcresult
+      run: xcodebuild test -verbose -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 14,OS=16.4' -skipPackagePluginValidation -resultBundlePath Logs/CompoundTests.xcresult
 
     - name: Zip artifacts
       if: failure() # We only care about artefacts if the tests fail
-      run: zip -r Logs/Test.xcresult.zip Logs/Test.xcresult/
+      run: zip -r Logs/CompoundTests.xcresult.zip Logs/CompoundTests.xcresult/
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v3
       if: failure() # We only care about artefacts if the tests fail
       with:
-          name: Result
-          path: Logs/Test.xcresult.zip
-          retention-days: 1
-          if-no-files-found: ignore
+        name: test-results
+        path: Logs/CompoundTests.xcresult.zip
+        retention-days: 1
+        if-no-files-found: ignore
  
