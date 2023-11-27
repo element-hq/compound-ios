@@ -33,12 +33,12 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
         case toggle(Binding<Bool>)
         case inlinePicker(selection: Binding<SelectionValue>, items: [(title: String, tag: SelectionValue)])
         case selection(isSelected: Bool, action: () -> Void)
-        case textField(text: Binding<String>, axis: Axis)
+        case textField(text: Binding<String>, axis: Axis?)
         
         case custom(() -> CustomContent)
         
         public static func textField(text: Binding<String>) -> Self {
-            .textField(text: text, axis: .vertical)
+            .textField(text: text, axis: nil)
         }
     }
     
@@ -99,13 +99,11 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
             Button(action: action) {
                 RowContent(details: details, accessory: isSelected ? .selected : .unselected) { label }
             }
-            // Add the following trait on iOS 17
-            // .accessibilityAddTraits(.isToggle)
+            .isToggle()
         case .textField(let text, let axis):
             TextField(text: text, axis: axis) {
                 Text(label.title ?? "")
-                    .font(.compound.bodyLG)
-                    .foregroundColor(.compound.textPlaceholder)
+                    .compoundTextFieldPlaceholder()
             }
             .tint(.compound.iconAccentTertiary)
             .listRowInsets(EdgeInsets(top: 11,
@@ -196,6 +194,32 @@ private struct RowContent<Label: View, DetailsIcon: View>: View {
         .frame(maxHeight: .infinity)
         .padding(.trailing, ListRowPadding.horizontal)
         .accessibilityElement(children: .combine)
+    }
+}
+
+// MARK: - Helpers
+
+private extension TextField {
+    /// Creates a text field with an optional preferred axis. Hard coding a default resulted
+    /// in the underlying component always being a `UITextView` during introspection.
+    /// This initialiser does the right thing when not supplying an axis in `ListRow.Kind`.
+    init(text: Binding<String>, axis: Axis?, label: () -> Label) {
+        if let axis {
+            self.init(text: text, axis: axis, label: label)
+        } else {
+            self.init(text: text, label: label)
+        }
+    }
+}
+
+private extension Button {
+    /// Adds the `isToggle` accessibility trait on iOS 17+
+    @ViewBuilder func isToggle() -> some View {
+        if #available(iOS 17.0, *) {
+            accessibilityAddTraits(.isToggle)
+        } else {
+            self
+        }
     }
 }
 
