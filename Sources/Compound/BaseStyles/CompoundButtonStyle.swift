@@ -140,22 +140,21 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
             Section {
                 states(.large)
             } header: {
-                Text("Large")
-                    .foregroundStyle(.compound.textSecondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading)
+                Header(title: "Large")
             }
             
             Section {
                 states(.medium)
             } header: {
-                Text("Medium")
-                    .foregroundStyle(.compound.textSecondary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(.leading)
+                Header(title: "Medium")
+            }
+            
+            Section {
+                plain
+            } header: {
+                Header(title: "Plain")
             }
         }
-        .padding(.horizontal)
     }
     
     public static func states(_ size: CompoundButtonStyle.Size) -> some View {
@@ -179,16 +178,33 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
             Button("Disabled") { }
                 .buttonStyle(.compound(.secondary, size: size))
                 .disabled(true)
-
+        }
+        .padding(.horizontal)
+    }
+    
+    static var plain: some View {
+        HStack(spacing: 20) {
             Button("Plain") { }
-                .buttonStyle(.compound(.plain, size: size))
-
+                .buttonStyle(.compound(.plain))
+            
             Button("Destructive", role: .destructive) { }
-                .buttonStyle(.compound(.plain, size: size))
-
+                .buttonStyle(.compound(.plain))
+            
             Button("Disabled") { }
-                .buttonStyle(.compound(.plain, size: size))
+                .buttonStyle(.compound(.plain))
                 .disabled(true)
+        }
+    }
+    
+    struct Header: View {
+        let title: String
+        
+        var body: some View {
+            Text(title)
+                .foregroundStyle(.compound.textSecondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding([.leading, .top])
+                .padding(.leading )
         }
     }
 }
