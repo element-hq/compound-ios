@@ -381,7 +381,7 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
                     .padding(.vertical, 20)
             })
             ListRow(label: .plain(title: "Placeholder"),
-                    kind: .textField(text: .constant("")))
+                    kind: .textField(text: .constant(""), axis: .vertical))
             .lineLimit(4...)
         }
     }
