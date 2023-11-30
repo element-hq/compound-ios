@@ -44,7 +44,7 @@ public struct ListRowTrailingSection<Icon: View>: View {
     var accessory: ListRowAccessory?
     
     @ScaledMetric private var iconSize = 24
-    private var hideAccessory: Bool { isWaiting && accessory == .unselected }
+    private var hideAccessory: Bool { isWaiting && accessory?.kind == .unselected }
     
     init(_ details: ListRowDetails<Icon>?, accessory: ListRowAccessory? = nil) {
         title = details?.title
@@ -110,15 +110,15 @@ struct ListRowTrailingSection_Previews: PreviewProvider, PrefireProvider {
     
     static var withAccessory: some View {
         VStack(spacing: 20) {
-            ListRowTrailingSection(.isWaiting(true), accessory: .selected)
+            ListRowTrailingSection(.isWaiting(true), accessory: .selection(true))
                 .border(.purple)
             
             // The checkmark should be hidden.
-            ListRowTrailingSection(.isWaiting(true), accessory: .unselected)
+            ListRowTrailingSection(.isWaiting(true), accessory: .selection(false))
                 .border(.purple)
             
             // The checkmark's space should be reserved.
-            ListRowTrailingSection(.isWaiting(false), accessory: .unselected)
+            ListRowTrailingSection(.isWaiting(false), accessory: .selection(false))
                 .border(.purple)
         }
     }

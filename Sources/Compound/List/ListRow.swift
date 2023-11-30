@@ -33,6 +33,7 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
         case toggle(Binding<Bool>)
         case inlinePicker(selection: Binding<SelectionValue>, items: [(title: String, tag: SelectionValue)])
         case selection(isSelected: Bool, action: () -> Void)
+        case multiSelection(isSelected: Bool, action: () -> Void)
         case textField(text: Binding<String>, axis: Axis?)
         
         case custom(() -> CustomContent)
@@ -97,7 +98,12 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                              items: items)
         case .selection(let isSelected, let action):
             Button(action: action) {
-                RowContent(details: details, accessory: isSelected ? .selected : .unselected) { label }
+                RowContent(details: details, accessory: .selection(isSelected)) { label }
+            }
+            .isToggle()
+        case .multiSelection(let isSelected, let action):
+            Button(action: action) {
+                RowContent(details: details, accessory: .multiSelection(isSelected)) { label }
             }
             .isToggle()
         case .textField(let text, let axis):
@@ -242,6 +248,7 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
             
             centeredActionButtonSections
             descriptionLabelSection
+            avatarSection
             othersSection
         }
         .compoundList()
@@ -370,6 +377,24 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
         Section {
             ListRow(label: .description("This is a row in the list, with a multiline description but it doesn't have either an icon or a title, just this text here."),
                     kind: .label)
+        }
+    }
+    
+    static var avatarSection: some View {
+        Section {
+            ListRow(label: .avatar(title: "Alice",
+                                   description: "@alice:element.io",
+                                   icon: Circle().foregroundStyle(.compound.avatarColors[0].background)),
+                    kind: .multiSelection(isSelected: true) { })
+            ListRow(label: .avatar(title: "Bob",
+                                   description: "@bob:element.io",
+                                   icon: Circle().foregroundStyle(.compound.avatarColors[1].background)),
+                    kind: .multiSelection(isSelected: false) { })
+            ListRow(label: .avatar(title: "@charlie:fake.com",
+                                   description: "This user can't be found, so the invite may not be received.",
+                                   icon: Circle().foregroundStyle(.compound.avatarColors[2].background),
+                                   role: .error),
+                    kind: .button { })
         }
     }
     
