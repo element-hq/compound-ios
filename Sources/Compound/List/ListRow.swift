@@ -19,6 +19,10 @@ import SwiftUI
 public enum ListRowPadding {
     public static let horizontal: CGFloat = 16
     public static let vertical: CGFloat = 13
+    public static let insets = EdgeInsets(top: vertical,
+                                          leading: horizontal,
+                                          bottom: vertical,
+                                          trailing: horizontal)
 }
 
 public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, SelectionValue: Hashable>: View {

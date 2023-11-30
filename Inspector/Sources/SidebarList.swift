@@ -36,9 +36,6 @@ struct SidebarList: View {
     
     var componentsSection: some View {
         Section("Components") {
-            NavigationLink(value: Screen.form) {
-                Label("Form (deprecated)", systemImage: "list.bullet.clipboard")
-            }
             NavigationLink(value: Screen.list) {
                 Label("List", systemImage: "list.bullet.clipboard")
             }

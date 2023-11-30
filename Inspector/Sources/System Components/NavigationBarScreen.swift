@@ -29,51 +29,52 @@ struct NavigationBarScreen: View {
     var body: some View {
         Form {
             Section {
-                Text("This component may be rendered differently when running on macOS.")
-                    .font(.compound.bodySM)
-                    .foregroundColor(.compound.textSecondary)
-                    .multilineTextAlignment(.center)
-                    .listRowBackground(Color.clear)
-            }
-            .compoundFormSection()
-            
-            Section {
-                Picker("Title", selection: $titleMode) {
-                    Text("Large").tag(TitleMode.large)
-                    Text("Inline").tag(TitleMode.inline)
-                    Text("Hidden").tag(TitleMode.hidden)
-                }
-                .foregroundColor(.compound.textPrimary)
-                
-                Picker("Back Button", selection: $backButtonMode) {
-                    Text("Navigation").tag(BackButtonMode.navigation)
-                    Text("Cancelation Action").tag(BackButtonMode.cancellationAction)
-                    Text("Hidden").tag(BackButtonMode.hidden)
-                }
-                .foregroundColor(.compound.textPrimary)
-                
-                Toggle("Confirmation Action", isOn: $hasConfirmationAction)
-                    .toggleStyle(.compoundForm)
-                Toggle("Primary Action", isOn: $hasPrimaryAction)
-                    .toggleStyle(.compoundForm)
-            } header: {
-                Text("Configuration")
-                    .compoundFormSectionHeader()
-            }
-            .compoundFormSection()
-            
-            Section {
-                VStack {
-                    Text("Empty section to make the form scrollable")
+                ListRow(kind: .custom {
+                    Text("This component may be rendered differently when running on macOS.")
                         .font(.compound.bodySM)
                         .foregroundColor(.compound.textSecondary)
-                        .padding(.top, 12)
-                    Spacer(minLength: 500)
-                }
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity)
+                        .listRowBackground(Color.clear)
+                })
             }
-            .compoundFormSection()
+            
+            Section {
+                ListRow(label: .plain(title: "Title"),
+                        kind: .picker(selection: $titleMode, items: [
+                                        (title: "Large", tag: .large),
+                                        (title: "Inline", tag: .inline),
+                                        (title: "Hidden", tag: .hidden)
+                                      ]))
+                ListRow(label: .plain(title: "Back Button"),
+                        kind: .picker(selection: $backButtonMode, items: [
+                                        (title: "Navigation", tag: .navigation),
+                                        (title: "Cancelation Action", tag: .cancellationAction),
+                                        (title: "Hidden", tag: .hidden)
+                                      ]))
+                
+                ListRow(label: .plain(title: "Confirmation Action"),
+                        kind: .toggle($hasConfirmationAction))
+                ListRow(label: .plain(title: "Primary Action"),
+                        kind: .toggle($hasPrimaryAction))
+            } header: {
+                Text("Configuration")
+                    .compoundListSectionHeader()
+            }
+            
+            Section {
+                ListRow(kind: .custom {
+                    VStack {
+                        Text("Empty section to make the form scrollable")
+                            .font(.compound.bodySM)
+                            .foregroundColor(.compound.textSecondary)
+                        Spacer(minLength: 500)
+                    }
+                    .padding(ListRowPadding.insets)
+                })
+            }
         }
-        .compoundForm()
+        .compoundList()
         .navigationTitle(titleMode == .hidden ? "" : "Navigation Bar")
         .navigationBarTitleDisplayMode(titleMode == .large ? .large : .inline)
         .navigationBarBackButtonHidden(backButtonMode != .navigation)
