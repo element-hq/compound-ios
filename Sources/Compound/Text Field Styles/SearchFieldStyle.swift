@@ -81,19 +81,23 @@ struct SearchStyle_Previews: PreviewProvider, PrefireProvider {
         
         NavigationStack {
             Form {
-                Section("Settings") {
-                    Button("Some row") { }
-                        .buttonStyle(.compoundForm())
+                Section {
+                    ListRow(label: .plain(title: "Some row"),
+                            kind: .button { })
+                } header: {
+                    Text("Settings")
+                        .compoundListSectionHeader()
                 }
-                .compoundFormSection()
 
-                Section("More Settings") {
-                    Toggle("Some setting", isOn: .constant(true))
-                        .toggleStyle(.compoundForm)
+                Section {
+                    ListRow(label: .plain(title: "Some setting"),
+                            kind: .toggle(.constant(true)))
+                } header: {
+                    Text("More Settings")
+                        .compoundListSectionHeader()
                 }
-                .compoundFormSection()
             }
-            .compoundForm()
+            .compoundList()
             .searchable(text: .constant(""))
             .compoundSearchField()
         }

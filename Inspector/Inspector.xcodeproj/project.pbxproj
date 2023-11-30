@@ -14,7 +14,6 @@
 		9132C6312A7280A500EAEF3D /* ContextMenuScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132C6302A7280A500EAEF3D /* ContextMenuScreen.swift */; };
 		9132C6332A72850200EAEF3D /* ShareSheetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132C6322A72850200EAEF3D /* ShareSheetScreen.swift */; };
 		9132C6352A72868B00EAEF3D /* NavigationBarScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132C6342A72868B00EAEF3D /* NavigationBarScreen.swift */; };
-		917C22F429C3760A00B35660 /* FormScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C22F329C375AA00B35660 /* FormScreen.swift */; };
 		917C22F629C37A9D00B35660 /* AllCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C22F529C37A9D00B35660 /* AllCases.swift */; };
 		917C22F829C380A200B35660 /* FontsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917C22F729C380A200B35660 /* FontsScreen.swift */; };
 		917F561C28256DB800D19543 /* CompoundInspectorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917F561B28256DB800D19543 /* CompoundInspectorApp.swift */; };
@@ -50,7 +49,6 @@
 		9132C6322A72850200EAEF3D /* ShareSheetScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareSheetScreen.swift; sourceTree = "<group>"; };
 		9132C6342A72868B00EAEF3D /* NavigationBarScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarScreen.swift; sourceTree = "<group>"; };
 		9139E78228257ECF00091740 /* Entitlements.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Entitlements.entitlements; sourceTree = "<group>"; };
-		917C22F329C375AA00B35660 /* FormScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormScreen.swift; sourceTree = "<group>"; };
 		917C22F529C37A9D00B35660 /* AllCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCases.swift; sourceTree = "<group>"; };
 		917C22F729C380A200B35660 /* FontsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontsScreen.swift; sourceTree = "<group>"; };
 		917F561828256DB800D19543 /* Compound Inspector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Compound Inspector.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,7 +171,6 @@
 			isa = PBXGroup;
 			children = (
 				917F562A28256DCD00D19543 /* ButtonsScreen.swift */,
-				917C22F329C375AA00B35660 /* FormScreen.swift */,
 				9129740F2A864F5E004BEA88 /* ListScreen.swift */,
 				917F563028256DDC00D19543 /* TextFieldsScreen.swift */,
 			);
@@ -321,7 +318,6 @@
 				912974102A864F5E004BEA88 /* ListScreen.swift in Sources */,
 				9132C6312A7280A500EAEF3D /* ContextMenuScreen.swift in Sources */,
 				9132C62F2A72785500EAEF3D /* AlertScreen.swift in Sources */,
-				917C22F429C3760A00B35660 /* FormScreen.swift in Sources */,
 				91CA00362AD7D83200121E0F /* ButtonsScreen.swift in Sources */,
 				91B2EA9C28CA064800A90A83 /* ColorsScreen.swift in Sources */,
 			);
