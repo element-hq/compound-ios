@@ -57,6 +57,7 @@ struct ListRowAvatarLabelStyle: LabelStyle {
 
 public struct ListRowLabel<Icon: View>: View {
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.lineLimit) private var lineLimit
     @ScaledMetric private var iconSize = 30.0
     
     var title: String?
@@ -83,14 +84,14 @@ public struct ListRowLabel<Icon: View>: View {
         guard isEnabled else { return .compound.textDisabled }
         return role == .destructive ? .compound.textCriticalPrimary : .compound.textPrimary
     }
-    var titleLineLimit: Int? { layout == .avatar ? 1 : nil }
+    var titleLineLimit: Int? { layout == .avatar ? 1 : lineLimit }
     
     var descriptionColor: Color {
         isEnabled ? .compound.textSecondary : .compound.textDisabled
     }
     var descriptionLineLimit: Int? {
-        guard layout == .avatar else { return nil }
-        return role != .error ? 1 : nil
+        guard layout == .avatar else { return lineLimit }
+        return role != .error ? 1 : lineLimit
     }
     
     var iconForegroundColor: Color {
