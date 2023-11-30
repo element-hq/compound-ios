@@ -71,7 +71,7 @@ public struct ListRowAccessory: View {
                 .hidden()
                 .padding(.vertical, verticalPaddingFix)
         case .multiSelected:
-            CompoundIcon(\.checkCircle)
+            CompoundIcon(\.checkCircleSolid)
                 .foregroundColor(isEnabled ? .compound.iconPrimary : .compound.iconDisabled)
                 .accessibilityAddTraits(.isSelected)
                 .padding(.vertical, verticalPaddingFix)
