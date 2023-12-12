@@ -29,7 +29,7 @@ final class AvatarColorsTests: XCTestCase {
     
     func testAvatarColorHash() {
         // Match the tests with the web ones for consistency between the two platforms
-        // https://github.com/vector-im/compound-web/blob/5dda11aa9733462fb8422968181275bc3e9b35e3/src/components/Avatar/Avatar.test.tsx#L62
+        // https://github.com/element-hq/compound-web/blob/5dda11aa9733462fb8422968181275bc3e9b35e3/src/components/Avatar/Avatar.test.tsx#L62
         let testCases: [TestCase] = [
             .init(input: "@bob:example.org", webOutput: 8),
             .init(input: "@alice:example.org", webOutput: 3),
