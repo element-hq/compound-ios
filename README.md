@@ -2,6 +2,6 @@
 
 # Compound iOS
 
-[![](https://img.shields.io/github/license/vector-im/compound)](https://github.com/vector-im/compound/blob/main/LICENSE)
+[![](https://img.shields.io/github/license/element-hq/compound)](https://github.com/element-hq/compound/blob/main/LICENSE)
 
 Element's design components for iOS
