@@ -14,8 +14,13 @@
 // limitations under the License.
 //
 
-import CompoundDesignTokens
+@_exported import CompoundDesignTokens
 import SwiftUI
+
+public extension Image {
+    /// The icons used by Element as defined in Compound Design Tokens.
+    static let compound = CompoundIcons()
+}
 
 /// A view that displays an icon from Compound. The icon defaults to a size of 24pt
 /// and scales with Dynamic Type, relative to any font given to it by the `font` modifier.
