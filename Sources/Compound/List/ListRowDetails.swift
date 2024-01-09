@@ -14,6 +14,7 @@
 // limitations under the License.
 //
 
+import CompoundDesignTokens
 import SFSafeSymbols
 import SwiftUI
 
