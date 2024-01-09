@@ -52,15 +52,15 @@ extension CompoundIcons {
         return icons
     }
     
-    var allKeyPaths: [(name: String, value: KeyPath<Self, Image>)] {
-        var icons: [(name: String, value: KeyPath<Self, Image>)] = []
+    var allKeyPaths: [(name: String, value: KeyPath<CompoundIcons, Image>)] {
+        var icons: [(name: String, value: KeyPath<CompoundIcons, Image>)] = []
         let mirror = Mirror(reflecting: self)
         
         for property in mirror.children {
             if let label = property.label {
-                let keyPath = \Self.[checkedMirrorDescendant: label] as PartialKeyPath
+                let keyPath = \CompoundIcons.[checkedMirrorDescendant: label] as PartialKeyPath
                 
-                if let imageKeyPath = keyPath as? KeyPath<Self, Image> {
+                if let imageKeyPath = keyPath as? KeyPath<CompoundIcons, Image> {
                     icons.append((label, imageKeyPath))
                 } else {
                     print("Nope")
