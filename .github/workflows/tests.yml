@@ -41,4 +41,10 @@ jobs:
         path: Logs/CompoundTests.xcresult.zip
         retention-days: 1
         if-no-files-found: ignore
+
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        xcode: true
+        xcode_archive_path: Logs/CompoundTests.xcresult
  
