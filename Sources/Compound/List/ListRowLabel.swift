@@ -342,10 +342,10 @@ struct ListRowLabel_Previews: PreviewProvider, PrefireProvider {
             Section {
                 ListRowLabel.avatar(title: "Alice",
                                     description: "@alice:example.com",
-                                    icon: Circle().foregroundStyle(.compound.avatarColors[0].background))
+                                    icon: Circle().foregroundStyle(.compound.decorativeColors[0].background))
                 ListRowLabel.avatar(title: "@bob:idontexist.com",
                                     description: "This user can't be found, so the invite may not be received.",
-                                    icon: Circle().foregroundStyle(.compound.avatarColors[0].background),
+                                    icon: Circle().foregroundStyle(.compound.decorativeColors[0].background),
                                     role: .error)
             }
             .listRowInsets(EdgeInsets())

@@ -11,7 +11,7 @@ import Foundation
 import SwiftUI
 import XCTest
 
-final class AvatarColorsTests: XCTestCase {
+final class DecorativeColorsTests: XCTestCase {
     struct TestCase {
         let input: String
         private let webOutput: Int
@@ -29,18 +29,18 @@ final class AvatarColorsTests: XCTestCase {
     
     func testAvatarColorHash() {
         // Match the tests with the web ones for consistency between the two platforms
-        // https://github.com/element-hq/compound-web/blob/5dda11aa9733462fb8422968181275bc3e9b35e3/src/components/Avatar/Avatar.test.tsx#L62
+        // https://github.com/element-hq/compound-web/blob/4608dc807c9c904874eac67ff22be3213f4a261d/src/components/Avatar/Avatar.test.tsx#L62
         let testCases: [TestCase] = [
-            .init(input: "@bob:example.org", webOutput: 8),
+            .init(input: "@bob:example.org", webOutput: 4),
             .init(input: "@alice:example.org", webOutput: 3),
             .init(input: "@charlie:example.org", webOutput: 5),
-            .init(input: "@dan:example.org", webOutput: 8),
-            .init(input: "@elena:example.org", webOutput: 2),
-            .init(input: "@fanny:example.org", webOutput: 1)
+            .init(input: "@dan:example.org", webOutput: 4),
+            .init(input: "@elena:example.org", webOutput: 4),
+            .init(input: "@fanny:example.org", webOutput: 3)
         ]
         
         for testCase in testCases {
-            XCTAssertEqual(Color.compound.avatarColor(for: testCase.input), Color.compound.avatarColors[testCase.output])
+            XCTAssertEqual(Color.compound.decorativeColor(for: testCase.input), Color.compound.decorativeColors[testCase.output])
         }
     }
 }
