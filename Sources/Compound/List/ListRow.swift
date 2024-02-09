@@ -388,15 +388,15 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
         Section {
             ListRow(label: .avatar(title: "Alice",
                                    description: "@alice:element.io",
-                                   icon: Circle().foregroundStyle(.compound.avatarColors[0].background)),
+                                   icon: Circle().foregroundStyle(.compound.decorativeColors[0].background)),
                     kind: .multiSelection(isSelected: true) { })
             ListRow(label: .avatar(title: "Bob",
                                    description: "@bob:element.io",
-                                   icon: Circle().foregroundStyle(.compound.avatarColors[1].background)),
+                                   icon: Circle().foregroundStyle(.compound.decorativeColors[1].background)),
                     kind: .multiSelection(isSelected: false) { })
             ListRow(label: .avatar(title: "@charlie:fake.com",
                                    description: "This user can't be found, so the invite may not be received.",
-                                   icon: Circle().foregroundStyle(.compound.avatarColors[2].background),
+                                   icon: Circle().foregroundStyle(.compound.decorativeColors[2].background),
                                    role: .error),
                     kind: .button { })
         }

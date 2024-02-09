@@ -97,24 +97,20 @@ public struct CompoundColors {
     public let bgSubtleSecondaryLevel0 = Color(UIColor { $0.isLight ? UIColor(compound.colorGray300) : UIColor(compound.colorThemeBg) })
     public let bgCanvasDefaultLevel1 = Color(UIColor { $0.isLight ? UIColor(compound.colorThemeBg) : UIColor(compound.colorGray300) })
     
-    // MARK: - Avatar Colors
-    // Used to determine the background color and the foreground color of an avatar.
-    
-    // Order matches the one from web
-    // https://github.com/element-hq/compound-web/blob/5dda11aa9733462fb8422968181275bc3e9b35e3/src/components/Avatar/Avatar.module.css#L64
-    internal let avatarColors: [AvatarColor] = [
-        .init(background: compound.colorBlue300, foreground: compound.colorBlue1200),
-        .init(background: compound.colorFuchsia300, foreground: compound.colorFuchsia1200),
-        .init(background: compound.colorGreen300, foreground: compound.colorGreen1200),
-        .init(background: compound.colorPink300, foreground: compound.colorPink1200),
-        .init(background: compound.colorOrange300, foreground: compound.colorOrange1200),
-        .init(background: compound.colorCyan300, foreground: compound.colorCyan1200),
-        .init(background: compound.colorPurple300, foreground: compound.colorPurple1200),
-        .init(background: compound.colorLime300, foreground: compound.colorLime1200)
+    // MARK: - Decorative Colors
+    // Used to determine the background and text colors of avatars, usernames etc.
+    internal let decorativeColors: [DecorativeColor] = [
+        // TODO: Use decorative colours
+        .init(background: compound.colorBgDecorative1, text: compound.colorTextDecorative1),
+        .init(background: compound.colorBgDecorative2, text: compound.colorTextDecorative2),
+        .init(background: compound.colorBgDecorative3, text: compound.colorTextDecorative3),
+        .init(background: compound.colorBgDecorative4, text: compound.colorTextDecorative4),
+        .init(background: compound.colorBgDecorative5, text: compound.colorTextDecorative5),
+        .init(background: compound.colorBgDecorative6, text: compound.colorTextDecorative6),
     ]
     
-    public func avatarColor(for contentID: String) -> AvatarColor {
-        avatarColors[contentID.hashCode]
+    public func decorativeColor(for contentID: String) -> DecorativeColor {
+        decorativeColors[contentID.hashCode]
     }
     
     // MARK: - Awaiting Semantic Tokens
@@ -165,9 +161,9 @@ private extension UITraitCollection {
     var isLight: Bool { userInterfaceStyle == .light }
 }
 
-public struct AvatarColor: Equatable {
+public struct DecorativeColor: Equatable {
     public let background: Color
-    public let foreground: Color
+    public let text: Color
 }
 
 private extension String {
@@ -177,6 +173,6 @@ private extension String {
         let characterCodeSum = self.reduce(0) { sum, character in
             sum + Int(character.unicodeScalars.first?.value ?? 0)
         }
-        return (characterCodeSum % Color.compound.avatarColors.count)
+        return (characterCodeSum % Color.compound.decorativeColors.count)
     }
 }
