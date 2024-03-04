@@ -19,11 +19,15 @@ import SwiftUI
 public enum ListRowPadding {
     public static let horizontal: CGFloat = 16
     public static let vertical: CGFloat = 13
+    public static let insets = EdgeInsets(top: vertical,
+                                          leading: horizontal,
+                                          bottom: vertical,
+                                          trailing: horizontal)
 }
 
 public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, SelectionValue: Hashable>: View {
-    let label: ListLabel<Icon>
-    let details: ListDetailsLabel<DetailsIcon>?
+    let label: ListRowLabel<Icon>
+    let details: ListRowDetails<DetailsIcon>?
     
     public enum Kind<CustomContent: View, SelectionValue: Hashable> {
         case label
@@ -33,12 +37,13 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
         case toggle(Binding<Bool>)
         case inlinePicker(selection: Binding<SelectionValue>, items: [(title: String, tag: SelectionValue)])
         case selection(isSelected: Bool, action: () -> Void)
-        case textField(text: Binding<String>, axis: Axis)
+        case multiSelection(isSelected: Bool, action: () -> Void)
+        case textField(text: Binding<String>, axis: Axis?)
         
         case custom(() -> CustomContent)
         
         public static func textField(text: Binding<String>) -> Self {
-            .textField(text: text, axis: .vertical)
+            .textField(text: text, axis: nil)
         }
     }
     
@@ -56,14 +61,14 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
     var rowContent: some View {
         switch kind {
         case .label:
-            RowContent { details } label: { label }
+            RowContent(details: details) { label }
         case .button(let action):
             Button(action: action) {
-                RowContent { details } label: { label }
+                RowContent(details: details) { label }
             }
         case .navigationLink(let action):
             Button(action: action) {
-                RowContent(accessory: .navigationLink) { details } label: { label }
+                RowContent(details: details, accessory: .navigationLink) { label }
             }
         case .picker(let selection, let items):
             LabeledContent {
@@ -97,15 +102,18 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                              items: items)
         case .selection(let isSelected, let action):
             Button(action: action) {
-                RowContent(accessory: isSelected ? .selected : nil) { details } label: { label }
+                RowContent(details: details, accessory: .selection(isSelected)) { label }
             }
-            // Add the following trait on iOS 17
-            // .accessibilityAddTraits(.isToggle)
+            .isToggle()
+        case .multiSelection(let isSelected, let action):
+            Button(action: action) {
+                RowContent(details: details, accessory: .multiSelection(isSelected)) { label }
+            }
+            .isToggle()
         case .textField(let text, let axis):
             TextField(text: text, axis: axis) {
                 Text(label.title ?? "")
-                    .font(.compound.bodyLG)
-                    .foregroundColor(.compound.textPlaceholder)
+                    .compoundTextFieldPlaceholder()
             }
             .tint(.compound.iconAccentTertiary)
             .listRowInsets(EdgeInsets(top: 11,
@@ -123,16 +131,16 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
 
 // Normal row with a details icon
 public extension ListRow where CustomContent == EmptyView {
-    init(label: ListLabel<Icon>,
-         details: ListDetailsLabel<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) {
         self.label = label
         self.details = details
         self.kind = kind
     }
     
-    init(label: ListLabel<Icon>,
-         details: ListDetailsLabel<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) where SelectionValue == String {
         self.label = label
         self.details = details
@@ -142,16 +150,16 @@ public extension ListRow where CustomContent == EmptyView {
 
 // Normal row without a details icon.
 public extension ListRow where DetailsIcon == EmptyView, CustomContent == EmptyView {
-    init(label: ListLabel<Icon>,
-         details: ListDetailsLabel<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) {
         self.label = label
         self.details = details
         self.kind = kind
     }
     
-    init(label: ListLabel<Icon>,
-         details: ListDetailsLabel<DetailsIcon>? = nil,
+    init(label: ListRowLabel<Icon>,
+         details: ListRowDetails<DetailsIcon>? = nil,
          kind: Kind<CustomContent, SelectionValue>) where SelectionValue == String {
         self.label = label
         self.details = details
@@ -162,13 +170,13 @@ public extension ListRow where DetailsIcon == EmptyView, CustomContent == EmptyV
 // Custom row without a label or details label.
 public extension ListRow where Icon == EmptyView, DetailsIcon == EmptyView {
     init(kind: Kind<CustomContent, SelectionValue>) {
-        self.label = ListLabel()
+        self.label = ListRowLabel()
         self.details = nil
         self.kind = kind
     }
     
     init(kind: Kind<CustomContent, SelectionValue>) where SelectionValue == String {
-        self.label = ListLabel()
+        self.label = ListRowLabel()
         self.details = nil
         self.kind = kind
     }
@@ -179,22 +187,49 @@ public extension ListRow where Icon == EmptyView, DetailsIcon == EmptyView {
 /// This doesn't use `LabeledContent` as that will happily build using an `EmptyView`
 /// in the content. This creates an issue where the label ends up hidden to VoiceOver,
 /// presumably because SwiftUI thinks that the row doesn't contain any content.
-private struct RowContent<Label: View, Details: View>: View {
+private struct RowContent<Label: View, DetailsIcon: View>: View {
+    let details: ListRowDetails<DetailsIcon>?
     var accessory: ListRowAccessory?
-    let details: () -> Details?
     let label: () -> Label
     
     var body: some View {
-        HStack(spacing: ListDetails.spacing) {
+        HStack(spacing: ListRowTrailingSectionSpacing.horizontal) {
             label()
                 .frame(maxWidth: .infinity)
             
-            details()
-            accessory
+            if details != nil || accessory != nil {
+                ListRowTrailingSection(details, accessory: accessory)
+            }
         }
         .frame(maxHeight: .infinity)
         .padding(.trailing, ListRowPadding.horizontal)
         .accessibilityElement(children: .combine)
+    }
+}
+
+// MARK: - Helpers
+
+private extension TextField {
+    /// Creates a text field with an optional preferred axis. Hard coding a default resulted
+    /// in the underlying component always being a `UITextView` during introspection.
+    /// This initialiser does the right thing when not supplying an axis in `ListRow.Kind`.
+    init(text: Binding<String>, axis: Axis?, label: () -> Label) {
+        if let axis {
+            self.init(text: text, axis: axis, label: label)
+        } else {
+            self.init(text: text, label: label)
+        }
+    }
+}
+
+private extension Button {
+    /// Adds the `isToggle` accessibility trait on iOS 17+
+    @ViewBuilder func isToggle() -> some View {
+        if #available(iOS 17.0, *) {
+            accessibilityAddTraits(.isToggle)
+        } else {
+            self
+        }
     }
 }
 
@@ -217,6 +252,7 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
             
             centeredActionButtonSections
             descriptionLabelSection
+            avatarSection
             othersSection
         }
         .compoundList()
@@ -348,6 +384,24 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
         }
     }
     
+    static var avatarSection: some View {
+        Section {
+            ListRow(label: .avatar(title: "Alice",
+                                   description: "@alice:element.io",
+                                   icon: Circle().foregroundStyle(.compound.decorativeColors[0].background)),
+                    kind: .multiSelection(isSelected: true) { })
+            ListRow(label: .avatar(title: "Bob",
+                                   description: "@bob:element.io",
+                                   icon: Circle().foregroundStyle(.compound.decorativeColors[1].background)),
+                    kind: .multiSelection(isSelected: false) { })
+            ListRow(label: .avatar(title: "@charlie:fake.com",
+                                   description: "This user can't be found, so the invite may not be received.",
+                                   icon: Circle().foregroundStyle(.compound.decorativeColors[2].background),
+                                   role: .error),
+                    kind: .button { })
+        }
+    }
+    
     @ViewBuilder static var othersSection: some View {
         Section {
             ListRow(kind: .custom {
@@ -356,8 +410,28 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
                     .padding(.vertical, 20)
             })
             ListRow(label: .plain(title: "Placeholder"),
-                    kind: .textField(text: .constant("")))
+                    kind: .textField(text: .constant(""), axis: .vertical))
             .lineLimit(4...)
         }
+    }
+}
+
+struct ListRowLoadingSelection_Previews: PreviewProvider, PrefireProvider {
+    static var previews: some View {
+        Form {
+            ListRow(label: .plain(title: "Selected",
+                                  description: "This is a long multiline description which shows what happens when wrapping with a details view and selection, specifically, an activity indicator in the details."),
+                    details: .isWaiting(false),
+                    kind: .selection(isSelected: true) { })
+            ListRow(label: .plain(title: "Unselected",
+                                  description: "This is a long multiline description which shows what happens when wrapping with a details view and selection, specifically, an activity indicator in the details."),
+                    details: .isWaiting(false),
+                    kind: .selection(isSelected: false) { })
+            ListRow(label: .plain(title: "Unselected & Loading",
+                                  description: "This is a long multiline description which shows what happens when wrapping with a details view and selection, specifically, an activity indicator in the details."),
+                    details: .isWaiting(true),
+                    kind: .selection(isSelected: false) { })
+        }
+        .compoundList()
     }
 }

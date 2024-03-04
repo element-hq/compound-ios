@@ -21,7 +21,7 @@ public extension View {
     /// Styles a search bar text field using the Compound design tokens.
     /// This modifier is to be used in combination with `.searchable`.
     func compoundSearchField() -> some View {
-        introspect(.navigationStack, on: .iOS(.v16), scope: .ancestor) { navigationController in
+        introspect(.navigationStack, on: .supportedVersions, scope: .ancestor) { navigationController in
             // Uses the navigation stack as .searchField is unreliable when pushing the second search bar, during the create rooms flow.
             guard let searchController = navigationController.navigationBar.topItem?.searchController else { return }
             
@@ -81,19 +81,23 @@ struct SearchStyle_Previews: PreviewProvider, PrefireProvider {
         
         NavigationStack {
             Form {
-                Section("Settings") {
-                    Button("Some row") { }
-                        .buttonStyle(.compoundForm())
+                Section {
+                    ListRow(label: .plain(title: "Some row"),
+                            kind: .button { })
+                } header: {
+                    Text("Settings")
+                        .compoundListSectionHeader()
                 }
-                .compoundFormSection()
 
-                Section("More Settings") {
-                    Toggle("Some setting", isOn: .constant(true))
-                        .toggleStyle(.compoundForm)
+                Section {
+                    ListRow(label: .plain(title: "Some setting"),
+                            kind: .toggle(.constant(true)))
+                } header: {
+                    Text("More Settings")
+                        .compoundListSectionHeader()
                 }
-                .compoundFormSection()
             }
-            .compoundForm()
+            .compoundList()
             .searchable(text: .constant(""))
             .compoundSearchField()
         }

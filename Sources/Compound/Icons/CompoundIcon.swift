@@ -14,8 +14,13 @@
 // limitations under the License.
 //
 
-import CompoundDesignTokens
+@_exported import CompoundDesignTokens
 import SwiftUI
+
+public extension Image {
+    /// The icons used by Element as defined in Compound Design Tokens.
+    static let compound = CompoundIcons()
+}
 
 /// A view that displays an icon from Compound. The icon defaults to a size of 24pt
 /// and scales with Dynamic Type, relative to any font given to it by the `font` modifier.
@@ -208,30 +213,20 @@ struct CompoundIcon_Previews: PreviewProvider, PrefireProvider {
     static var form: some View {
         Form {
             Section {
-                Label { Text("Plain Icon") } icon: {
-                    CompoundIcon(\.userProfile)
-                        .foregroundColor(.compound.iconSecondary)
-                }
-                
-                Label { Text("Styled Icon") } icon: {
-                    CompoundIcon(\.userProfile)
-                }
-                .labelStyle(.compoundFormRow(alignment: .center))
-                
-                Label("SF Symbol", systemImage: "person.crop.circle")
-                    .labelStyle(.compoundFormRow())
+                ListRow(label: .action(title: "Plain Icon", icon: \.userProfile),
+                        kind: .label)
+                ListRow(label: .default(title: "Plain Icon", icon: \.userProfile),
+                        kind: .label)
+                ListRow(label: .default(title: "Plain Icon", systemIcon: .personCropCircle),
+                        kind: .label)
             }
-            .compoundFormSection()
         }
-        .compoundForm()
+        .compoundList()
         .safeAreaInset(edge: .bottom) {
             Button { } label: {
-                Label { Text("Button") } icon: {
-                    CompoundIcon(\.userProfile)
-                }
-                .frame(maxWidth: .infinity)
+                Label("Button", icon: \.userProfile)
             }
-            .buttonStyle(.borderedProminent)
+            .buttonStyle(.compound(.primary))
             .padding()
         }
     }

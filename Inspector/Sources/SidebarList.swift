@@ -13,6 +13,7 @@ struct SidebarList: View {
             tokensSection
             componentsSection
             systemComponentsSection
+            missingFromFigmaSection
             playbookSection
         }
         .navigationTitle("Components")
@@ -31,33 +32,14 @@ struct SidebarList: View {
             NavigationLink(value: Screen.icons) {
                 Label("Icons", systemImage: "pencil.and.outline")
             }
-            NavigationLink(value: Screen.sizes) {
-                Label("Sizes", systemImage: "ruler")
-            }
-            .disabled(true)
         }
     }
     
     var componentsSection: some View {
         Section("Components") {
-            NavigationLink(value: Screen.form) {
-                Label("Form (deprecated)", systemImage: "list.bullet.clipboard")
-            }
             NavigationLink(value: Screen.list) {
                 Label("List", systemImage: "list.bullet.clipboard")
             }
-            NavigationLink(value: Screen.labels) {
-                Label("Labels", systemImage: "character.textbox")
-            }
-            .disabled(true)
-            NavigationLink(value: Screen.buttons) {
-                Label("Buttons", systemImage: "rectangle.and.hand.point.up.left")
-            }
-            .disabled(true)
-            NavigationLink(value: Screen.textFields) {
-                Label("Text Fields", systemImage: "character.cursor.ibeam")
-            }
-            .disabled(true)
         }
     }
     
@@ -89,6 +71,14 @@ struct SidebarList: View {
         Section("Playbook") {
             NavigationLink(value: Screen.playbook) {
                 Label("Previews Playbook", systemImage: "book")
+            }
+        }
+    }
+  
+    var missingFromFigmaSection: some View {
+        Section("Missing from Figma") {
+            NavigationLink(value: Screen.buttons) {
+                Label("Buttons", systemImage: "rectangle.and.hand.point.up.left")
             }
         }
     }

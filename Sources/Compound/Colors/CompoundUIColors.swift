@@ -56,6 +56,9 @@ public struct CompoundUIColors {
     public let borderFocused = compound.colorBorderFocused
     public let borderDisabled = compound.colorBorderDisabled
     // public let bgSubtleSecondaryLevel0 = compound.colorBgSubtleSecondaryLevel0
+    public let bgAccentPressed = compound.colorBgAccentPressed
+    public let bgAccentHovered = compound.colorBgAccentHovered
+    public let bgAccentRest = compound.colorBgAccentRest
     public let bgInfoSubtle = compound.colorBgInfoSubtle
     public let bgSuccessSubtle = compound.colorBgSuccessSubtle
     public let bgCriticalSubtleHovered = compound.colorBgCriticalSubtleHovered

@@ -3,9 +3,10 @@
     {
       "identity" : "compound-design-tokens",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/vector-im/compound-design-tokens.git",
+      "location" : "https://github.com/element-hq/compound-design-tokens.git",
       "state" : {
-        "revision" : "387d2b7211f07761c67e849c59414a1bb803defa"
+        "revision" : "c3fff1f2b042295cd5f4bcf8d4fe68ec47ca4061",
+        "version" : "1.2.0"
       }
     },
     {

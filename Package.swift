@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "Compound", targets: ["Compound"])
     ],
     dependencies: [
-        .package(url: "https://github.com/vector-im/compound-design-tokens.git", revision: "387d2b7211f07761c67e849c59414a1bb803defa"),
+        .package(url: "https://github.com/element-hq/compound-design-tokens.git", exact: "1.2.0"),
         .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "0.9.0"),
         .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols.git", from: "4.1.1"),
         .package(url: "https://github.com/BarredEwe/Prefire", from: "1.5.0"),
@@ -23,9 +23,6 @@ let package = Package(
                 .product(name: "SwiftUIIntrospect", package: "SwiftUI-Introspect"),
                 .product(name: "SFSafeSymbols", package: "SFSafeSymbols"),
                 .product(name: "Prefire", package: "Prefire")
-            ],
-            plugins: [
-                .plugin(name: "PrefirePlaybookPlugin", package: "Prefire")
             ]
         ),
         .testTarget(
@@ -33,6 +30,9 @@ let package = Package(
             dependencies: [
                 "Compound",
                 .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
+            ],
+            exclude: [
+                "__Snapshots__"
             ],
             plugins: [
                 .plugin(name: "PrefireTestsPlugin", package: "Prefire")
