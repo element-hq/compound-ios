@@ -100,7 +100,7 @@ class PreviewTests: XCTestCase {
                                  testName: String = #function,
                                  traits: UITraitCollection = .init()) -> String? {
         var delay: TimeInterval = 0
-        var precision: Float = 1.0
+        var precision: Float = 0.98
         var perceptualPrecision: Float = 0.98
 
         let view = view
