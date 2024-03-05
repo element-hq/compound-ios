@@ -256,6 +256,7 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
             othersSection
         }
         .compoundList()
+        .snapshot(perceptualPrecision: 0.98)
     }
     
     static var labels: some View {
@@ -433,5 +434,6 @@ struct ListRowLoadingSelection_Previews: PreviewProvider, PrefireProvider {
                     kind: .selection(isSelected: false) { })
         }
         .compoundList()
+        .snapshot(perceptualPrecision: 0.98)
     }
 }

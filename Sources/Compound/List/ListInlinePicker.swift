@@ -66,6 +66,7 @@ struct ListInlinePicker_Previews: PreviewProvider, PrefireProvider {
                     .labelsHidden()
                 }
             }
+            .snapshot(perceptualPrecision: 0.98)
         }
     }
 }
