@@ -12,10 +12,9 @@
     {
       "identity" : "prefire",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BarredEwe/Prefire",
+      "location" : "https://github.com/BarredEwe/Prefire/",
       "state" : {
-        "revision" : "898a4a9f5d5eb0a0b07adb1a7c89daf0f068b129",
-        "version" : "1.5.0"
+        "revision" : "996a192263f8056375eb6809e0ff91f1ace40877"
       }
     },
     {

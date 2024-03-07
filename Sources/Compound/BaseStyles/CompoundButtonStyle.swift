@@ -155,6 +155,7 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
                 Header(title: "Plain")
             }
         }
+        .snapshotWithDefaultPrecision()
     }
     
     public static func states(_ size: CompoundButtonStyle.Size) -> some View {

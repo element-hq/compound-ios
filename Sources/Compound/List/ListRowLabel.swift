@@ -356,5 +356,6 @@ struct ListRowLabel_Previews: PreviewProvider, PrefireProvider {
             }
         }
         .compoundList()
+        .snapshotWithDefaultPrecision()
     }
 }
