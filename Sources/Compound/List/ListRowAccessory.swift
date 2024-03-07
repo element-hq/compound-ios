@@ -112,7 +112,7 @@ struct ListRowAccessory_Previews: PreviewProvider, PrefireProvider {
                 .disabled(true)
         }
         .previewDisplayName("Accessories")
-        .snapshot(perceptualPrecision: 0.98)
+        .snapshotWithDefaultPrecision()
     }
     
     static func row(title: String, accessory: ListRowAccessory) -> some View {
@@ -134,6 +134,6 @@ struct MultiUnselectedAccessory_Previews: PreviewProvider, PrefireProvider {
             }
         }
         .previewDisplayName("Fake circle icon")
-        .snapshot(perceptualPrecision: 0.98)
+        .snapshotWithDefaultPrecision()
     }
 }

@@ -80,7 +80,7 @@ struct ListTextStyles_Previews: PreviewProvider, PrefireProvider {
         }
         .compoundList()
         .previewDisplayName("Form")
-        .snapshot(perceptualPrecision: 0.98)
+        .snapshotWithDefaultPrecision()
         
         List {
             Section {
@@ -96,6 +96,6 @@ struct ListTextStyles_Previews: PreviewProvider, PrefireProvider {
         }
         .compoundList()
         .previewDisplayName("List")
-        .snapshot(perceptualPrecision: 0.98)
+        .snapshotWithDefaultPrecision()
     }
 }

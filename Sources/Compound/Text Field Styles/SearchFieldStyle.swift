@@ -78,7 +78,7 @@ struct SearchStyle_Previews: PreviewProvider, PrefireProvider {
         }
         .tint(.compound.textActionPrimary)
         .previewDisplayName("List")
-        .snapshot(perceptualPrecision: 0.98)
+        .snapshotWithDefaultPrecision()
         
         NavigationStack {
             Form {
@@ -104,6 +104,6 @@ struct SearchStyle_Previews: PreviewProvider, PrefireProvider {
         }
         .tint(.compound.textActionPrimary)
         .previewDisplayName("Form")
-        .snapshot(perceptualPrecision: 0.98)
+        .snapshotWithDefaultPrecision()
     }
 }
