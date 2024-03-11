@@ -90,7 +90,6 @@ struct ListRowTrailingSection_Previews: PreviewProvider, PrefireProvider {
             details
             withAccessory
         }
-        .snapshotWithDefaultPrecision()
     }
     
     static var details: some View {

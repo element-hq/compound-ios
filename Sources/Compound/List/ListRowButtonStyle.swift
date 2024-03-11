@@ -72,6 +72,5 @@ public struct ListRowButtonStyle_Previews: PreviewProvider, PrefireProvider {
             .listRowInsets(EdgeInsets())
         }
         .compoundList()
-        .snapshotWithDefaultPrecision()
     }
 }

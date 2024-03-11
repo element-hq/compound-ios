@@ -44,7 +44,6 @@ public struct CompoundToggleStyle_Previews: PreviewProvider, PrefireProvider {
             states
         }
         .padding(32)
-        .snapshotWithDefaultPrecision()
     }
     
     @ViewBuilder
