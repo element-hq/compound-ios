@@ -1,3 +1,0 @@
-test_configuration:
-  - simulator_device: "iPhone15"
-  - required_os: 17

@@ -12,7 +12,7 @@ let package = Package(
         .package(url: "https://github.com/element-hq/compound-design-tokens.git", exact: "1.2.0"),
         .package(url: "https://github.com/siteline/SwiftUI-Introspect.git", from: "0.9.0"),
         .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols.git", from: "4.1.1"),
-        .package(url: "https://github.com/BarredEwe/Prefire", revision: "996a192263f8056375eb6809e0ff91f1ace40877"),
+        .package(url: "https://github.com/stefanceriu/Prefire", revision: "982b207efafb9c6ff0c7beae38211c37b918d2b9"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.13.0")
     ],
     targets: [

@@ -168,18 +168,14 @@ struct CompoundIcon_Previews: PreviewProvider, PrefireProvider {
     static var previews: some View {
         form
             .previewDisplayName("Form")
-            .snapshotWithDefaultPrecision()
         buttons
             .padding(8)
             .previewLayout(.sizeThatFits)
             .previewDisplayName("Buttons")
-            .snapshotWithDefaultPrecision()
         accessibilityIcons
             .previewDisplayName("Accessibility Icons Only")
-            .snapshotWithDefaultPrecision()
         accessibilityLabels
             .previewDisplayName("Accessibility Labels")
-            .snapshotWithDefaultPrecision()
     }
     
     static var accessibilityIcons: some View {
