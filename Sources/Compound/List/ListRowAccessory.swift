@@ -72,13 +72,12 @@ public struct ListRowAccessory: View {
                 .padding(.vertical, verticalPaddingFix)
         case .multiSelected:
             CompoundIcon(\.checkCircleSolid)
-                .foregroundColor(isEnabled ? .compound.iconPrimary : .compound.iconDisabled)
+                .foregroundColor(isEnabled ? .compound.iconSuccessPrimary : .compound.iconDisabled)
                 .accessibilityAddTraits(.isSelected)
                 .padding(.vertical, verticalPaddingFix)
         case .multiUnselected:
-            CompoundIcon(\.checkCircle)
-                .foregroundColor(isEnabled ? .compound.iconTertiary : .compound.iconDisabled)
-                .overlay { Circle().inset(by: circleOverlayInsets).fill(.background) } // This is a bodge.
+            CompoundIcon(\.circle)
+                .foregroundColor(isEnabled ? .compound.borderInteractivePrimary : .compound.borderDisabled)
                 .padding(.vertical, verticalPaddingFix)
         }
     }
@@ -120,18 +119,5 @@ struct ListRowAccessory_Previews: PreviewProvider, PrefireProvider {
             Text(title)
                 .foregroundStyle(.compound.textSecondary)
         }
-    }
-}
-
-/// Just to prove that the overlay bodge works for all Dynamic Type sizes.
-struct MultiUnselectedAccessory_Previews: PreviewProvider, PrefireProvider {
-    static var previews: some View {
-        VStack {
-            ForEach(DynamicTypeSize.allCases, id: \.self) { size in
-                ListRowAccessory.multiSelection(false)
-                    .dynamicTypeSize(size)
-            }
-        }
-        .previewDisplayName("Fake circle icon")
     }
 }
