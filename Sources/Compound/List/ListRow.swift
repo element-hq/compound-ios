@@ -394,6 +394,12 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
                                    description: "@bob:element.io",
                                    icon: Circle().foregroundStyle(.compound.decorativeColors[1].background)),
                     kind: .multiSelection(isSelected: false) { })
+            ListRow(label: .avatar(title: "Dan",
+                                   status: "Pending",
+                                   description: "@dan:element.io",
+                                   icon: Circle().foregroundStyle(.compound.decorativeColors[3].background)),
+                    kind: .multiSelection(isSelected: false) { })
+                .disabled(true)
             ListRow(label: .avatar(title: "@charlie:fake.com",
                                    description: "This user can't be found, so the invite may not be received.",
                                    icon: Circle().foregroundStyle(.compound.decorativeColors[2].background),
