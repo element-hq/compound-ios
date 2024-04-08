@@ -62,6 +62,7 @@ public struct ListRowLabel<Icon: View>: View {
     @ScaledMetric private var iconSize = 30.0
     
     var title: String?
+    var status: String?
     var description: String?
     var icon: Icon?
     
@@ -86,6 +87,10 @@ public struct ListRowLabel<Icon: View>: View {
         return role == .destructive ? .compound.textCriticalPrimary : .compound.textPrimary
     }
     var titleLineLimit: Int? { layout == .avatar ? 1 : lineLimit }
+    
+    var statusColor: Color {
+        isEnabled ? .compound.textSecondary : .compound.textDisabled
+    }
     
     var descriptionColor: Color {
         isEnabled ? .compound.textSecondary : .compound.textDisabled
@@ -166,10 +171,21 @@ public struct ListRowLabel<Icon: View>: View {
     var titleAndDescription: some View {
         VStack(alignment: .leading, spacing: 2) {
             if let title {
-                Text(title)
-                    .font(.compound.bodyLG)
-                    .foregroundColor(titleColor)
-                    .lineLimit(titleLineLimit)
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text(title)
+                        .font(.compound.bodyLG)
+                        .foregroundColor(titleColor)
+                        .lineLimit(titleLineLimit)
+                    
+                    // Status is only available in the avatar init which requires a title,
+                    // so no need to worry about the outer `if let` being nil in this instance.
+                    if let status {
+                        Text(status)
+                            .font(.compound.bodySM)
+                            .foregroundColor(statusColor)
+                            .lineLimit(1)
+                    }
+                }
             }
             
             if let description {
@@ -282,10 +298,12 @@ public struct ListRowLabel<Icon: View>: View {
     
     /// A label that displays an avatar as it's icon, such as a user profile row or for a room picker.
     public static func avatar(title: String,
+                              status: String? = nil,
                               description: String? = nil,
                               icon: Icon,
                               role: ListRowLabel.Role? = nil) -> ListRowLabel {
         ListRowLabel(title: title,
+                     status: status,
                      description: description,
                      icon: icon,
                      role: role,
@@ -341,6 +359,10 @@ struct ListRowLabel_Previews: PreviewProvider, PrefireProvider {
             
             Section {
                 ListRowLabel.avatar(title: "Alice",
+                                    description: "@alice:example.com",
+                                    icon: Circle().foregroundStyle(.compound.decorativeColors[0].background))
+                ListRowLabel.avatar(title: "Alice",
+                                    status: "Pending",
                                     description: "@alice:example.com",
                                     icon: Circle().foregroundStyle(.compound.decorativeColors[0].background))
                 ListRowLabel.avatar(title: "@bob:idontexist.com",
