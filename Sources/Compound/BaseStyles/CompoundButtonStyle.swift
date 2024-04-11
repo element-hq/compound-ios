@@ -29,6 +29,7 @@ public extension ButtonStyle where Self == CompoundButtonStyle {
 /// Default button style for standalone buttons.
 public struct CompoundButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.colorScheme) private var colorScheme
     
     var kind: Kind
     public enum Kind {
@@ -80,6 +81,10 @@ public struct CompoundButtonStyle: ButtonStyle {
             return nil
         }
     }
+    
+    private var pressedOpacity: Double {
+        colorScheme == .light ? 0.3 : 0.6
+    }
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
@@ -108,6 +113,8 @@ public struct CompoundButtonStyle: ButtonStyle {
                     Capsule().stroke(LinearGradient(gradient: Color.compound.gradientSuperButton,
                                                     startPoint: .bottomLeading, endPoint: .topTrailing))
                 }
+                .compositingGroup()
+                .opacity(configuration.isPressed ? pressedOpacity : 1)
             } else {
                 Capsule().stroke(buttonColor(configuration: configuration))
             }
@@ -132,7 +139,7 @@ public struct CompoundButtonStyle: ButtonStyle {
     private func buttonColor(configuration: Self.Configuration) -> Color {
         guard isEnabled else { return .compound.bgActionPrimaryDisabled }
         if configuration.role == .destructive {
-            return .compound.bgCriticalPrimary.opacity(configuration.isPressed ? 0.6 : 1)
+            return .compound.bgCriticalPrimary.opacity(configuration.isPressed ? pressedOpacity : 1)
         } else {
             return configuration.isPressed ? .compound.bgActionPrimaryPressed : .compound.bgActionPrimaryRest
         }
@@ -144,7 +151,7 @@ public struct CompoundButtonStyle: ButtonStyle {
         } else {
             guard isEnabled else { return .compound.textDisabled }
             let textColor: Color = configuration.role == .destructive ? .compound.textCriticalPrimary : .compound.textActionPrimary
-            return textColor.opacity(kind == .plain && configuration.isPressed ? 0.6 : 1.0)
+            return textColor.opacity(configuration.isPressed ? pressedOpacity : 1)
         }
     }
 }
