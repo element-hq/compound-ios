@@ -29,15 +29,18 @@ public extension ButtonStyle where Self == CompoundButtonStyle {
 /// Default button style for standalone buttons.
 public struct CompoundButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
+    @Environment(\.colorScheme) private var colorScheme
     
     var kind: Kind
     public enum Kind {
-        /// A plain button with no background.
-        case plain
+        /// A stroked button that uses colour to highlight important actions.
+        case `super`
         /// A filled button usually representing the default action.
         case primary
         /// A stroked button usually representing alternate actions.
         case secondary
+        /// A plain button with no background. This will be renamed to `tertiary` in the future.
+        case plain
     }
     
     var size: Size
@@ -69,14 +72,18 @@ public struct CompoundButtonStyle: ButtonStyle {
             return 14
         }
     }
-
+    
     private var maxWidth: CGFloat? {
-        switch kind {
+        switch kind { // This is wrong, it should be switching on size.
+        case .super, .primary, .secondary:
+            return .infinity
         case .plain:
             return nil
-        case .primary, .secondary:
-            return .infinity
         }
+    }
+    
+    private var pressedOpacity: Double {
+        colorScheme == .light ? 0.3 : 0.6
     }
 
     public func makeBody(configuration: Self.Configuration) -> some View {
@@ -96,28 +103,43 @@ public struct CompoundButtonStyle: ButtonStyle {
     @ViewBuilder
     private func makeBackground(configuration: Self.Configuration) -> some View {
         switch kind {
-        case .plain:
-            EmptyView()
+        case .super:
+            if isEnabled {
+                ZStack {
+                    Capsule().fill(.compound.bgCanvasDefault)
+                    Capsule().fill(LinearGradient(gradient: Color.compound.gradientSuperButton,
+                                                  startPoint: .bottomLeading, endPoint: .topTrailing))
+                        .opacity(0.04)
+                    Capsule().stroke(LinearGradient(gradient: Color.compound.gradientSuperButton,
+                                                    startPoint: .bottomLeading, endPoint: .topTrailing))
+                }
+                .compositingGroup()
+                .opacity(configuration.isPressed ? pressedOpacity : 1)
+            } else {
+                Capsule().stroke(buttonColor(configuration: configuration))
+            }
         case .primary:
             Capsule().fill(buttonColor(configuration: configuration))
         case .secondary:
             Capsule().stroke(buttonColor(configuration: configuration))
+        case .plain:
+            EmptyView()
         }
     }
 
     private var contentShape: AnyShape {
         switch kind {
+        case .super, .primary, .secondary:
+            return AnyShape(Capsule())
         case .plain:
             return AnyShape(Rectangle())
-        case .primary, .secondary:
-            return AnyShape(Capsule())
         }
     }
 
     private func buttonColor(configuration: Self.Configuration) -> Color {
         guard isEnabled else { return .compound.bgActionPrimaryDisabled }
         if configuration.role == .destructive {
-            return .compound.bgCriticalPrimary.opacity(configuration.isPressed ? 0.6 : 1)
+            return .compound.bgCriticalPrimary.opacity(configuration.isPressed ? pressedOpacity : 1)
         } else {
             return configuration.isPressed ? .compound.bgActionPrimaryPressed : .compound.bgActionPrimaryRest
         }
@@ -129,7 +151,7 @@ public struct CompoundButtonStyle: ButtonStyle {
         } else {
             guard isEnabled else { return .compound.textDisabled }
             let textColor: Color = configuration.role == .destructive ? .compound.textCriticalPrimary : .compound.textActionPrimary
-            return textColor.opacity(kind == .plain && configuration.isPressed ? 0.6 : 1.0)
+            return textColor.opacity(configuration.isPressed ? pressedOpacity : 1)
         }
     }
 }
@@ -151,14 +173,23 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
             
             Section {
                 plain
+                    .padding(.bottom) // Only for the snapshot.
             } header: {
                 Header(title: "Plain")
             }
         }
+        .previewLayout(.fixed(width: 390, height: 975))
     }
     
     public static func states(_ size: CompoundButtonStyle.Size) -> some View {
         VStack {
+            Button("Super") { }
+                .buttonStyle(.compound(.super, size: size))
+            
+            Button("Disabled") { }
+                .buttonStyle(.compound(.super, size: size))
+                .disabled(true)
+            
             Button("Primary") { }
                 .buttonStyle(.compound(.primary, size: size))
             
