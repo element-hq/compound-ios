@@ -32,12 +32,14 @@ public struct CompoundButtonStyle: ButtonStyle {
     
     var kind: Kind
     public enum Kind {
-        /// A plain button with no background.
-        case plain
+        /// A stroked button that uses colour to highlight important actions.
+        case `super`
         /// A filled button usually representing the default action.
         case primary
         /// A stroked button usually representing alternate actions.
         case secondary
+        /// A plain button with no background. This will be renamed to `tertiary` in the future.
+        case plain
     }
     
     var size: Size
@@ -69,13 +71,13 @@ public struct CompoundButtonStyle: ButtonStyle {
             return 14
         }
     }
-
+    
     private var maxWidth: CGFloat? {
-        switch kind {
+        switch kind { // This is wrong, it should be switching on size.
+        case .super, .primary, .secondary:
+            return .infinity
         case .plain:
             return nil
-        case .primary, .secondary:
-            return .infinity
         }
     }
 
@@ -96,21 +98,34 @@ public struct CompoundButtonStyle: ButtonStyle {
     @ViewBuilder
     private func makeBackground(configuration: Self.Configuration) -> some View {
         switch kind {
-        case .plain:
-            EmptyView()
+        case .super:
+            if isEnabled {
+                ZStack {
+                    Capsule().fill(.compound.bgCanvasDefault)
+                    Capsule().fill(LinearGradient(gradient: Color.compound.gradientSuperButton,
+                                                  startPoint: .bottomLeading, endPoint: .topTrailing))
+                        .opacity(0.04)
+                    Capsule().stroke(LinearGradient(gradient: Color.compound.gradientSuperButton,
+                                                    startPoint: .bottomLeading, endPoint: .topTrailing))
+                }
+            } else {
+                Capsule().stroke(buttonColor(configuration: configuration))
+            }
         case .primary:
             Capsule().fill(buttonColor(configuration: configuration))
         case .secondary:
             Capsule().stroke(buttonColor(configuration: configuration))
+        case .plain:
+            EmptyView()
         }
     }
 
     private var contentShape: AnyShape {
         switch kind {
+        case .super, .primary, .secondary:
+            return AnyShape(Capsule())
         case .plain:
             return AnyShape(Rectangle())
-        case .primary, .secondary:
-            return AnyShape(Capsule())
         }
     }
 
@@ -151,14 +166,23 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
             
             Section {
                 plain
+                    .padding(.bottom) // Only for the snapshot.
             } header: {
                 Header(title: "Plain")
             }
         }
+        .previewLayout(.fixed(width: 390, height: 975))
     }
     
     public static func states(_ size: CompoundButtonStyle.Size) -> some View {
         VStack {
+            Button("Super") { }
+                .buttonStyle(.compound(.super, size: size))
+            
+            Button("Disabled") { }
+                .buttonStyle(.compound(.super, size: size))
+                .disabled(true)
+            
             Button("Primary") { }
                 .buttonStyle(.compound(.primary, size: size))
             
