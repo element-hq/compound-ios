@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/BarredEwe/Prefire",
       "state" : {
-        "revision" : "608e7992dedc5ee409e59b3580010371ff0cef57",
-        "version" : "2.0.4"
+        "revision" : "4de802de81f28cec1e5f406af8754cb894584e49",
+        "version" : "2.6.0"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SFSafeSymbols/SFSafeSymbols.git",
       "state" : {
-        "revision" : "7cca2d60925876b5953a2cf7341cd80fbeac983c",
-        "version" : "4.1.1"
+        "revision" : "afd0a1da4ed62bab1413caa6dd6b60a7a7089ed2",
+        "version" : "5.2.0"
       }
     },
     {
@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
       "state" : {
-        "revision" : "696b86a6d151578bca7c1a2a3ed419a5f834d40f",
-        "version" : "1.13.0"
+        "revision" : "625ccca8570773dd84a34ee51a81aa2bc5a4f97a",
+        "version" : "1.16.0"
       }
     },
     {
@@ -50,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/siteline/SwiftUI-Introspect.git",
       "state" : {
-        "revision" : "730ab9e6cdbb3122ad88277b295c4cecd284a311",
-        "version" : "0.9.1"
+        "revision" : "7dc5b287f8040e4ad5038739850b758e78f77808",
+        "version" : "1.1.4"
       }
     }
   ],
