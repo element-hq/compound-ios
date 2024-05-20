@@ -13,7 +13,7 @@ let package = Package(
         .package(url: "https://github.com/siteline/SwiftUI-Introspect", from: "0.9.0"),
         .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: "4.1.1"),
         .package(url: "https://github.com/BarredEwe/Prefire", from: "2.0.4"),
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.13.0")
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.16.0")
     ],
     targets: [
         .target(
