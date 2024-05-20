@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "Compound", targets: ["Compound"])
     ],
     dependencies: [
-        .package(url: "https://github.com/element-hq/compound-design-tokens", exact: "1.2.0"),
+        .package(url: "https://github.com/element-hq/compound-design-tokens", exact: "1.3.0"),
         .package(url: "https://github.com/siteline/SwiftUI-Introspect", from: "1.1.4"),
         .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: "5.2.0"),
         .package(url: "https://github.com/BarredEwe/Prefire", from: "2.6.0"),
