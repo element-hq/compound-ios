@@ -12,8 +12,8 @@ let package = Package(
         .package(url: "https://github.com/element-hq/compound-design-tokens", exact: "1.3.0"),
         .package(url: "https://github.com/siteline/SwiftUI-Introspect", from: "1.1.4"),
         .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: "5.2.0"),
-        .package(url: "https://github.com/BarredEwe/Prefire", from: "2.0.4"),
-        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.16.0")
+        .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", from: "1.16.0"),
+        .package(url: "https://github.com/BarredEwe/Prefire", from: "2.8.0")
     ],
     targets: [
         .target(
@@ -21,15 +21,15 @@ let package = Package(
             dependencies: [
                 .product(name: "CompoundDesignTokens", package: "compound-design-tokens"),
                 .product(name: "SwiftUIIntrospect", package: "SwiftUI-Introspect"),
-                .product(name: "SFSafeSymbols", package: "SFSafeSymbols"),
-                .product(name: "Prefire", package: "Prefire")
+                .product(name: "SFSafeSymbols", package: "SFSafeSymbols")
             ]
         ),
         .testTarget(
             name: "CompoundTests",
             dependencies: [
                 "Compound",
-                .product(name: "SnapshotTesting", package: "swift-snapshot-testing")
+                .product(name: "SnapshotTesting", package: "swift-snapshot-testing"),
+                .product(name: "Prefire", package: "Prefire")
             ],
             exclude: [
                 "__Snapshots__"

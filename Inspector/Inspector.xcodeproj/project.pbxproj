@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		188077252C1DC7B4000E16DC /* Prefire in Frameworks */ = {isa = PBXBuildFile; productRef = 188077242C1DC7B4000E16DC /* Prefire */; };
 		70AC7B23011C802F750E470E /* Pods_Compound_Inspector.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2E28F45EEA9A8DE6AFB10E9 /* Pods_Compound_Inspector.framework */; };
 		912974102A864F5E004BEA88 /* ListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9129740F2A864F5E004BEA88 /* ListScreen.swift */; };
 		9132C62D2A72708400EAEF3D /* ActionSheetScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9132C62C2A72708400EAEF3D /* ActionSheetScreen.swift */; };
@@ -74,6 +75,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188077252C1DC7B4000E16DC /* Prefire in Frameworks */,
 				91B2EA9928CA05B900A90A83 /* Compound in Frameworks */,
 				70AC7B23011C802F750E470E /* Pods_Compound_Inspector.framework in Frameworks */,
 			);
@@ -206,6 +208,7 @@
 			name = "Compound Inspector";
 			packageProductDependencies = (
 				91B2EA9828CA05B900A90A83 /* Compound */,
+				188077242C1DC7B4000E16DC /* Prefire */,
 			);
 			productName = "Component Library";
 			productReference = 917F561828256DB800D19543 /* Compound Inspector.app */;
@@ -236,6 +239,7 @@
 			);
 			mainGroup = 917F560F28256DB800D19543;
 			packageReferences = (
+				188077232C1DC7B4000E16DC /* XCRemoteSwiftPackageReference "Prefire" */,
 			);
 			productRefGroup = 917F561928256DB800D19543 /* Products */;
 			projectDirPath = "";
@@ -533,7 +537,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		188077232C1DC7B4000E16DC /* XCRemoteSwiftPackageReference "Prefire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/BarredEwe/Prefire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		188077242C1DC7B4000E16DC /* Prefire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 188077232C1DC7B4000E16DC /* XCRemoteSwiftPackageReference "Prefire" */;
+			productName = Prefire;
+		};
 		91B2EA9828CA05B900A90A83 /* Compound */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Compound;
