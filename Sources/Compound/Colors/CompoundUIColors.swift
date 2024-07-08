@@ -35,6 +35,7 @@ public struct CompoundUIColors {
     public let iconInfoPrimary = compound.colorIconInfoPrimary
     public let iconSuccessPrimary = compound.colorIconSuccessPrimary
     public let iconCriticalPrimary = compound.colorIconCriticalPrimary
+    public let iconAccentPrimary = compound.colorIconAccentPrimary
     public let iconAccentTertiary = compound.colorIconAccentTertiary
     public let iconQuaternaryAlpha = compound.colorIconQuaternaryAlpha
     public let iconTertiaryAlpha = compound.colorIconTertiaryAlpha
