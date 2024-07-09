@@ -9,7 +9,7 @@ import SwiftUI
 import Compound
 
 struct IconsScreen: View {
-    let icons = Image.compound.allIcons.sorted(by: { $0.name < $1.name })
+    let icons = Image.compound.allValues.sorted(by: { $0.name < $1.name })
     
     var body: some View {
         ScreenContent(navigationTitle: "Icons") {
