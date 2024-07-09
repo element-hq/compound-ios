@@ -33,9 +33,17 @@ public class CompoundUIColors {
     private static let coreTokens = CompoundCoreUIColorTokens.self
     /// The main semantic tokens generated from the Style Dictionary.
     private let tokens = CompoundUIColorTokens()
+    /// Runtime overrides for the `tokens` property.
+    private var overrides = [KeyPath<CompoundUIColorTokens, UIColor>: UIColor]()
     
     public subscript(dynamicMember keyPath: KeyPath<CompoundUIColorTokens, UIColor>) -> UIColor {
-        return tokens[keyPath: keyPath]
+        return overrides[keyPath] ?? tokens[keyPath: keyPath]
+    }
+    
+    /// Customise the colour at the specified key path with the supplied colour.
+    /// Supplying `nil` as the colour will remove any existing customisation.
+    public func override(_ keyPath: KeyPath<CompoundUIColorTokens, UIColor>, with color: UIColor?) {
+        overrides[keyPath] = color
     }
     
     // MARK: - Elevation Tokens

@@ -38,9 +38,17 @@ public class CompoundColors {
     private static let coreTokens = CompoundCoreColorTokens.self
     /// The main semantic tokens generated from the Style Dictionary.
     private let tokens: CompoundColorTokens
+    /// Runtime overrides for the `tokens` property.
+    private var overrides = [KeyPath<CompoundColorTokens, Color>: Color]()
     
     public subscript(dynamicMember keyPath: KeyPath<CompoundColorTokens, Color>) -> Color {
-        return tokens[keyPath: keyPath]
+        return overrides[keyPath] ?? tokens[keyPath: keyPath]
+    }
+    
+    /// Customise the colour at the specified key path with the supplied colour.
+    /// Supplying `nil` as the colour will remove any existing customisation.
+    public func override(_ keyPath: KeyPath<CompoundColorTokens, Color>, with color: Color?) {
+        overrides[keyPath] = color
     }
     
     init() {
