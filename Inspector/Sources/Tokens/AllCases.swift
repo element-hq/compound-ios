@@ -8,50 +8,38 @@
 import Compound
 import SwiftUI
 
-extension CompoundColors {
-    var allColors: [(name: String, value: Color)] {
-        var colors: [(name: String, value: Color)] = []
+protocol AllValues {
+    associatedtype ValueType
+    var allValues: [(name: String, value: ValueType)] { get }
+}
+
+extension AllValues {
+    var allValues: [(name: String, value: ValueType)] {
+        var values: [(name: String, value: ValueType)] = []
         let mirror = Mirror(reflecting: self)
         
         for property in mirror.children {
-            if let label = property.label, let color = property.value as? Color {
-                colors.append((label, color))
+            if let label = property.label, let value = property.value as? ValueType {
+                values.append((label, value))
             }
         }
         
-        return colors
+        return values
     }
 }
 
-extension CompoundFonts {
-    var allFonts: [(name: String, value: Font)] {
-        var fonts: [(name: String, value: Font)] = []
-        let mirror = Mirror(reflecting: self)
-        
-        for property in mirror.children {
-            if let label = property.label, let font = property.value as? Font {
-                fonts.append((label, font))
-            }
-        }
-        
-        return fonts
+extension CompoundColors: AllValues { typealias ValueType = Color }
+extension CompoundColorTokens: AllValues { typealias ValueType = Color }
+extension CompoundFonts: AllValues { typealias ValueType = Font }
+extension CompoundIcons: AllValues { typealias ValueType = Image }
+
+extension CompoundColors {
+    var allColors: [(name: String, value: Color)] {
+        CompoundColorTokens().allValues + allValues
     }
 }
 
 extension CompoundIcons {
-    var allIcons: [(name: String, value: Image)] {
-        var icons: [(name: String, value: Image)] = []
-        let mirror = Mirror(reflecting: self)
-        
-        for property in mirror.children {
-            if let label = property.label, let icon = property.value as? Image {
-                icons.append((label, icon))
-            }
-        }
-        
-        return icons
-    }
-    
     var allKeyPaths: [(name: String, value: KeyPath<CompoundIcons, Image>)] {
         var icons: [(name: String, value: KeyPath<CompoundIcons, Image>)] = []
         let mirror = Mirror(reflecting: self)

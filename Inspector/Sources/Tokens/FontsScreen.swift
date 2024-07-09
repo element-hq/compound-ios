@@ -11,7 +11,7 @@ import Compound
 struct FontsScreen: View {
     var body: some View {
         ScreenContent(navigationTitle: "Fonts") {
-            ForEach(Font.compound.allFonts, id: \.name) { font in
+            ForEach(Font.compound.allValues, id: \.name) { font in
                 FontItem(font: font.value, name: font.name)
             }
         }
