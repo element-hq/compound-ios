@@ -29,89 +29,44 @@ public extension ShapeStyle where Self == Color {
 
 /// The colours used by Element as defined in Compound Design Tokens.
 /// This struct contains only the colour tokens in a more usable form.
-public struct CompoundColors {
-    /// The raw compound tokens.
+@dynamicMemberLookup
+public class CompoundColors {
+    /// The base colour tokens that form the palette of available colours.
     ///
-    /// Note: Whilst this references `CompoundLightDesignTokens`, all generated tokens are aware
-    /// of dark and high contract variants the generated collections each contain the same token set.
-    private static let compound = CompoundColorTokens.self
+    /// Normally these shouldn't be necessary, however in practice we may need
+    /// access for temporary tokens while waiting for official ones to be formalised.
+    private static let coreTokens = CompoundCoreColorTokens.self
+    /// The main semantic tokens generated from the Style Dictionary.
+    private let tokens: CompoundColorTokens
     
-    public let iconOnSolidPrimary = compound.colorIconOnSolidPrimary
-    public let iconInfoPrimary = compound.colorIconInfoPrimary
-    public let iconSuccessPrimary = compound.colorIconSuccessPrimary
-    public let iconCriticalPrimary = compound.colorIconCriticalPrimary
-    public let iconAccentPrimary = compound.colorIconAccentPrimary
-    public let iconAccentTertiary = compound.colorIconAccentTertiary
-    public let iconQuaternaryAlpha = compound.colorIconQuaternaryAlpha
-    public let iconTertiaryAlpha = compound.colorIconTertiaryAlpha
-    public let iconSecondaryAlpha = compound.colorIconSecondaryAlpha
-    public let iconPrimaryAlpha = compound.colorIconPrimaryAlpha
-    public let iconDisabled = compound.colorIconDisabled
-    public let iconQuaternary = compound.colorIconQuaternary
-    public let iconTertiary = compound.colorIconTertiary
-    public let iconSecondary = compound.colorIconSecondary
-    public let iconPrimary = compound.colorIconPrimary
-    public let borderInfoSubtle = compound.colorBorderInfoSubtle
-    public let borderSuccessSubtle = compound.colorBorderSuccessSubtle
-    public let borderCriticalSubtle = compound.colorBorderCriticalSubtle
-    public let borderCriticalHovered = compound.colorBorderCriticalHovered
-    public let borderCriticalPrimary = compound.colorBorderCriticalPrimary
-    public let borderInteractiveHovered = compound.colorBorderInteractiveHovered
-    public let borderInteractiveSecondary = compound.colorBorderInteractiveSecondary
-    public let borderInteractivePrimary = compound.colorBorderInteractivePrimary
-    public let borderFocused = compound.colorBorderFocused
-    public let borderDisabled = compound.colorBorderDisabled
-    // public let bgSubtleSecondaryLevel0 = compound.colorBgSubtleSecondaryLevel0
-    public let bgAccentPressed = compound.colorBgAccentPressed
-    public let bgAccentHovered = compound.colorBgAccentHovered
-    public let bgAccentRest = compound.colorBgAccentRest
-    public let bgInfoSubtle = compound.colorBgInfoSubtle
-    public let bgSuccessSubtle = compound.colorBgSuccessSubtle
-    public let bgCriticalSubtleHovered = compound.colorBgCriticalSubtleHovered
-    public let bgCriticalSubtle = compound.colorBgCriticalSubtle
-    public let bgCriticalHovered = compound.colorBgCriticalHovered
-    public let bgCriticalPrimary = compound.colorBgCriticalPrimary
-    public let bgActionSecondaryPressed = compound.colorBgActionSecondaryPressed
-    public let bgActionSecondaryHovered = compound.colorBgActionSecondaryHovered
-    public let bgActionSecondaryRest = compound.colorBgActionSecondaryRest
-    public let bgActionPrimaryDisabled = compound.colorBgActionPrimaryDisabled
-    public let bgActionPrimaryPressed = compound.colorBgActionPrimaryPressed
-    public let bgActionPrimaryHovered = compound.colorBgActionPrimaryHovered
-    public let bgActionPrimaryRest = compound.colorBgActionPrimaryRest
-    // public let bgCanvasDefaultLevel1 = compound.colorBgCanvasDefaultLevel1
-    public let bgCanvasDisabled = compound.colorBgCanvasDisabled
-    public let bgCanvasDefault = compound.colorBgCanvasDefault
-    public let bgSubtleSecondary = compound.colorBgSubtleSecondary
-    public let bgSubtlePrimary = compound.colorBgSubtlePrimary
-    public let textOnSolidPrimary = compound.colorTextOnSolidPrimary
-    public let textInfoPrimary = compound.colorTextInfoPrimary
-    public let textSuccessPrimary = compound.colorTextSuccessPrimary
-    public let textCriticalPrimary = compound.colorTextCriticalPrimary
-    public let textLinkExternal = compound.colorTextLinkExternal
-    public let textActionAccent = compound.colorTextActionAccent
-    public let textActionPrimary = compound.colorTextActionPrimary
-    public let textDisabled = compound.colorTextDisabled
-    public let textPlaceholder = compound.colorTextPlaceholder
-    public let textSecondary = compound.colorTextSecondary
-    public let textPrimary = compound.colorTextPrimary
+    public subscript(dynamicMember keyPath: KeyPath<CompoundColorTokens, Color>) -> Color {
+        return tokens[keyPath: keyPath]
+    }
+    
+    init() {
+        let tokens = CompoundColorTokens()
+        self.tokens = tokens
+        
+        decorativeColors = [
+           .init(background: tokens.bgDecorative1, text: tokens.textDecorative1),
+           .init(background: tokens.bgDecorative2, text: tokens.textDecorative2),
+           .init(background: tokens.bgDecorative3, text: tokens.textDecorative3),
+           .init(background: tokens.bgDecorative4, text: tokens.textDecorative4),
+           .init(background: tokens.bgDecorative5, text: tokens.textDecorative5),
+           .init(background: tokens.bgDecorative6, text: tokens.textDecorative6),
+       ]
+    }
     
     // MARK: - Elevation Tokens
     // This is a workaround until they are generated correctly
     
-    public let bgSubtleSecondaryLevel0 = Color(UIColor { $0.isLight ? UIColor(compound.colorGray300) : UIColor(compound.colorThemeBg) })
-    public let bgCanvasDefaultLevel1 = Color(UIColor { $0.isLight ? UIColor(compound.colorThemeBg) : UIColor(compound.colorGray300) })
+    public let bgSubtleSecondaryLevel0 = Color(UIColor { $0.isLight ? UIColor(coreTokens.gray300) : UIColor(coreTokens.themeBg) })
+    public let bgCanvasDefaultLevel1 = Color(UIColor { $0.isLight ? UIColor(coreTokens.themeBg) : UIColor(coreTokens.gray300) })
     
     // MARK: - Decorative Colors
     // Used to determine the background and text colors of avatars, usernames etc.
-    internal let decorativeColors: [DecorativeColor] = [
-        // TODO: Use decorative colours
-        .init(background: compound.colorBgDecorative1, text: compound.colorTextDecorative1),
-        .init(background: compound.colorBgDecorative2, text: compound.colorTextDecorative2),
-        .init(background: compound.colorBgDecorative3, text: compound.colorTextDecorative3),
-        .init(background: compound.colorBgDecorative4, text: compound.colorTextDecorative4),
-        .init(background: compound.colorBgDecorative5, text: compound.colorTextDecorative5),
-        .init(background: compound.colorBgDecorative6, text: compound.colorTextDecorative6),
-    ]
+    
+    let decorativeColors: [DecorativeColor]
     
     public func decorativeColor(for contentID: String) -> DecorativeColor {
         decorativeColors[contentID.hashCode]
@@ -121,58 +76,56 @@ public struct CompoundColors {
     
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _borderTextFieldFocused = compound.colorGray500
+    public let _borderTextFieldFocused = coreTokens.gray500
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgReactionButton = Color(UIColor { $0.isLight ? UIColor(compound.colorGray200) : UIColor(compound.colorGray600) })
+    public let _bgBubbleIncoming = Color(UIColor { $0.isLight ? UIColor(coreTokens.gray300) : UIColor(coreTokens.gray400) })
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgBubbleIncoming = Color(UIColor { $0.isLight ? UIColor(compound.colorGray300) : UIColor(compound.colorGray400) })
+    public let _bgBubbleOutgoing = Color(UIColor { $0.isLight ? UIColor(coreTokens.gray400) : UIColor(coreTokens.gray500) })
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgBubbleOutgoing = Color(UIColor { $0.isLight ? UIColor(compound.colorGray400) : UIColor(compound.colorGray500) })
+    public let _bgBubbleHighlighted = coreTokens.green300
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgBubbleHighlighted = compound.colorGreen300
+    public let _bgCodeBlock = coreTokens.gray100
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgCodeBlock = compound.colorGray100
+    public let _borderInteractiveSecondaryAlpha = coreTokens.alphaGray600
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _borderInteractiveSecondaryAlpha = compound.colorAlphaGray600
+    public let _bgSubtleSecondaryAlpha = coreTokens.alphaGray300
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgSubtleSecondaryAlpha = compound.colorAlphaGray300
+    public let _bgCriticalSubtleAlpha = coreTokens.alphaRed300
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgCriticalSubtleAlpha = compound.colorAlphaRed300
+    public let _bgEmptyItemAlpha = coreTokens.alphaGray500
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgEmptyItemAlpha = compound.colorAlphaGray500
+    public let _bgAccentSelected = coreTokens.green300
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgAccentSelected = compound.colorGreen300
+    public let _bgPill = Color(UIColor { $0.isLight ? UIColor(coreTokens.alphaGray400) : UIColor(coreTokens.alphaGray500) })
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgPill = Color(UIColor { $0.isLight ? UIColor(compound.colorAlphaGray400) : UIColor(compound.colorAlphaGray500) })
+    public let _bgOwnPill = Color(UIColor { $0.isLight ? UIColor(coreTokens.alphaGreen400) : UIColor(coreTokens.alphaGreen500) })
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgOwnPill = Color(UIColor { $0.isLight ? UIColor(compound.colorAlphaGreen400) : UIColor(compound.colorAlphaGreen500) })
+    public let _textOwnPill = coreTokens.green1100
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _textOwnPill = compound.colorGreen1100
+    public let _bgBadgeSuccess = coreTokens.alphaGreen300
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _bgBadgeSuccess = compound.colorAlphaGreen300
+    public let _badgeTextSubtle = coreTokens.gray1100
     /// This token is a placeholder and hasn't been finalised.
     @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _badgeTextSubtle = compound.colorGray1100
-    /// This token is a placeholder and hasn't been finalised.
-    @available(iOS, deprecated: 17.0, message: "This token should be generated by now.")
-    public let _badgeTextSuccess = compound.colorGreen1100
+    public let _badgeTextSuccess = coreTokens.green1100
     
     // MARK: - Gradients
-    public let gradientSuperButton = Gradient(colors: [compound.colorBlue900, compound.colorGreen1100])
+    
+    public let gradientSuperButton = Gradient(colors: [coreTokens.blue900, coreTokens.green1100])
 }
 
 private extension UITraitCollection {
