@@ -26,6 +26,8 @@ public enum ListRowPadding {
 }
 
 public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, SelectionValue: Hashable>: View {
+    @Environment(\.isEnabled) private var isEnabled
+    
     let label: ListRowLabel<Icon>
     let details: ListRowDetails<DetailsIcon>?
     
@@ -116,6 +118,7 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                     .compoundTextFieldPlaceholder()
             }
             .tint(.compound.iconAccentTertiary)
+            .foregroundStyle(isEnabled ? .compound.textPrimary : .compound.textDisabled)
             .listRowInsets(EdgeInsets(top: 11,
                                       leading: ListRowPadding.horizontal,
                                       bottom: 11,
@@ -415,6 +418,9 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
                     .padding(.horizontal, 16)
                     .padding(.vertical, 20)
             })
+            ListRow(label: .plain(title: "Placeholder"),
+                    kind: .textField(text: .constant("This is a disabled text field"), axis: .vertical))
+            .disabled(true)
             ListRow(label: .plain(title: "Placeholder"),
                     kind: .textField(text: .constant(""), axis: .vertical))
             .lineLimit(4...)
