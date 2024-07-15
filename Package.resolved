@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/element-hq/compound-design-tokens",
       "state" : {
-        "revision" : "b1e0643d0af145a00297190ca0e6dc48cbe5ace0",
-        "version" : "1.5.0"
+        "revision" : "5350cf2871ef7edcf043ef57b8990858463db51b",
+        "version" : "1.6.0"
       }
     },
     {
@@ -32,14 +32,14 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/pointfreeco/swift-snapshot-testing",
       "state" : {
-        "revision" : "63d3b45dd249878a41c56274a748ca2c1c9c5230",
-        "version" : "1.17.1"
+        "revision" : "c097f955b4e724690f0fc8ffb7a6d4b881c9c4e3",
+        "version" : "1.17.2"
       }
     },
     {
       "identity" : "swift-syntax",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-syntax.git",
+      "location" : "https://github.com/swiftlang/swift-syntax",
       "state" : {
         "revision" : "74203046135342e4a4a627476dd6caf8b28fe11b",
         "version" : "509.0.0"
