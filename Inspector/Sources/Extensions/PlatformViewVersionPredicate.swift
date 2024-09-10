@@ -11,6 +11,6 @@ import SwiftUIIntrospect
 
 extension PlatformViewVersionPredicate<WindowType, UIWindow> {
     static var supportedVersions: Self {
-        .iOS(.v16, .v17)
+        .iOS(.v16, .v17, .v18)
     }
 }
