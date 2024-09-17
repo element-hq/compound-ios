@@ -23,6 +23,11 @@ public enum ListRowPadding {
                                           leading: horizontal,
                                           bottom: vertical,
                                           trailing: horizontal)
+    
+    public static let textFieldInsets = EdgeInsets(top: 11,
+                                                   leading: horizontal,
+                                                   bottom: 11,
+                                                   trailing: horizontal)
 }
 
 public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, SelectionValue: Hashable>: View {
@@ -41,6 +46,7 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
         case selection(isSelected: Bool, action: () -> Void)
         case multiSelection(isSelected: Bool, action: () -> Void)
         case textField(text: Binding<String>, axis: Axis?)
+        case secureField(text: Binding<String>)
         
         case custom(() -> CustomContent)
         
@@ -119,10 +125,15 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
             }
             .tint(.compound.iconAccentTertiary)
             .foregroundStyle(isEnabled ? .compound.textPrimary : .compound.textDisabled)
-            .listRowInsets(EdgeInsets(top: 11,
-                                      leading: ListRowPadding.horizontal,
-                                      bottom: 11,
-                                      trailing: ListRowPadding.horizontal))
+            .listRowInsets(ListRowPadding.textFieldInsets)
+        case .secureField(let text):
+            SecureField(text: text) {
+                Text(label.title ?? "")
+                    .compoundTextFieldPlaceholder()
+            }
+            .tint(.compound.iconAccentTertiary)
+            .foregroundStyle(isEnabled ? .compound.textPrimary : .compound.textDisabled)
+            .listRowInsets(ListRowPadding.textFieldInsets)
         
         case .custom(let content):
             content()
@@ -419,11 +430,13 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
                     .padding(.vertical, 20)
             })
             ListRow(label: .plain(title: "Placeholder"),
-                    kind: .textField(text: .constant("This is a disabled text field"), axis: .vertical))
+                    kind: .textField(text: .constant("This is a disabled text field")))
             .disabled(true)
             ListRow(label: .plain(title: "Placeholder"),
                     kind: .textField(text: .constant(""), axis: .vertical))
             .lineLimit(4...)
+            ListRow(label: .plain(title: "Password"),
+                    kind: .secureField(text: .constant("p4ssw0rd")))
         }
     }
 }
