@@ -270,6 +270,8 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
             othersSection
         }
         .compoundList()
+        .frame(idealHeight: 2050) // Snapshot height
+        .previewLayout(.sizeThatFits)
     }
     
     static var labels: some View {
