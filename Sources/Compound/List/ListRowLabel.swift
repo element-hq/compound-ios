@@ -378,5 +378,7 @@ struct ListRowLabel_Previews: PreviewProvider, PrefireProvider {
             }
         }
         .compoundList()
+        .frame(idealHeight: 1000) // Snapshot height
+        .previewLayout(.sizeThatFits)
     }
 }
