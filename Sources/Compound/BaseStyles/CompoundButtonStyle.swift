@@ -107,12 +107,12 @@ public struct CompoundButtonStyle: ButtonStyle {
                 .compositingGroup()
                 .opacity(configuration.isPressed ? pressedOpacity : 1)
             } else {
-                Capsule().stroke(buttonColor(configuration: configuration))
+                Capsule().stroke(strokeColor(configuration: configuration))
             }
         case .primary:
-            Capsule().fill(buttonColor(configuration: configuration))
+            Capsule().fill(fillColor(configuration: configuration))
         case .secondary:
-            Capsule().stroke(buttonColor(configuration: configuration))
+            Capsule().stroke(strokeColor(configuration: configuration))
         case .plain:
             EmptyView()
         }
@@ -127,12 +127,20 @@ public struct CompoundButtonStyle: ButtonStyle {
         }
     }
 
-    private func buttonColor(configuration: Self.Configuration) -> Color {
+    private func fillColor(configuration: Self.Configuration) -> Color {
         guard isEnabled else { return .compound.bgActionPrimaryDisabled }
         if configuration.role == .destructive {
             return .compound.bgCriticalPrimary.opacity(configuration.isPressed ? pressedOpacity : 1)
         } else {
             return configuration.isPressed ? .compound.bgActionPrimaryPressed : .compound.bgActionPrimaryRest
+        }
+    }
+    
+    private func strokeColor(configuration: Self.Configuration) -> Color {
+        if configuration.role == .destructive {
+            return .compound.borderCriticalPrimary.opacity(configuration.isPressed ? pressedOpacity : 1)
+        } else {
+            return .compound.borderInteractiveSecondary.opacity(configuration.isPressed ? pressedOpacity : 1)
         }
     }
     
