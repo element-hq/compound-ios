@@ -54,7 +54,7 @@ public struct ListRowAccessory: View {
                 .flipsForRightToLeftLayoutDirection(true)
         case .selected:
             CompoundIcon(\.check)
-                .foregroundColor(isEnabled ? .compound.iconPrimary : .compound.iconDisabled)
+                .foregroundColor(isEnabled ? .compound.iconAccentPrimary : .compound.iconDisabled)
                 .accessibilityAddTraits(.isSelected)
                 .padding(.vertical, verticalPaddingFix)
         case .unselected:
