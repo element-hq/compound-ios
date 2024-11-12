@@ -22,10 +22,10 @@ jobs:
 
     - name: Configure Xcode 16
       run: |
-        sudo xcode-select -s /Applications/Xcode_16.app
+        sudo xcode-select -s /Applications/Xcode_16.1_Release_Candidate.app
 
     - name: Run tests
-      run: set -o pipefail && xcodebuild test -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.0' -skipPackagePluginValidation -resultBundlePath Logs/CompoundTests.xcresult | xcbeautify --renderer github-actions
+      run: set -o pipefail && xcodebuild test -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.1' -skipPackagePluginValidation -resultBundlePath Logs/CompoundTests.xcresult | xcbeautify --renderer github-actions
 
     - name: Zip artifacts
       if: failure() # We only care about artefacts if the tests fail
