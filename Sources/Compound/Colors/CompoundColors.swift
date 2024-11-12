@@ -125,6 +125,7 @@ public class CompoundColors {
     // MARK: - Gradients
     
     public let gradientSuperButton = Gradient(colors: [coreTokens.blue900, coreTokens.green1100])
+    public let gradientSendButton = Gradient(colors: [coreTokens.green700, coreTokens.blue900])
 }
 
 private extension UITraitCollection {

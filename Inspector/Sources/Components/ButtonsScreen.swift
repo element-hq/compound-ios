@@ -11,7 +11,8 @@ import SwiftUI
 struct ButtonsScreen: View {
     var body: some View {
         ScreenContent(navigationTitle: "Buttons") {
-            CompoundButtonStyle_Previews.previews
+            CompoundButtonStyle_Previews.states
+            SendButton_Previews.states
         }
     }
 }

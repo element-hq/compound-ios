@@ -158,29 +158,34 @@ public struct CompoundButtonStyle: ButtonStyle {
 public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
     public static var previews: some View {
         ScrollView {
-            Section {
-                states(.large)
-            } header: {
-                Header(title: "Large")
-            }
-            
-            Section {
-                states(.medium)
-            } header: {
-                Header(title: "Medium")
-            }
-            
-            Section {
-                plain
-                    .padding(.bottom) // Only for the snapshot.
-            } header: {
-                Header(title: "Plain")
-            }
+            states
         }
         .previewLayout(.fixed(width: 390, height: 975))
     }
     
-    public static func states(_ size: CompoundButtonStyle.Size) -> some View {
+    @ViewBuilder
+    public static var states: some View {
+        Section {
+            buttons(.large)
+        } header: {
+            Header(title: "Large")
+        }
+        
+        Section {
+            buttons(.medium)
+        } header: {
+            Header(title: "Medium")
+        }
+        
+        Section {
+            plain
+                .padding(.bottom) // Only for the snapshot.
+        } header: {
+            Header(title: "Plain")
+        }
+    }
+    
+    public static func buttons(_ size: CompoundButtonStyle.Size) -> some View {
         VStack {
             Button("Super") { }
                 .buttonStyle(.compound(.super, size: size))
