@@ -19,7 +19,7 @@ public extension View {
             // Ported from Riot iOS as this is the only reliable way to get the exact look we want.
             // However this is fragile and tied to gutwrenching the current UISearchBar internals.
             let textColor = UIColor.compound.textPrimary
-            let placeholderColor = UIColor.compound.textPlaceholder
+            let placeholderColor = UIColor.compound.textSecondary
             let textFieldTintColor = UIColor.compound.iconAccentTertiary
             let textFieldBackgroundColor = UIColor.compound._bgSubtleSecondaryAlpha
             

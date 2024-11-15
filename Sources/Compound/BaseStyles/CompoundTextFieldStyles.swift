@@ -12,6 +12,6 @@ public extension Text {
     /// Styles a text with the Compound design tokens to be displayed as a text field placeholder.
     func compoundTextFieldPlaceholder() -> Text {
         font(.compound.bodyLG)
-            .foregroundColor(.compound.textPlaceholder)
+            .foregroundColor(.compound.textSecondary)
     }
 }
