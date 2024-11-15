@@ -19,6 +19,11 @@ public struct SendButton: View {
     private var gradient: Gradient { isEnabled ? Color.compound.gradientSendButton : .init(colors: [.clear]) }
     private var colorSchemeOverride: ColorScheme { isEnabled ? .light : colorScheme }
     
+    /// Creates a send button that performs the provided action.
+    public init(action: @escaping () -> Void) {
+        self.action = action
+    }
+    
     public var body: some View {
         Button(action: action) {
             CompoundIcon(\.sendSolid)
