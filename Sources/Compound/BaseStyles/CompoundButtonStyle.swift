@@ -21,6 +21,7 @@ public extension ButtonStyle where Self == CompoundButtonStyle {
 public struct CompoundButtonStyle: ButtonStyle {
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityShowButtonShapes) private var accessibilityShowButtonShapes
     
     var kind: Kind
     public enum Kind {
@@ -76,15 +77,20 @@ public struct CompoundButtonStyle: ButtonStyle {
     private var pressedOpacity: Double {
         colorScheme == .light ? 0.3 : 0.6
     }
+    
+    private var isUnderlined: Bool {
+        kind == .plain && accessibilityShowButtonShapes
+    }
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
+            .font(.compound.bodyLGSemibold)
+            .underline(isUnderlined)
+            .multilineTextAlignment(.center)
+            .foregroundColor(textColor(configuration: configuration))
             .padding(.horizontal, horizontalPadding)
             .padding(.vertical, verticalPadding)
             .frame(maxWidth: maxWidth)
-            .font(.compound.bodyLGSemibold)
-            .foregroundColor(textColor(configuration: configuration))
-            .multilineTextAlignment(.center)
             .background {
                 makeBackground(configuration: configuration)
             }
