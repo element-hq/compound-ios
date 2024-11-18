@@ -39,7 +39,7 @@ public struct ListRowTrailingSection<Icon: View>: View {
     @ScaledMetric private var iconSize = 24
     private var hideAccessory: Bool { isWaiting && accessory?.kind == .unselected }
     
-    init(_ details: ListRowDetails<Icon>?, solidCounter: Int? = nil, accessory: ListRowAccessory? = nil) {
+    init(_ details: ListRowDetails<Icon>?, accessory: ListRowAccessory? = nil) {
         title = details?.title
         icon = details?.icon
         isWaiting = details?.isWaiting ?? false
