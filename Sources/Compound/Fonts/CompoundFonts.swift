@@ -32,3 +32,21 @@ public struct CompoundFonts {
     public let headingXL = Font.largeTitle
     public let headingXLBold = Font.largeTitle.bold()
 }
+
+public extension Font.TextStyle {
+    /// The text styles used by Element as defined in Compound Design Tokens.
+    static let compound = CompoundTextStyles()
+}
+
+/// A manual mapping of the Compound font styles to iOS text styles. This is useful
+/// for `@ScaledMetric` along with modifiers such as `scaledPadding` etc.
+public struct CompoundTextStyles {
+    public let bodyXS = Font.TextStyle.caption
+    public let bodySM = Font.TextStyle.footnote
+    public let bodyMD = Font.TextStyle.subheadline
+    public let bodyLG = Font.TextStyle.body
+    public let headingSM = Font.TextStyle.title3
+    public let headingMD = Font.TextStyle.title2
+    public let headingLG = Font.TextStyle.title
+    public let headingXL = Font.TextStyle.largeTitle
+}
