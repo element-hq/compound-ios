@@ -26,9 +26,9 @@ public struct SendButton: View {
     
     public var body: some View {
         Button(action: action) {
-            CompoundIcon(\.sendSolid)
+            CompoundIcon(\.sendSolid, size: .medium, relativeTo: .compound.headingLG)
                 .foregroundStyle(iconColor)
-                .padding(6)
+                .scaledPadding(6, relativeTo: .compound.headingLG)
                 .background { buttonShape }
                 .environment(\.colorScheme, colorSchemeOverride)
                 .compositingGroup()
