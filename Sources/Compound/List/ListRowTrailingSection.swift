@@ -128,7 +128,7 @@ struct ListRowTrailingSection_Previews: PreviewProvider, PrefireProvider {
             ListRowTrailingSection(.isWaiting(false), accessory: .selection(false))
                 .border(.purple)
             
-            ListRowTrailingSection(.counter(1, isWaiting: true), accessory: .navigationLink)
+            ListRowTrailingSection(.counter(1), accessory: .navigationLink)
                 .border(.purple)
         }
     }
