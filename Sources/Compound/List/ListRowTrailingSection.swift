@@ -110,8 +110,8 @@ struct ListRowTrailingSection_Previews: PreviewProvider, PrefireProvider {
             
             ListRowTrailingSection(someCondition ? .isWaiting(true) : otherCondition ? .systemIcon(.checkmark) : .title("Hello"))
             
-            ListRowTrailingSection(.title("Hello"), solidCounter: 1)
-            ListRowTrailingSection(.title("Hello"), solidCounter: 1)
+            ListRowTrailingSection(.title("Hello", counter: 1))
+            ListRowTrailingSection(.title("Hello", counter: 1))
                 .disabled(true)
         }
     }
@@ -129,7 +129,7 @@ struct ListRowTrailingSection_Previews: PreviewProvider, PrefireProvider {
             ListRowTrailingSection(.isWaiting(false), accessory: .selection(false))
                 .border(.purple)
             
-            ListRowTrailingSection(.isWaiting(false), solidCounter: 1, accessory: .navigationLink)
+            ListRowTrailingSection(.counter(1, isWaiting: true), accessory: .navigationLink)
                 .border(.purple)
         }
     }

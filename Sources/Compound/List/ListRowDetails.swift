@@ -84,7 +84,11 @@ public extension ListRowDetails where Icon == Image {
                        isWaiting: isWaiting)
     }
     
-    static func isWaiting(counter: Int? = nil, _ isWaiting: Bool) -> Self {
+    static func counter(_ counter: Int, isWaiting: Bool = false) -> Self {
         ListRowDetails(counter: counter, isWaiting: isWaiting)
+    }
+    
+    static func isWaiting(_ isWaiting: Bool) -> Self {
+        ListRowDetails(isWaiting: isWaiting)
     }
 }
