@@ -14,6 +14,7 @@ import SwiftUI
 public struct ListRowDetails<Icon: View> {
     var title: String?
     var icon: Icon?
+    var counter: Int?
     
     var isWaiting = false
     
@@ -21,38 +22,70 @@ public struct ListRowDetails<Icon: View> {
     
     public static func label(title: String,
                              icon: Icon,
+                             counter: Int? = nil,
                              isWaiting: Bool = false) -> Self {
-        ListRowDetails(title: title, icon: icon, isWaiting: isWaiting)
+        ListRowDetails(title: title,
+                       icon: icon,
+                       counter: counter,
+                       isWaiting: isWaiting)
     }
     
     public static func label(title: String,
                              icon: KeyPath<CompoundIcons, Image>,
+                             counter: Int? = nil,
                              isWaiting: Bool = false) -> Self where Icon == CompoundIcon {
-        ListRowDetails(title: title, icon: CompoundIcon(icon), isWaiting: isWaiting)
+        ListRowDetails(title: title,
+                       icon: CompoundIcon(icon),
+                       counter: counter,
+                       isWaiting: isWaiting)
     }
     
     public static func label(title: String,
                              systemIcon: SFSymbol,
+                             counter: Int? = nil,
                              isWaiting: Bool = false) -> Self where Icon == Image {
-        ListRowDetails(title: title, icon: Image(systemSymbol: systemIcon), isWaiting: isWaiting)
+        ListRowDetails(title: title,
+                       icon: Image(systemSymbol: systemIcon),
+                       counter: counter,
+                       isWaiting: isWaiting)
     }
     
-    public static func icon(_ icon: Icon, isWaiting: Bool = false) -> Self {
-        ListRowDetails(icon: icon, isWaiting: isWaiting)
+    public static func icon(_ icon: Icon,
+                            counter: Int? = nil,
+                            isWaiting: Bool = false) -> Self {
+        ListRowDetails(icon: icon,
+                       counter: counter,
+                       isWaiting: isWaiting)
     }
     
-    public static func icon(_ icon: KeyPath<CompoundIcons, Image>, isWaiting: Bool = false) -> Self where Icon == CompoundIcon {
-        ListRowDetails(icon:CompoundIcon(icon), isWaiting: isWaiting)
+    public static func icon(_ icon: KeyPath<CompoundIcons, Image>,
+                            counter: Int? = nil,
+                            isWaiting: Bool = false) -> Self where Icon == CompoundIcon {
+        ListRowDetails(icon:CompoundIcon(icon),
+                       counter: counter,
+                       isWaiting: isWaiting)
     }
     
-    public static func systemIcon(_ systemIcon: SFSymbol, isWaiting: Bool = false) -> Self where Icon == Image {
-        ListRowDetails(icon: Image(systemSymbol: systemIcon), isWaiting: isWaiting)
+    public static func systemIcon(_ systemIcon: SFSymbol,
+                                  counter: Int? = nil,
+                                  isWaiting: Bool = false) -> Self where Icon == Image {
+        ListRowDetails(icon: Image(systemSymbol: systemIcon),
+                       counter: counter,
+                       isWaiting: isWaiting)
     }
 }
 
 public extension ListRowDetails where Icon == Image {
-    static func title(_ title: String, isWaiting: Bool = false) -> Self {
-        ListRowDetails(title: title, isWaiting: isWaiting)
+    static func title(_ title: String,
+                      counter: Int? = nil,
+                      isWaiting: Bool = false) -> Self {
+        ListRowDetails(title: title,
+                       counter: counter,
+                       isWaiting: isWaiting)
+    }
+    
+    static func counter(_ counter: Int, isWaiting: Bool = false) -> Self {
+        ListRowDetails(counter: counter, isWaiting: isWaiting)
     }
     
     static func isWaiting(_ isWaiting: Bool) -> Self {
