@@ -28,13 +28,13 @@ private struct ListRowDetailsLabelStyle: LabelStyle {
 /// The view shown to the right of the `ListRowLabel` inside of a `ListRow`.
 /// This consists of both the `ListRowDetails` and the `ListRowAccessory`.
 public struct ListRowTrailingSection<Icon: View>: View {
-    var title: String?
-    var icon: Icon?
-    
-    var solidCounter: Int?
-    var isWaiting = false
-    var accessory: ListRowAccessory?
     @Environment(\.isEnabled) private var isEnabled
+
+    private var title: String?
+    private var icon: Icon?
+    private var counter: Int?
+    private var isWaiting = false
+    private var accessory: ListRowAccessory?
     
     @ScaledMetric private var iconSize = 24
     private var hideAccessory: Bool { isWaiting && accessory?.kind == .unselected }
@@ -43,8 +43,8 @@ public struct ListRowTrailingSection<Icon: View>: View {
         title = details?.title
         icon = details?.icon
         isWaiting = details?.isWaiting ?? false
+        counter = details?.counter
         self.accessory = accessory
-        self.solidCounter = solidCounter
     }
     
     public var body: some View {
@@ -62,8 +62,8 @@ public struct ListRowTrailingSection<Icon: View>: View {
                 .labelStyle(ListRowDetailsLabelStyle())
             }
             
-            if let solidCounter {
-                Text("\(solidCounter)")
+            if let counter {
+                Text("\(counter)")
                     .font(.compound.bodyXSSemibold)
                     .foregroundStyle(.compound.textOnSolidPrimary)
                     .padding(.horizontal, 6)
