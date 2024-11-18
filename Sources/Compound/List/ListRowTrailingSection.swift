@@ -31,17 +31,20 @@ public struct ListRowTrailingSection<Icon: View>: View {
     var title: String?
     var icon: Icon?
     
+    var solidCounter: Int?
     var isWaiting = false
     var accessory: ListRowAccessory?
+    @Environment(\.isEnabled) private var isEnabled
     
     @ScaledMetric private var iconSize = 24
     private var hideAccessory: Bool { isWaiting && accessory?.kind == .unselected }
     
-    init(_ details: ListRowDetails<Icon>?, accessory: ListRowAccessory? = nil) {
+    init(_ details: ListRowDetails<Icon>?, solidCounter: Int? = nil, accessory: ListRowAccessory? = nil) {
         title = details?.title
         icon = details?.icon
         isWaiting = details?.isWaiting ?? false
         self.accessory = accessory
+        self.solidCounter = solidCounter
     }
     
     public var body: some View {
@@ -58,6 +61,16 @@ public struct ListRowTrailingSection<Icon: View>: View {
                 }
                 .labelStyle(ListRowDetailsLabelStyle())
             }
+            
+            if let solidCounter {
+                Text("\(solidCounter)")
+                    .font(.compound.bodyXSSemibold)
+                    .foregroundStyle(.compound.textOnSolidPrimary)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background { Capsule().fill(isEnabled ? .compound.iconSuccessPrimary : .compound.iconDisabled) }
+            }
+
             
             if let accessory, !hideAccessory {
                 accessory
@@ -96,6 +109,10 @@ struct ListRowTrailingSection_Previews: PreviewProvider, PrefireProvider {
             ListRowTrailingSection(.title("Hello"))
             
             ListRowTrailingSection(someCondition ? .isWaiting(true) : otherCondition ? .systemIcon(.checkmark) : .title("Hello"))
+            
+            ListRowTrailingSection(.title("Hello"), solidCounter: 1)
+            ListRowTrailingSection(.title("Hello"), solidCounter: 1)
+                .disabled(true)
         }
     }
     
@@ -110,6 +127,9 @@ struct ListRowTrailingSection_Previews: PreviewProvider, PrefireProvider {
             
             // The checkmark's space should be reserved.
             ListRowTrailingSection(.isWaiting(false), accessory: .selection(false))
+                .border(.purple)
+            
+            ListRowTrailingSection(.isWaiting(false), solidCounter: 1, accessory: .navigationLink)
                 .border(.purple)
         }
     }
