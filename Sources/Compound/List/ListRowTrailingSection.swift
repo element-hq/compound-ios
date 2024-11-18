@@ -70,7 +70,6 @@ public struct ListRowTrailingSection<Icon: View>: View {
                     .padding(.vertical, 2)
                     .background { Capsule().fill(isEnabled ? .compound.iconSuccessPrimary : .compound.iconDisabled) }
             }
-
             
             if let accessory, !hideAccessory {
                 accessory
