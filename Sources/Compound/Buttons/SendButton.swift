@@ -15,9 +15,12 @@ public struct SendButton: View {
     /// The action to perform when the user triggers the button.
     public let action: () -> Void
     
-    private var iconColor: Color { isEnabled ? .compound.iconPrimary : .compound.iconQuaternary }
+    private var iconColor: Color {
+        guard isEnabled else { return .compound.iconQuaternary }
+        return colorScheme == .light ? .compound.iconOnSolidPrimary : .compound.iconPrimary
+    }
+    
     private var gradient: Gradient { isEnabled ? enabledGradient : .init(colors: [.clear]) }
-    private var colorSchemeOverride: ColorScheme { isEnabled ? .dark : colorScheme }
     
     /// This is a custom gradient used for this button, the colours don't come from our core tokens
     /// and aren't reactive to light/dark mode or high contrast, so it is hard coded in here.
@@ -39,7 +42,6 @@ public struct SendButton: View {
                 .foregroundStyle(iconColor)
                 .scaledPadding(6, relativeTo: .compound.headingLG)
                 .background { buttonShape }
-                .environment(\.colorScheme, colorSchemeOverride)
                 .compositingGroup()
         }
     }
