@@ -3,6 +3,7 @@
   "extends": [
     "config:recommended"
   ],
+  "ignoreDeps": ["pointfreeco/swift-snapshot-testing"],
   "packageRules" : [
     {
       "matchManagers": ["github-actions"],
