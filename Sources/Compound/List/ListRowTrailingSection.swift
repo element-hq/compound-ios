@@ -64,9 +64,9 @@ public struct ListRowTrailingSection<Icon: View>: View {
             
             if let counter {
                 Text("\(counter)")
-                    .font(.compound.bodyXSSemibold)
+                    .font(.compound.bodyLG)
                     .foregroundStyle(.compound.textOnSolidPrimary)
-                    .padding(.horizontal, 6)
+                    .padding(.horizontal, 8)
                     .padding(.vertical, 2)
                     .background { Capsule().fill(isEnabled ? .compound.iconSuccessPrimary : .compound.iconDisabled) }
             }
