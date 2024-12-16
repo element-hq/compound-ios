@@ -15,9 +15,21 @@ public struct SendButton: View {
     /// The action to perform when the user triggers the button.
     public let action: () -> Void
     
-    private var iconColor: Color { isEnabled ? .compound.iconOnSolidPrimary : .compound.iconQuaternary }
-    private var gradient: Gradient { isEnabled ? Color.compound.gradientSendButton : .init(colors: [.clear]) }
-    private var colorSchemeOverride: ColorScheme { isEnabled ? .light : colorScheme }
+    private var iconColor: Color {
+        guard isEnabled else { return .compound.iconQuaternary }
+        return colorScheme == .light ? .compound.iconOnSolidPrimary : .compound.iconPrimary
+    }
+    
+    private var gradient: Gradient { isEnabled ? enabledGradient : .init(colors: [.clear]) }
+    
+    /// This is a custom gradient used for this button, the colours don't come from our core tokens
+    /// and aren't reactive to light/dark mode or high contrast, so it is hard coded in here.
+    private var enabledGradient: Gradient {
+        .init(stops: [Gradient.Stop(color: Color(red: 0.47, green: 0.87, blue: 0.6), location: 0.00),
+                      Gradient.Stop(color: Color(red: 0.05, green: 0.74, blue: 0.55), location: 0.30),
+                      Gradient.Stop(color: Color(red: 0.07, green: 0.52, blue: 0.52), location: 0.60),
+                      Gradient.Stop(color: Color(red: 0.14, green: 0.27, blue: 0.42), location: 1.00)])
+    }
     
     /// Creates a send button that performs the provided action.
     public init(action: @escaping () -> Void) {
@@ -26,11 +38,10 @@ public struct SendButton: View {
     
     public var body: some View {
         Button(action: action) {
-            CompoundIcon(\.sendSolid)
+            CompoundIcon(\.sendSolid, size: .medium, relativeTo: .compound.headingLG)
                 .foregroundStyle(iconColor)
-                .padding(6)
+                .scaledPadding(6, relativeTo: .compound.headingLG)
                 .background { buttonShape }
-                .environment(\.colorScheme, colorSchemeOverride)
                 .compositingGroup()
         }
     }
@@ -38,12 +49,6 @@ public struct SendButton: View {
     var buttonShape: some View {
         Circle()
             .fill(LinearGradient(gradient: gradient, startPoint: .top, endPoint: .bottom))
-            .overlay {
-                Circle()
-                    .fill(EllipticalGradient(gradient: gradient))
-                    .opacity(0.4)
-                    .blendMode(.overlay)
-            }
     }
 }
 
