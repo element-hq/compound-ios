@@ -182,7 +182,7 @@ public struct ListRowLabel<Icon: View>: View {
             if let description {
                 HStack(alignment: .top, spacing: 4) {
                     if role == .error {
-                        CompoundIcon(\.error, size: .xSmall, relativeTo: .compound.bodySM)
+                        CompoundIcon(\.errorSolid, size: .xSmall, relativeTo: .compound.bodySM)
                             .foregroundStyle(.compound.iconCriticalPrimary)
                     }
                     
