@@ -11,8 +11,8 @@ let package = Package(
     dependencies: [
         .package(url: "https://github.com/element-hq/compound-design-tokens", exact: "4.0.1"),
         .package(url: "https://github.com/siteline/SwiftUI-Introspect", from: "1.3.0"),
-        .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: "5.3.0"),
-        .package(url: "https://github.com/BarredEwe/Prefire", from: "2.10.0"),
+        .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: "6.2.0"),
+        .package(url: "https://github.com/BarredEwe/Prefire", from: "4.0.2"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.17.5") // Newer require Swift Testing
     ],
     targets: [
