@@ -16,7 +16,7 @@ jobs:
 
     steps:
     - name: Checkout code and snapshots
-      uses: nschloe/action-cached-lfs-checkout@v1
+      uses: nschloe/action-cached-lfs-checkout@f46300cd8952454b9f0a21a3d133d4bd5684cfc2 #v1.2.3
       with:
         submodules: recursive
 
@@ -41,7 +41,7 @@ jobs:
         if-no-files-found: ignore
 
     - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v5
+      uses: codecov/codecov-action@0565863a31f2c772f9f0395002a31e3f06189574 #v5.4.0
       with:
         fail_ci_if_error: true
         token: ${{ secrets.CODECOV_TOKEN }}
