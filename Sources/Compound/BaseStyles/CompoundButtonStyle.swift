@@ -31,46 +31,68 @@ public struct CompoundButtonStyle: ButtonStyle {
         case primary
         /// A stroked button usually representing alternate actions.
         case secondary
-        /// A plain button with no background. This will be renamed to `tertiary` in the future.
-        case plain
+        /// A plain button with matching dimensions to ``primary`` and ``secondary``.
+        case tertiary
+        /// A plain button with no padding.
+        case textLink
     }
     
     var size: Size
     public enum Size {
-        /// A button that is a regular size.
-        case medium
         /// A button that is prominently sized.
         case large
+        /// A button that is a regular size.
+        case medium
+        /// A button that is a small size.
+        case small
+        /// A (super/primary/secondary) button that should be place within a toolbar.
+        case toolbarIcon
+    }
+    
+    private var font: Font {
+        if kind == .textLink, size == .small {
+            .compound.bodyMDSemibold
+        } else {
+            .compound.bodyLGSemibold
+        }
     }
     
     private var horizontalPadding: CGFloat {
-        switch (kind, size) {
-        case (.plain, _):
+        if kind == .textLink {
             return 0
-        case (_, .medium):
-            return 7
-        case (_, .large):
-            return 12
+        }
+        
+        return switch size {
+        case .large: 20
+        case .medium: 20
+        case .small: 16
+        case .toolbarIcon: 3
         }
     }
 
     private var verticalPadding: CGFloat {
-        switch (kind, size) {
-        case (.plain, _):
+        if kind == .textLink {
             return 0
-        case (_, .medium):
-            return 7
-        case (_, .large):
-            return 14
+        }
+        
+        return switch size {
+        case .large: 14
+        case .medium: 7
+        case .small: 4
+        case .toolbarIcon: 3
         }
     }
     
     private var maxWidth: CGFloat? {
-        switch kind { // This is wrong, it should be switching on size.
-        case .super, .primary, .secondary:
-            return .infinity
-        case .plain:
+        if kind == .textLink {
             return nil
+        }
+        
+        return switch size {
+        case .large: .infinity
+        case .medium: nil
+        case .small: nil
+        case .toolbarIcon: nil
         }
     }
     
@@ -79,12 +101,12 @@ public struct CompoundButtonStyle: ButtonStyle {
     }
     
     private var isUnderlined: Bool {
-        kind == .plain && accessibilityShowButtonShapes
+        kind == .textLink && accessibilityShowButtonShapes
     }
 
     public func makeBody(configuration: Self.Configuration) -> some View {
         configuration.label
-            .font(.compound.bodyLGSemibold)
+            .font(font)
             .underline(isUnderlined)
             .multilineTextAlignment(.center)
             .foregroundColor(textColor(configuration: configuration))
@@ -107,28 +129,30 @@ public struct CompoundButtonStyle: ButtonStyle {
                     Capsule().fill(LinearGradient(gradient: Color.compound.gradientSuperButton,
                                                   startPoint: .bottomLeading, endPoint: .topTrailing))
                         .opacity(0.04)
-                    Capsule().stroke(LinearGradient(gradient: Color.compound.gradientSuperButton,
-                                                    startPoint: .bottomLeading, endPoint: .topTrailing))
+                    Capsule().strokeBorder(LinearGradient(gradient: Color.compound.gradientSuperButton,
+                                                          startPoint: .bottomLeading, endPoint: .topTrailing))
                 }
                 .compositingGroup()
                 .opacity(configuration.isPressed ? pressedOpacity : 1)
             } else {
-                Capsule().stroke(strokeColor(configuration: configuration))
+                Capsule().strokeBorder(strokeColor(configuration: configuration))
             }
         case .primary:
             Capsule().fill(fillColor(configuration: configuration))
         case .secondary:
-            Capsule().stroke(strokeColor(configuration: configuration))
-        case .plain:
+            Capsule().strokeBorder(strokeColor(configuration: configuration))
+        case .tertiary:
+            EmptyView()
+        case .textLink:
             EmptyView()
         }
     }
 
     private var contentShape: AnyShape {
         switch kind {
-        case .super, .primary, .secondary:
+        case .super, .primary, .secondary, .tertiary:
             return AnyShape(Capsule())
-        case .plain:
+        case .textLink:
             return AnyShape(Rectangle())
         }
     }
@@ -161,12 +185,14 @@ public struct CompoundButtonStyle: ButtonStyle {
     }
 }
 
+// MARK: - Previews
+
 public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
     public static var previews: some View {
         ScrollView {
             states
         }
-        .previewLayout(.fixed(width: 390, height: 975))
+        .previewLayout(.fixed(width: 390, height: 1875))
     }
     
     @ViewBuilder
@@ -184,10 +210,28 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
         }
         
         Section {
-            plain
+            buttons(.small)
+        } header: {
+            Header(title: "Small")
+        }
+        
+        Section {
+            textLinks(.medium)
+        } header: {
+            Header(title: "Text Link")
+        }
+        
+        Section {
+            textLinks(.small)
+        } header: {
+            Header(title: "Text Link Small")
+        }
+        
+        Section {
+            startChat
                 .padding(.bottom) // Only for the snapshot.
         } header: {
-            Header(title: "Plain")
+            Header(title: "Start chat")
         }
     }
     
@@ -219,22 +263,40 @@ public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
             Button("Disabled") { }
                 .buttonStyle(.compound(.secondary, size: size))
                 .disabled(true)
+            
+            Button("Tertiary") { }
+                .buttonStyle(.compound(.tertiary, size: size))
+            
+            Button("Destructive", role: .destructive) { }
+                .buttonStyle(.compound(.tertiary, size: size))
+            
+            Button("Disabled") { }
+                .buttonStyle(.compound(.tertiary, size: size))
+                .disabled(true)
         }
         .padding(.horizontal)
     }
     
-    static var plain: some View {
+    static func textLinks(_ size: CompoundButtonStyle.Size) -> some View {
         HStack(spacing: 20) {
-            Button("Plain") { }
-                .buttonStyle(.compound(.plain))
+            Button("Text Link") { }
+                .buttonStyle(.compound(.textLink, size: size))
             
             Button("Destructive", role: .destructive) { }
-                .buttonStyle(.compound(.plain))
+                .buttonStyle(.compound(.textLink, size: size))
             
             Button("Disabled") { }
-                .buttonStyle(.compound(.plain))
+                .buttonStyle(.compound(.textLink, size: size))
                 .disabled(true)
         }
+        .padding(.top, 1)
+    }
+    
+    static var startChat: some View {
+        Button { } label: {
+            CompoundIcon(\.plus)
+        }
+        .buttonStyle(.compound(.super, size: .toolbarIcon))
     }
     
     struct Header: View {
