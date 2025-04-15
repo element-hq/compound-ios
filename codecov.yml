@@ -11,3 +11,5 @@ coverage:
 ignore:
   - "Inspector"
   - "Tests"
+  - "Sources/Previews"
+  - "Tools"
