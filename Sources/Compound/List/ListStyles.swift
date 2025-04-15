@@ -36,9 +36,7 @@ public extension View {
     }
 }
 
-import Prefire
-
-struct ListTextStyles_Previews: PreviewProvider, PrefireProvider {
+struct ListTextStyles_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
         Form {
             Section {

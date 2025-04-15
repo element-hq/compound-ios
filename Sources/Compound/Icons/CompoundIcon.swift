@@ -153,9 +153,7 @@ public extension Label {
 
 // MARK: - Previews
 
-import Prefire
-
-struct CompoundIcon_Previews: PreviewProvider, PrefireProvider {
+struct CompoundIcon_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
         form
             .previewDisplayName("Form")

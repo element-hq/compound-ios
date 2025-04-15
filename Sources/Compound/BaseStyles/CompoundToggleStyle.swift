@@ -27,9 +27,7 @@ public struct CompoundToggleStyle: ToggleStyle {
     }
 }
 
-import Prefire
-
-public struct CompoundToggleStyle_Previews: PreviewProvider, PrefireProvider {
+public struct CompoundToggleStyle_Previews: PreviewProvider, TestablePreview {
     public static var previews: some View {
         VStack(spacing: 16) {
             states

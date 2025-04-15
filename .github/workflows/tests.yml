@@ -16,16 +16,21 @@ jobs:
 
     steps:
     - name: Checkout code and snapshots
-      uses: nschloe/action-cached-lfs-checkout@f46300cd8952454b9f0a21a3d133d4bd5684cfc2 #v1.2.3
+      uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 #v4.2.2
       with:
         submodules: recursive
 
     - name: Configure Xcode 16
-      run: |
-        sudo xcode-select -s /Applications/Xcode_16.1.app
+      run: sudo xcode-select -s /Applications/Xcode_16.3.app
+        
+    - name: Install sourcery
+      run: brew install sourcery
+        
+    - name: Generate preview tests
+      run: sourcery --config Tools/Sourcery/PreviewTestsConfig.yml
 
     - name: Run tests
-      run: set -o pipefail && xcodebuild test -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.1' -skipPackagePluginValidation -resultBundlePath Logs/CompoundTests.xcresult | xcbeautify --renderer github-actions
+      run: set -o pipefail && xcodebuild test -scheme 'Compound' -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone SE (3rd generation),OS=18.4' -skipPackagePluginValidation -resultBundlePath Logs/CompoundTests.xcresult | xcbeautify --renderer github-actions
 
     - name: Zip artifacts
       if: failure() # We only care about artefacts if the tests fail

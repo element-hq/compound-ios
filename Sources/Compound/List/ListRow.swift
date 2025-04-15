@@ -244,9 +244,7 @@ private extension Button {
 
 // MARK: - Previews
 
-import Prefire
-
-public struct ListRow_Previews: PreviewProvider, PrefireProvider {
+public struct ListRow_Previews: PreviewProvider, TestablePreview {
     public static var previews: some View {
         Form {
             Section {
@@ -438,7 +436,7 @@ public struct ListRow_Previews: PreviewProvider, PrefireProvider {
     }
 }
 
-struct ListRowLoadingSelection_Previews: PreviewProvider, PrefireProvider {
+struct ListRowLoadingSelection_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
         Form {
             ListRow(label: .plain(title: "Selected",

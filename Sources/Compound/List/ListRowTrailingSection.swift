@@ -82,9 +82,7 @@ public struct ListRowTrailingSection<Icon: View>: View {
 
 // MARK: - Previews
 
-import Prefire
-
-struct ListRowTrailingSection_Previews: PreviewProvider, PrefireProvider {
+struct ListRowTrailingSection_Previews: PreviewProvider, TestablePreview {
     static let someCondition = true
     static let otherCondition = true
     
