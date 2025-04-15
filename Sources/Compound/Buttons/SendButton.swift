@@ -54,9 +54,7 @@ public struct SendButton: View {
 
 // MARK: - Previews
 
-import Prefire
-
-public struct SendButton_Previews: PreviewProvider, PrefireProvider {
+public struct SendButton_Previews: PreviewProvider, TestablePreview {
     public static var previews: some View {
         VStack(spacing: 0) {
             states

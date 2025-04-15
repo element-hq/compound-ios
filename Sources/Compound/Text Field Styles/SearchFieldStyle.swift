@@ -53,9 +53,7 @@ public extension View {
 
 // MARK: - Previews
 
-import Prefire
-
-struct SearchStyle_Previews: PreviewProvider, PrefireProvider {
+struct SearchStyle_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
         NavigationStack {
             List {

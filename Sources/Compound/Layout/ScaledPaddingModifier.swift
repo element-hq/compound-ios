@@ -35,9 +35,7 @@ private struct ScaledPaddingModifier: ViewModifier {
 
 // MARK: - Previews
 
-import Prefire
-
-struct ScaledPaddingModifier_Previews: PreviewProvider, PrefireProvider {
+struct ScaledPaddingModifier_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
         VStack {
             ForEach(DynamicTypeSize.allCases, id: \.self) { size in

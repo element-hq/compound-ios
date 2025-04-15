@@ -31,9 +31,7 @@ private struct ScaledOffsetModifier: ViewModifier {
 
 // MARK: - Previews
 
-import Prefire
-
-struct ScaledOffsetModifier_Previews: PreviewProvider, PrefireProvider {
+struct ScaledOffsetModifier_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
         VStack {
             ForEach(DynamicTypeSize.allCases, id: \.self) { size in

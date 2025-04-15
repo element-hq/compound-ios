@@ -76,9 +76,7 @@ public struct ListRowAccessory: View {
 
 // MARK: - Previews
 
-import Prefire
-
-struct ListRowAccessory_Previews: PreviewProvider, PrefireProvider {
+struct ListRowAccessory_Previews: PreviewProvider, TestablePreview {
     static var previews: some View {
         Grid(alignment: .leading, verticalSpacing: 16) {
             row(title: "Navigation Link", accessory: .navigationLink)

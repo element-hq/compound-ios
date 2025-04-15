@@ -5,7 +5,6 @@
 // Please see LICENSE files in the repository root for full details.
 //
 
-import Prefire
 import SwiftUI
 
 public extension ButtonStyle where Self == CompoundButtonStyle {
@@ -187,7 +186,7 @@ public struct CompoundButtonStyle: ButtonStyle {
 
 // MARK: - Previews
 
-public struct CompoundButtonStyle_Previews: PreviewProvider, PrefireProvider {
+public struct CompoundButtonStyle_Previews: PreviewProvider, TestablePreview {
     public static var previews: some View {
         ScrollView {
             states
