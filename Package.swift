@@ -31,7 +31,7 @@ let package = Package(
             ],
             exclude: [
                 "__Snapshots__"
-            ],
+            ]
         )
     ]
 )
