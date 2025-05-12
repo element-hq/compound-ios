@@ -20,7 +20,7 @@ let package = Package(
             dependencies: [
                 .product(name: "CompoundDesignTokens", package: "compound-design-tokens"),
                 .product(name: "SwiftUIIntrospect", package: "SwiftUI-Introspect"),
-                .product(name: "SFSafeSymbols", package: "SFSafeSymbols"),
+                .product(name: "SFSafeSymbols", package: "SFSafeSymbols")
             ]
         ),
         .testTarget(
@@ -31,7 +31,7 @@ let package = Package(
             ],
             exclude: [
                 "__Snapshots__"
-            ],
+            ]
         )
     ]
 )
