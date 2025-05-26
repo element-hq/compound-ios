@@ -11,11 +11,13 @@ struct ListInlinePicker<SelectedValue: Hashable>: View {
     let title: String?
     @Binding var selection: SelectedValue
     let items: [(title: String, tag: SelectedValue)]
+    let isWaiting: Bool
     
     var body: some View {
         ForEach(items, id: \.tag) { item in
             ListRow(label: .plain(title: item.title),
-                    kind: .selection(isSelected: selection == item.tag) {
+                    details: isWaiting ? .isWaiting(selection == item.tag) : nil,
+                    kind: .selection(isSelected: !isWaiting ? selection == item.tag : false) {
                 var transaction = Transaction()
                 transaction.disablesAnimations = true
 
@@ -41,7 +43,15 @@ struct ListInlinePicker_Previews: PreviewProvider, TestablePreview {
                 Section("Compound") {
                     ListInlinePicker(title: "Title",
                                      selection: $selection,
-                                     items: items.map { (title: $0, tag: $0) })
+                                     items: items.map { (title: $0, tag: $0) },
+                                     isWaiting: false)
+                }
+                
+                Section("Compound with loader") {
+                    ListInlinePicker(title: "Title",
+                                     selection: $selection,
+                                     items: items.map { (title: $0, tag: $0) },
+                                     isWaiting: true)
                 }
                 
                 Section("Native") {
