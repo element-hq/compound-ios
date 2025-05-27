@@ -268,7 +268,7 @@ public struct ListRow_Previews: PreviewProvider, TestablePreview {
             othersSection
         }
         .compoundList()
-        .frame(idealHeight: 2050) // Snapshot height
+        .frame(idealHeight: 2100) // Snapshot height
         .previewLayout(.sizeThatFits)
     }
     
