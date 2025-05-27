@@ -32,8 +32,8 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
         case button(action: () -> Void)
         case navigationLink(action: () -> Void)
         case picker(selection: Binding<SelectionValue>, items: [(title: String, tag: SelectionValue)])
-        case toggle(Binding<Bool>, isWaiting: Bool = false)
-        case inlinePicker(selection: Binding<SelectionValue>, items: [(title: String, tag: SelectionValue)], isWaiting: Bool = false)
+        case toggle(Binding<Bool>)
+        case inlinePicker(selection: Binding<SelectionValue>, items: [(title: String, tag: SelectionValue)])
         case selection(isSelected: Bool, action: () -> Void)
         case multiSelection(isSelected: Bool, action: () -> Void)
         case textField(text: Binding<String>, axis: Axis?)
@@ -86,27 +86,28 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
             }
             // Due to a limitation of LabeledContent, we need to manually combine them for accessibility
             .accessibilityElement(children: .combine)
-        case .toggle(let binding, let isWaiting):
+        case .toggle(let binding):
             LabeledContent {
-                // Note: VoiceOver label already provided.
-                if isWaiting {
-                    ProgressView()
+                HStack(spacing: ListRowTrailingSectionSpacing.horizontal) {
+                    ListRowTrailingSection(details)
+                    
+                    // Note: VoiceOver label already provided.
+                    Toggle("", isOn: binding)
+                        .toggleStyle(.compound)
+                        .labelsHidden()
+                        .padding(.vertical, -10)
                 }
-                Toggle("", isOn: binding)
-                    .toggleStyle(.compound)
-                    .labelsHidden()
-                    .padding(.vertical, -10)
             } label: {
                 label
             }
             .padding(.trailing, ListRowPadding.horizontal)
             // Due to a limitation of LabeledContent, we need to manually combine them for accessibility
             .accessibilityElement(children: .combine)
-        case .inlinePicker(let selection, let items, let isWaiting):
+        case .inlinePicker(let selection, let items):
             ListInlinePicker(title: label.title ?? "",
                              selection: selection,
                              items: items,
-                             isWaiting: isWaiting)
+                             isWaiting: details?.isWaiting ?? false)
         case .selection(let isSelected, let action):
             Button(action: action) {
                 RowContent(details: details, accessory: .selection(isSelected)) { label }
@@ -326,7 +327,8 @@ public struct ListRow_Previews: PreviewProvider, TestablePreview {
         ListRow(label: .default(title: "Title", systemIcon: .squareDashed),
                 kind: .toggle(.constant(true)))
         ListRow(label: .default(title: "Title", systemIcon: .squareDashed),
-                kind: .toggle(.constant(false), isWaiting: true))
+                details: .isWaiting(true),
+                kind: .toggle(.constant(false)))
     }
     
     @ViewBuilder static var selection: some View {
