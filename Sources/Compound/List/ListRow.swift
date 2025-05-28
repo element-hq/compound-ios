@@ -89,7 +89,9 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
         case .toggle(let binding):
             LabeledContent {
                 HStack(spacing: ListRowTrailingSectionSpacing.horizontal) {
-                    ListRowTrailingSection(details)
+                    if let details {
+                        ListRowTrailingSection(details)
+                    }
                     
                     // Note: VoiceOver label already provided.
                     Toggle("", isOn: binding)
