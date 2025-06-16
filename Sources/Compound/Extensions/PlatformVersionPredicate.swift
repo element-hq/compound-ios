@@ -6,16 +6,16 @@
 //
 
 import SwiftUI
-import SwiftUIIntrospect
+@_spi(Advanced) import SwiftUIIntrospect
 
 public extension PlatformViewVersionPredicate<NavigationStackType, UINavigationController> {
     static var supportedVersions: Self {
-        .iOS(.v16, .v17, .v18)
+        .iOS(.v16...)
     }
 }
 
 public extension PlatformViewVersionPredicate<WindowType, UIWindow> {
     static var supportedVersions: Self {
-        .iOS(.v16, .v17, .v18)
+        .iOS(.v16...)
     }
 }
