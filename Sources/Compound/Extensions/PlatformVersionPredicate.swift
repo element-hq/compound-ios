@@ -19,3 +19,21 @@ public extension PlatformViewVersionPredicate<WindowType, UIWindow> {
         .iOS(.v16...)
     }
 }
+
+public extension PlatformViewVersionPredicate<TextFieldType, UITextField> {
+    static var supportedVersions: Self {
+        .iOS(.v16...)
+    }
+}
+
+public extension PlatformViewVersionPredicate<ScrollViewType, UIScrollView> {
+    static var supportedVersions: Self {
+        .iOS(.v16...)
+    }
+}
+
+public extension PlatformViewVersionPredicate<ViewControllerType, UIViewController> {
+    static var supportedVersions: Self {
+        .iOS(.v16...)
+    }
+}
