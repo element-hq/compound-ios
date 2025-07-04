@@ -25,6 +25,7 @@
 		91B2EA9C28CA064800A90A83 /* ColorsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */; };
 		91B946812A29062300F187EF /* IconsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91B946802A29062300F187EF /* IconsScreen.swift */; };
 		91CA00362AD7D83200121E0F /* ButtonsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917F562A28256DCD00D19543 /* ButtonsScreen.swift */; };
+		91DE5A702E1801970000C59A /* GradientsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DE5A6F2E1801970000C59A /* GradientsScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,6 +63,7 @@
 		91B2EA9728CA048200A90A83 /* compound-ios */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "compound-ios"; path = ..; sourceTree = "<group>"; };
 		91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorsScreen.swift; sourceTree = "<group>"; };
 		91B946802A29062300F187EF /* IconsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IconsScreen.swift; sourceTree = "<group>"; };
+		91DE5A6F2E1801970000C59A /* GradientsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientsScreen.swift; sourceTree = "<group>"; };
 		9F9AF07976782861ECA2764C /* Pods-Compound Inspector.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Compound Inspector.release.xcconfig"; path = "Target Support Files/Pods-Compound Inspector/Pods-Compound Inspector.release.xcconfig"; sourceTree = "<group>"; };
 		B62609A3377EA1D9C59FCD20 /* Pods-Compound Inspector.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Compound Inspector.debug.xcconfig"; path = "Target Support Files/Pods-Compound Inspector/Pods-Compound Inspector.debug.xcconfig"; sourceTree = "<group>"; };
 		D2E28F45EEA9A8DE6AFB10E9 /* Pods_Compound_Inspector.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Compound_Inspector.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,6 +120,7 @@
 				91B2EA9B28CA064800A90A83 /* ColorsScreen.swift */,
 				917C22F729C380A200B35660 /* FontsScreen.swift */,
 				91B946802A29062300F187EF /* IconsScreen.swift */,
+				91DE5A6F2E1801970000C59A /* GradientsScreen.swift */,
 			);
 			path = Tokens;
 			sourceTree = "<group>";
@@ -255,9 +258,13 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Compound Inspector/Pods-Compound Inspector-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
+			inputPaths = (
+			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Compound Inspector/Pods-Compound Inspector-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -296,6 +303,7 @@
 				91B946812A29062300F187EF /* IconsScreen.swift in Sources */,
 				9132C6352A72868B00EAEF3D /* NavigationBarScreen.swift in Sources */,
 				917F562F28256DD800D19543 /* SidebarList.swift in Sources */,
+				91DE5A702E1801970000C59A /* GradientsScreen.swift in Sources */,
 				917C22F629C37A9D00B35660 /* AllCases.swift in Sources */,
 				9132C62D2A72708400EAEF3D /* ActionSheetScreen.swift in Sources */,
 				917F561C28256DB800D19543 /* CompoundInspectorApp.swift in Sources */,

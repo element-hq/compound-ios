@@ -9,8 +9,10 @@ import SwiftUI
 
 /// A screen of components/tokens that can be navigated to.
 enum Screen: Hashable, View {
-    /// Color tokens
+    /// Colour tokens
     case colors
+    /// Gradients assembled from colour tokens
+    case gradients
     /// Font tokens
     case fonts
     /// Icon tokens
@@ -41,6 +43,7 @@ enum Screen: Hashable, View {
     var body: some View {
         switch self {
         case .colors: ColorsScreen()
+        case .gradients: GradientsScreen()
         case .fonts: FontsScreen()
         case .icons: IconsScreen()
         
