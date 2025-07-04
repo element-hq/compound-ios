@@ -30,6 +30,7 @@ extension AllValues {
 
 extension CompoundColors: AllValues { typealias ValueType = Color }
 extension CompoundColorTokens: AllValues { typealias ValueType = Color }
+extension CompoundGradients: AllValues { typealias ValueType = Gradient }
 extension CompoundFonts: AllValues { typealias ValueType = Font }
 extension CompoundIcons: AllValues { typealias ValueType = Image }
 

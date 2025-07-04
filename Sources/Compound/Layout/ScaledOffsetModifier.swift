@@ -47,7 +47,7 @@ struct ScaledOffsetModifier_Previews: PreviewProvider, TestablePreview {
             .overlay {
                 CompoundIcon(\.verified, size: .custom(10), relativeTo: .body)
                     .scaledOffset(x: 6, y: 6)
-                    .foregroundStyle(.compound.borderInfoSubtle)
+                    .foregroundStyle(.compound.gradientActionStop1)
             }
     }
 }

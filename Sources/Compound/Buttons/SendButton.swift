@@ -20,16 +20,7 @@ public struct SendButton: View {
         return colorScheme == .light ? .compound.iconOnSolidPrimary : .compound.iconPrimary
     }
     
-    private var gradient: Gradient { isEnabled ? enabledGradient : .init(colors: [.clear]) }
-    
-    /// This is a custom gradient used for this button, the colours don't come from our core tokens
-    /// and aren't reactive to light/dark mode or high contrast, so it is hard coded in here.
-    private var enabledGradient: Gradient {
-        .init(stops: [Gradient.Stop(color: Color(red: 0.47, green: 0.87, blue: 0.6), location: 0.00),
-                      Gradient.Stop(color: Color(red: 0.05, green: 0.74, blue: 0.55), location: 0.30),
-                      Gradient.Stop(color: Color(red: 0.07, green: 0.52, blue: 0.52), location: 0.60),
-                      Gradient.Stop(color: Color(red: 0.14, green: 0.27, blue: 0.42), location: 1.00)])
-    }
+    private var gradient: Gradient { isEnabled ? .compound.action : .init(colors: [.clear]) }
     
     /// Creates a send button that performs the provided action.
     public init(action: @escaping () -> Void) {

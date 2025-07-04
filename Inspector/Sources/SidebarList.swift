@@ -13,7 +13,6 @@ struct SidebarList: View {
             tokensSection
             componentsSection
             systemComponentsSection
-            missingFromFigmaSection
         }
         .navigationTitle("Components")
         .listStyle(.sidebar)
@@ -24,6 +23,9 @@ struct SidebarList: View {
         Section("Tokens") {
             NavigationLink(value: Screen.colors) {
                 Label("Colours", systemImage: "paintpalette")
+            }
+            NavigationLink(value: Screen.gradients) {
+                Label("Gradients", systemImage: "lightspectrum.horizontal")
             }
             NavigationLink(value: Screen.fonts) {
                 Label("Typography", systemImage: "character")
@@ -36,6 +38,9 @@ struct SidebarList: View {
     
     var componentsSection: some View {
         Section("Components") {
+            NavigationLink(value: Screen.buttons) {
+                Label("Buttons", systemImage: "rectangle.and.hand.point.up.left")
+            }
             NavigationLink(value: Screen.list) {
                 Label("List", systemImage: "list.bullet.clipboard")
             }
@@ -62,14 +67,6 @@ struct SidebarList: View {
             
             NavigationLink(value: Screen.shareSheet) {
                 Label("Share Sheet", systemImage: "square.and.arrow.up")
-            }
-        }
-    }
-    
-    var missingFromFigmaSection: some View {
-        Section("Missing from Figma") {
-            NavigationLink(value: Screen.buttons) {
-                Label("Buttons", systemImage: "rectangle.and.hand.point.up.left")
             }
         }
     }
