@@ -93,19 +93,6 @@ public class CompoundColors {
     public let _bgEmptyItemAlpha = coreTokens.alphaGray500
 }
 
-public extension CompoundColorTokens {
-    // MARK: - Asymmetric tokens
-    // This is a workaround until they are generated correctly
-    
-    var bgSubtleSecondaryLevel0: Color { Color(UIColor { $0.isLight ? UIColor(CompoundCoreColorTokens.gray300) : UIColor(CompoundCoreColorTokens.themeBg) }) }
-    var bgCanvasDefaultLevel1: Color { Color(UIColor { $0.isLight ? UIColor(CompoundCoreColorTokens.themeBg) : UIColor(CompoundCoreColorTokens.gray300) }) }
-    
-    var gradientActionStop1: Color { Color(UIColor { $0.isLight ? UIColor(CompoundCoreColorTokens.green500) : UIColor(CompoundCoreColorTokens.green1100) }) }
-    var gradientActionStop2: Color { Color(UIColor { $0.isLight ? UIColor(CompoundCoreColorTokens.green700) : UIColor(CompoundCoreColorTokens.green900) }) }
-    var gradientActionStop3: Color { Color(UIColor { $0.isLight ? UIColor(CompoundCoreColorTokens.green900) : UIColor(CompoundCoreColorTokens.green700) }) }
-    var gradientActionStop4: Color { Color(UIColor { $0.isLight ? UIColor(CompoundCoreColorTokens.green1100) : UIColor(CompoundCoreColorTokens.green500) }) }
-}
-
 private extension UITraitCollection {
     /// Whether or not the trait collection contains a `userInterfaceStyle` of `.light`.
     var isLight: Bool { userInterfaceStyle == .light }

@@ -37,12 +37,6 @@ public class CompoundUIColors {
         overrides[keyPath] = color
     }
     
-    // MARK: - Elevation Tokens
-    // This is a workaround until they are generated correctly
-    
-    public let bgSubtleSecondaryLevel0 = UIColor { $0.isLight ? coreTokens.gray300 : coreTokens.themeBg }
-    public let bgCanvasDefaultLevel1 = UIColor { $0.isLight ? coreTokens.themeBg : coreTokens.gray300 }
-    
     // MARK: - Awaiting Semantic Tokens
     
     /// This token is a placeholder and hasn't been finalised.
