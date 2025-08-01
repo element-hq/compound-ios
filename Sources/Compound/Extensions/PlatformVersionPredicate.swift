@@ -37,3 +37,9 @@ public extension PlatformViewVersionPredicate<ViewControllerType, UIViewControll
         .iOS(.v16...)
     }
 }
+
+public extension PlatformViewVersionPredicate<TabViewType, UITabBarController> {
+    static var supportedVersions: Self {
+        .iOS(.v16...)
+    }
+}
