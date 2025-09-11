@@ -102,7 +102,6 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                 }
             }
             .padding(.trailing, ListRowPadding.horizontal)
-            // Due to a limitation of LabeledContent, we need to manually combine them for accessibility
             .accessibilityElement(children: .combine)
         case .inlinePicker(let selection, let items):
             ListInlinePicker(title: label.title ?? "",
