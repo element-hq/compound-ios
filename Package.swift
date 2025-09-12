@@ -1,17 +1,17 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.9
 
 import PackageDescription
 
 let package = Package(
     name: "Compound",
-    platforms: [.iOS(.v16)],
+    platforms: [.iOS(.v17)],
     products: [
         .library(name: "Compound", targets: ["Compound"])
     ],
     dependencies: [
         .package(url: "https://github.com/element-hq/compound-design-tokens", exact: "6.0.0"),
         // .package(path: "../compound-design-tokens"),
-        .package(url: "https://github.com/siteline/SwiftUI-Introspect", from: "1.3.0"),
+        .package(url: "https://github.com/siteline/SwiftUI-Introspect", from: "26.0.0-rc.1"),
         .package(url: "https://github.com/SFSafeSymbols/SFSafeSymbols", from: "6.2.0"),
         .package(url: "https://github.com/pointfreeco/swift-snapshot-testing", exact: "1.18.3")
     ],
