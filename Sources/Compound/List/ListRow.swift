@@ -70,7 +70,9 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                 RowContent(details: details, accessory: .navigationLink) { label }
             }
         case .picker(let selection, let items):
-            LabeledContent {
+            HStack(spacing: 0) {
+                label
+                Spacer()
                 // Note: VoiceOver label already provided.
                 Picker("", selection: selection) {
                     ForEach(items, id: \.tag) { item in
@@ -81,13 +83,12 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                 .labelsHidden()
                 .padding(.vertical, -10)
                 .padding(.trailing, ListRowPadding.horizontal)
-            } label: {
-                label
             }
-            // Due to a limitation of LabeledContent, we need to manually combine them for accessibility
             .accessibilityElement(children: .combine)
         case .toggle(let binding):
-            LabeledContent {
+            HStack(spacing: 0) {
+                label
+                Spacer()
                 HStack(spacing: ListRowTrailingSectionSpacing.horizontal) {
                     if let details {
                         ListRowTrailingSection(details)
@@ -99,11 +100,8 @@ public struct ListRow<Icon: View, DetailsIcon: View, CustomContent: View, Select
                         .labelsHidden()
                         .padding(.vertical, -10)
                 }
-            } label: {
-                label
             }
             .padding(.trailing, ListRowPadding.horizontal)
-            // Due to a limitation of LabeledContent, we need to manually combine them for accessibility
             .accessibilityElement(children: .combine)
         case .inlinePicker(let selection, let items):
             ListInlinePicker(title: label.title ?? "",
@@ -314,6 +312,13 @@ public struct ListRow_Previews: PreviewProvider, TestablePreview {
                               items: [(title: "Item 1", tag: 0),
                                       (title: "Item 2", tag: 1),
                                       (title: "Item 3", tag: 2)]))
+        ListRow(label: .default(title: "Very very very very very very long title",
+                                description: "Description…",
+                                systemIcon: .squareDashed),
+                kind: .picker(selection: .constant(0),
+                              items: [(title: "Item 1", tag: 0),
+                                      (title: "Item 2", tag: 1),
+                                      (title: "Item 3", tag: 2)]))
         ListRow(label: .default(title: "Title", systemIcon: .squareDashed),
                 kind: .picker(selection: .constant("Item 1"),
                               items: [(title: "Item 1", tag: "Item 1"),
@@ -323,6 +328,10 @@ public struct ListRow_Previews: PreviewProvider, TestablePreview {
     
     @ViewBuilder static var toggles: some View {
         ListRow(label: .default(title: "Title",
+                                description: "Description…",
+                                systemIcon: .squareDashed),
+                kind: .toggle(.constant(true)))
+        ListRow(label: .default(title: "Very very very very very very very long title",
                                 description: "Description…",
                                 systemIcon: .squareDashed),
                 kind: .toggle(.constant(true)))
