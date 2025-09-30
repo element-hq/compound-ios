@@ -1,3 +1,11 @@
+# ⛔️ Deprecated Repository ⛔️
+
+The Compound iOS project has moved and now lives within Element X iOS itself. You can find it here:
+
+https://github.com/element-hq/element-x-ios/tree/develop/compound-ios
+
+<hr />   
+
 <p align="center"><img src="https://compound.element.io/logo-readme.png" width="300" alt="" /></p>
 
 # Compound iOS
